@@ -1,0 +1,729 @@
+{
+  "nodes": [
+    {
+      "id": "eslint_config_js",
+      "label": "eslint.config.js",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "vite_config_ts",
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/vite.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_tsx",
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_main_tsx",
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/main.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_analysis_tsx",
+      "label": "Analysis.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "analysis_sectionlabel",
+      "label": "SectionLabel()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "analysis_block",
+      "label": "Block()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L33"
+    },
+    {
+      "id": "src_components_cursor_tsx",
+      "label": "Cursor.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Cursor.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "cursor_cursor",
+      "label": "Cursor()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Cursor.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_components_downloadsection_tsx",
+      "label": "DownloadSection.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/DownloadSection.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_heatmap_tsx",
+      "label": "Heatmap.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Heatmap.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_hero_tsx",
+      "label": "Hero.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "hero_e",
+      "label": "e()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L92"
+    },
+    {
+      "id": "src_components_herowordspullup_tsx",
+      "label": "HeroWordsPullUp.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/HeroWordsPullUp.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "herowordspullup_herowordspullup",
+      "label": "HeroWordsPullUp()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/HeroWordsPullUp.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_components_partbreakdown_tsx",
+      "label": "PartBreakdown.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PartBreakdown.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_pyqcards_tsx",
+      "label": "PYQCards.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PYQCards.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_subjectgrid_tsx",
+      "label": "SubjectGrid.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "subjectgrid_e",
+      "label": "e()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L272"
+    },
+    {
+      "id": "src_components_unitdonut_tsx",
+      "label": "UnitDonut.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "unitdonut_getsegments",
+      "label": "getSegments()",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_components_yeartable_tsx",
+      "label": "YearTable.tsx",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/YearTable.tsx",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "eslint_config_js",
+      "target": "js",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_js",
+      "target": "globals",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_js",
+      "target": "eslint_plugin_react_hooks",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_js",
+      "target": "eslint_plugin_react_refresh",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_js",
+      "target": "typescript_eslint",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_js",
+      "target": "config",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/eslint.config.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config_ts",
+      "target": "vite",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/vite.config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config_ts",
+      "target": "plugin_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/vite.config.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config_ts",
+      "target": "vite",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/vite.config.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_cursor",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_hero",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_subjectgrid",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_analysis",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_downloadsection",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/main.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_tsx",
+      "target": "client",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/main.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_index_css",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/main.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_tsx",
+      "target": "src_app_tsx",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/main.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_heatmap",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_unitdonut",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_partbreakdown",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_pyqcards",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_yeartable",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "analysis_sectionlabel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_analysis_tsx",
+      "target": "analysis_block",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Analysis.tsx",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_cursor_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Cursor.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_cursor_tsx",
+      "target": "cursor_cursor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Cursor.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_downloadsection_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/DownloadSection.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_downloadsection_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/DownloadSection.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_downloadsection_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/DownloadSection.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_downloadsection_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/DownloadSection.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_heatmap_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Heatmap.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_heatmap_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Heatmap.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_heatmap_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Heatmap.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hero_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hero_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hero_tsx",
+      "target": "mnt_c_users_admin_desktop_projects_sem_prep_data_science_site_src_components_herowordspullup",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_hero_tsx",
+      "target": "hero_e",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/Hero.tsx",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_herowordspullup_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/HeroWordsPullUp.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_herowordspullup_tsx",
+      "target": "herowordspullup_herowordspullup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/HeroWordsPullUp.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_partbreakdown_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PartBreakdown.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_partbreakdown_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PartBreakdown.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_partbreakdown_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PartBreakdown.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_partbreakdown_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PartBreakdown.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pyqcards_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PYQCards.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pyqcards_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PYQCards.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pyqcards_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PYQCards.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pyqcards_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/PYQCards.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_subjectgrid_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_subjectgrid_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_subjectgrid_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_subjectgrid_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_subjectgrid_tsx",
+      "target": "subjectgrid_e",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/SubjectGrid.tsx",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_unitdonut_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_unitdonut_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_unitdonut_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_unitdonut_tsx",
+      "target": "unitdonut_getsegments",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/UnitDonut.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_yeartable_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/YearTable.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_yeartable_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/YearTable.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_yeartable_tsx",
+      "target": "framer_motion",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/components/YearTable.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

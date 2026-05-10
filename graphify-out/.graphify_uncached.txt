@@ -1,0 +1,24 @@
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/exam_bible.html
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/study_guide.html
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/study_guide_part2.html
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/graphify-out/converted/Question Bank_Data Science_6e2b0b92.md
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/UI_Assets/hero section/cursor for hero section.txt
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/index.html
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/README.md
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/18CSE396T 21.05.2025 AN.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/18CSE396T.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/21CSS303T 14.07.2025 AN.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/21CSS303T.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/DS_Dec25_PYQ.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/DS_July25_PYQ.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/PYQs/DS_May25_PYQ.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/Syllabus/Data Science Syllabus.pdf
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/UI_Assets/Screenshots/duna_hero.png
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/public/favicon.svg
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/public/icons.svg
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/assets/hero.png
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/assets/react.svg
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/src/assets/vite.svg
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/UI_Assets/hero section/b_c_e_b_d_a_a_f_mp_.mp4
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/Assets/UI_Assets/hero section/mp_.mp4
+/mnt/c/Users/ADMIN/Desktop/Projects/SEM_Prep/Data_Science/site/public/hero.mp4
