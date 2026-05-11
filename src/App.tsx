@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Cursor } from './components/Cursor';
 import { Hero } from './components/Hero';
@@ -57,6 +58,7 @@ function App() {
     <>
       {/* Base layer: true black behind the hero video */}
       <div style={{ position: 'fixed', inset: 0, background: '#000000', zIndex: 0, pointerEvents: 'none' }} />
+      <Analytics />
       <Cursor />
       <PWAPrompt />
       <AnimatePresence mode="wait">
