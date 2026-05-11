@@ -136,7 +136,7 @@ export function DownloadSection() {
           {/* CTA row */}
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="/DataScience_BeautifulGuide.pdf"
+              href="/prepguide.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -158,7 +158,7 @@ export function DownloadSection() {
               Prep Guide
             </a>
             <a
-              href="/DS_PYQ_MasterSheet.pdf"
+              href="/mastersheet.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={{

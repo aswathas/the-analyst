@@ -215,7 +215,7 @@ export function Hero({ onViewAnalysis }: HeroProps) {
                 style={dropdownStyle}
               >
                 <button
-                  onClick={() => { window.open('/DataScience_BeautifulGuide.pdf', '_blank'); setOpenDropdown(null); }}
+                  onClick={() => { window.open('/prepguide.pdf', '_blank'); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
                   onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}
@@ -224,7 +224,7 @@ export function Hero({ onViewAnalysis }: HeroProps) {
                   Prep Guide
                 </button>
                 <button
-                  onClick={() => { window.open('/DS_PYQ_MasterSheet.pdf', '_blank'); setOpenDropdown(null); }}
+                  onClick={() => { window.open('/mastersheet.pdf', '_blank'); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
                   onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}

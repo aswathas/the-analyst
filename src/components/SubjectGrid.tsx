@@ -31,7 +31,7 @@ const SUBJECTS: Subject[] = [
 ];
 
 function openPDF() {
-  window.open('/DataScience_BeautifulGuide.pdf', '_blank');
+  window.open('/prepguide.pdf', '_blank');
 }
 
 function SubjectCard({
@@ -171,7 +171,7 @@ function SubjectCard({
                 </button>
               </div>
               <a
-                href="/DS_PYQ_MasterSheet.pdf"
+                href="/mastersheet.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

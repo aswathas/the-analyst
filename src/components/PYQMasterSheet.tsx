@@ -303,7 +303,7 @@ export function PYQMasterSheet({ onBack }: Props) {
         <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button
-            onClick={() => window.open('/DataScience_BeautifulGuide.pdf', '_blank')}
+            onClick={() => window.open('/prepguide.pdf', '_blank')}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '5px',
               padding: '6px 14px', borderRadius: '9999px',

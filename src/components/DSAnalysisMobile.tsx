@@ -586,7 +586,7 @@ export function DSAnalysisMobile({ onBack }: Props) {
           transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
         >
           <button
-            onClick={() => window.open('/DataScience_BeautifulGuide.pdf', '_blank')}
+            onClick={() => window.open('/prepguide.pdf', '_blank')}
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
               padding: '16px', borderRadius: '14px', width: '100%',

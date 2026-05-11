@@ -132,11 +132,11 @@ export function DSAnalysisPage({ onBack }: Props) {
         <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>Data Science</span>
         <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <button onClick={() => window.open('/DataScience_BeautifulGuide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.85)', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
+          <button onClick={() => window.open('/prepguide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.85)', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
             <BookOpen size={12} strokeWidth={1.5} />
             Prep Guide
           </button>
-          <button onClick={() => window.open('/DS_PYQ_MasterSheet.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(52,199,89,0.1)', border: '1px solid rgba(52,199,89,0.25)', color: '#34c759', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
+          <button onClick={() => window.open('/mastersheet.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(52,199,89,0.1)', border: '1px solid rgba(52,199,89,0.25)', color: '#34c759', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
             <FileSpreadsheet size={12} strokeWidth={1.5} />
             MasterSheet
           </button>
@@ -548,14 +548,23 @@ export function DSAnalysisPage({ onBack }: Props) {
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }} style={{ background: '#1c1c1e', borderRadius: '20px', padding: '48px 44px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '32px' }}>
           <h3 style={{ fontSize: '26px', fontWeight: 600, color: '#fff', letterSpacing: '-0.03em', margin: '0 0 12px' }}>Need the full study guide?</h3>
           <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', margin: '0 0 28px', lineHeight: 1.6 }}>First principles explanations · Memory techniques · All model answers · Code arsenal</p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={() => window.open('/DataScience_BeautifulGuide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: '#2997ff', color: '#fff', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: 'none' }}>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
+            <button onClick={() => window.open('/prepguide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: '#2997ff', color: '#fff', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: 'none' }}>
               <BookOpen size={15} strokeWidth={1.5} />
               Prep Guide
             </button>
-            <button onClick={() => window.open('/DS_PYQ_MasterSheet.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: 'rgba(52,199,89,0.15)', color: '#34c759', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: '1px solid rgba(52,199,89,0.3)' }}>
+            <button onClick={() => window.open('/mastersheet.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: 'rgba(52,199,89,0.15)', color: '#34c759', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: '1px solid rgba(52,199,89,0.3)' }}>
               <FileSpreadsheet size={15} strokeWidth={1.5} />
               PYQ MasterSheet
+            </button>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <button onClick={() => navigate('/pyq-master')} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '9px 22px', borderRadius: '100px', background: 'transparent', color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontWeight: 400, letterSpacing: '-0.01em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', transition: 'color 0.15s, border-color 0.15s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.85)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.45)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)'; }}
+            >
+              <FileSpreadsheet size={13} strokeWidth={1.5} />
+              View Master Sheet Page
             </button>
           </div>
         </motion.div>
