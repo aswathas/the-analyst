@@ -287,22 +287,6 @@ export function Hero({ onViewAnalysis }: HeroProps) {
               The Analyst
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              style={{
-                color: 'rgba(225,224,204,0.38)',
-                fontSize: '13px',
-                fontWeight: 400,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                fontFamily: "'JetBrains Mono', monospace",
-                marginTop: '10px',
-              }}
-            >
-              21CSS303T · Aswath AS
-            </motion.p>
           </div>
 
           {/* Right: tagline + CTAs */}
