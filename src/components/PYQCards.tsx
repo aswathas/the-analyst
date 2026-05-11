@@ -30,7 +30,7 @@ const PAPERS = [
   },
 ];
 
-export function PYQCards() {
+export function PYQCards({ dark = false }: { dark?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -50,10 +50,10 @@ export function PYQCards() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            background: '#ffffff',
+            background: dark ? '#1c1c1e' : '#ffffff',
             borderRadius: '14px',
             padding: '20px',
-            border: '1px solid #e5e7eb',
+            border: dark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb',
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -73,8 +73,8 @@ export function PYQCards() {
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '12px' }}>
             <FileText size={18} strokeWidth={1.5} style={{ color: paper.color, marginTop: '1px', flexShrink: 0 }} />
             <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 600, color: '#1d1d1f' }}>{paper.year}</div>
-              <div style={{ fontSize: '11px', color: '#9ca3af', fontFamily: "'JetBrains Mono', monospace" }}>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: dark ? '#ffffff' : '#1d1d1f' }}>{paper.year}</div>
+              <div style={{ fontSize: '11px', color: dark ? 'rgba(255,255,255,0.4)' : '#9ca3af', fontFamily: "'JetBrains Mono', monospace" }}>
                 {paper.file}
               </div>
             </div>
@@ -84,13 +84,14 @@ export function PYQCards() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '4px',
-                fontSize: '10.5px',
+                fontSize: '10px',
                 fontWeight: 600,
                 color: '#10b981',
-                background: '#d1fae5',
+                background: dark ? 'rgba(48,209,88,0.15)' : '#d1fae5',
                 padding: '2px 8px',
                 borderRadius: '100px',
                 flexShrink: 0,
+                border: dark ? '1px solid rgba(48,209,88,0.3)' : 'none',
               }}
             >
               <CheckCircle size={10} strokeWidth={2} />
@@ -111,7 +112,7 @@ export function PYQCards() {
                     flexShrink: 0,
                   }}
                 />
-                <span style={{ fontSize: '12px', color: '#4b5563', lineHeight: 1.45 }}>{h}</span>
+                <span style={{ fontSize: '12px', color: dark ? 'rgba(255,255,255,0.65)' : '#4b5563', lineHeight: 1.45 }}>{h}</span>
               </div>
             ))}
           </div>

@@ -3,13 +3,23 @@
 
 * { cursor: none !important; box-sizing: border-box; }
 
+/* Restore native cursors on touch/mobile devices */
+@media (pointer: coarse) {
+  * { cursor: auto !important; }
+  a, button, [role="button"] { cursor: pointer !important; }
+  #cursor-dot, #cursor-ring { display: none !important; }
+}
+
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   background: #000;
   color: #1d1d1f;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,35 +38,36 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, background 0.2s;
+  transition: transform 0.12s ease, width 0.18s, height 0.18s, opacity 0.18s;
   left: -100px;
   top: -100px;
 }
 
 #cursor-ring {
   position: fixed;
-  width: 32px;
-  height: 32px;
-  border: 1.5px solid rgba(0, 102, 204, 0.55);
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 102, 204, 0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.2s;
+  transition: width 0.28s ease, height 0.28s ease, border-color 0.2s, border-width 0.2s;
   left: -100px;
   top: -100px;
 }
 
 #cursor-dot.hovering {
-  transform: translate(-50%, -50%) scale(1.5);
-  background: #2997ff;
+  transform: translate(-50%, -50%) scale(2);
+  background: #0066cc;
+  opacity: 0.6;
 }
 
 #cursor-ring.hovering {
-  width: 48px;
-  height: 48px;
-  border-color: #0066cc;
-  border-width: 2px;
+  width: 52px;
+  height: 52px;
+  border-color: rgba(0, 102, 204, 0.7);
+  border-width: 1.5px;
 }
 
 .noise-overlay {
@@ -67,4 +78,89 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   pointer-events: none;
+}
+
+/* Hero responsive grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  align-items: end;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-col-title  { grid-column: span 12; }
+.hero-col-tagline { grid-column: span 12; align-items: flex-start; }
+
+@media (min-width: 1024px) {
+  .hero-col-title  { grid-column: span 8; }
+  .hero-col-tagline { grid-column: span 4; align-items: flex-end; text-align: right; }
+}
+
+/* Stoic section — responsive 2-col → 1-col */
+.stoic-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+}
+@media (max-width: 768px) {
+  .stoic-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Mobile responsive fixes ─────────────────────────────── */
+@media (max-width: 640px) {
+  /* Hero nav — shrink text on small screens */
+  .hero-nav a,
+  .hero-nav button {
+    font-size: 11px !important;
+  }
+
+  /* Hero title — tighter on mobile */
+  .hero-col-title h1 {
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+  }
+
+  /* Tagline column — stack with less gap */
+  .hero-col-tagline {
+    gap: 12px !important;
+    margin-top: 8px;
+  }
+
+  /* Stoic grid — always single column */
+  .stoic-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Subject cards — full width */
+  #subjects [style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Focus-visible: keyboard nav ring */
+:focus-visible {
+  outline: 2px solid rgba(41, 151, 255, 0.8);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  #cursor-dot, #cursor-ring {
+    transition: none !important;
+  }
 }

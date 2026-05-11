@@ -68,11 +68,11 @@ export function YearTable() {
                 onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#eff6ff')}
                 onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? '#ffffff' : '#f9fafb')}
               >
-                <td style={{ padding: '10px 14px', color: '#1d1d1f', fontWeight: 500, borderBottom: '1px solid #f3f4f6' }}>
+                <td style={{ padding: '10px 14px', color: '#1d1d1f', fontWeight: 400, borderBottom: '1px solid #f3f4f6' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {row.topic}
                     {count === 4 && (
-                      <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.08em', color: '#dc2626', background: '#fee2e2', padding: '1px 6px', borderRadius: '100px', textTransform: 'uppercase' }}>
+                      <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', color: '#dc2626', background: '#fee2e2', padding: '1px 6px', borderRadius: '100px', textTransform: 'uppercase' }}>
                         Must Know
                       </span>
                     )}
@@ -81,7 +81,7 @@ export function YearTable() {
                 {[row.may25, row.jul25, row.dec25, row.dec23].map((v, j) => (
                   <td key={j} style={{ padding: '10px 14px', textAlign: 'center', borderBottom: '1px solid #f3f4f6' }}>
                     {v ? (
-                      <span style={{ color: '#10b981', fontSize: '16px', fontWeight: 700 }}>✓</span>
+                      <span style={{ color: '#10b981', fontSize: '16px', fontWeight: 600 }}>✓</span>
                     ) : (
                       <span style={{ color: '#d1d5db', fontSize: '14px' }}>—</span>
                     )}

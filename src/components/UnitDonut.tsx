@@ -43,7 +43,7 @@ export function UnitDonut() {
       <div style={{ position: 'relative', flexShrink: 0 }}>
         <svg width="140" height="140" style={{ transform: 'rotate(-90deg)' }}>
           {/* Background circle */}
-          <circle cx={CX} cy={CY} r={R} fill="none" stroke="#e5e7eb" strokeWidth="14" />
+          <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="14" />
           {/* Segments */}
           {segments.map((seg, i) => (
             <motion.circle
@@ -78,8 +78,8 @@ export function UnitDonut() {
             justifyContent: 'center',
           }}
         >
-          <span style={{ fontSize: '22px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.03em' }}>75</span>
-          <span style={{ fontSize: '10px', color: '#6b7280', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
+          <span style={{ fontSize: '22px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.03em' }}>75</span>
+          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
         </div>
       </div>
 
@@ -105,11 +105,11 @@ export function UnitDonut() {
             />
             <div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#1d1d1f' }}>{u.label}</span>
-                <span style={{ fontSize: '12px', color: '#6b7280' }}>{u.sublabel}</span>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: u.color }}>{u.pct}%</span>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>{u.label}</span>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)' }}>{u.sublabel}</span>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: u.color }}>{u.pct}%</span>
               </div>
-              <div style={{ fontSize: '11.5px', color: '#9ca3af', marginTop: '2px' }}>{u.topics}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '2px' }}>{u.topics}</div>
             </div>
           </motion.div>
         ))}

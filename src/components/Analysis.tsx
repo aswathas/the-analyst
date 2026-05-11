@@ -15,7 +15,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
         alignItems: 'center',
         gap: '6px',
         fontSize: '11px',
-        fontWeight: 700,
+        fontWeight: 600,
         letterSpacing: '0.1em',
         textTransform: 'uppercase',
         color: '#0066cc',
@@ -156,14 +156,14 @@ export function Analysis() {
                     background: card.color,
                   }}
                 />
-                <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: card.color, marginBottom: '6px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: card.color, marginBottom: '6px' }}>
                   {card.part}
                 </div>
-                <div style={{ fontSize: '20px', fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.03em' }}>
+                <div style={{ fontSize: '20px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.03em' }}>
                   {card.detail}
                 </div>
-                <div style={{ fontSize: '12.5px', color: '#4b5563', marginTop: '4px' }}>{card.sub}</div>
-                <div style={{ fontSize: '11.5px', color: '#9ca3af', marginTop: '10px', fontStyle: 'italic' }}>
+                <div style={{ fontSize: '12px', color: '#4b5563', marginTop: '4px' }}>{card.sub}</div>
+                <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '10px', fontStyle: 'italic' }}>
                   {card.note}
                 </div>
               </div>
@@ -185,8 +185,8 @@ export function Analysis() {
               gap: '8px',
             }}
           >
-            <span style={{ fontSize: '13px', color: '#4b5563', fontWeight: 500 }}>Total Marks</span>
-            <span style={{ fontSize: '22px', fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.03em' }}>
+            <span style={{ fontSize: '13px', color: '#4b5563', fontWeight: 400 }}>Total Marks</span>
+            <span style={{ fontSize: '22px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.03em' }}>
               75 marks · 3 hours
             </span>
           </div>

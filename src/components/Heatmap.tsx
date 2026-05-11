@@ -24,7 +24,7 @@ const TIER_COLORS: Record<string, { bg: string; label: string; dot: string }> = 
   red: { bg: '#ef4444', label: 'Exam Critical', dot: '#ef4444' },
   yellow: { bg: '#f59e0b', label: 'High Probability', dot: '#f59e0b' },
   blue: { bg: '#3b82f6', label: 'Moderate', dot: '#3b82f6' },
-  dark: { bg: '#6b7280', label: 'Low Probability', dot: '#6b7280' },
+  dark: { bg: 'rgba(255,255,255,0.5)', label: 'Low Probability', dot: 'rgba(255,255,255,0.5)' },
 };
 
 export function Heatmap() {
@@ -38,7 +38,7 @@ export function Heatmap() {
         {Object.entries(TIER_COLORS).map(([key, val]) => (
           <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
             <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: val.dot }} />
-            <span style={{ fontSize: '12px', color: '#6b7280', fontWeight: 500 }}>{val.label}</span>
+            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>{val.label}</span>
           </div>
         ))}
       </div>
@@ -50,7 +50,7 @@ export function Heatmap() {
           return (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
               <div style={{ width: '220px', flexShrink: 0 }}>
-                <span style={{ fontSize: '12.5px', color: '#1d1d1f', fontWeight: 450, lineHeight: 1.3 }}>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)', fontWeight: 400, lineHeight: 1.3 }}>
                   {topic.name}
                 </span>
               </div>
@@ -58,7 +58,7 @@ export function Heatmap() {
                 style={{
                   flex: 1,
                   height: '8px',
-                  background: '#e5e7eb',
+                  background: 'rgba(255,255,255,0.1)',
                   borderRadius: '100px',
                   overflow: 'hidden',
                 }}
@@ -70,7 +70,7 @@ export function Heatmap() {
                   transition={{ duration: 0.8, delay: 0.06 * i, ease: [0.16, 1, 0.3, 1] }}
                 />
               </div>
-              <span style={{ fontSize: '11.5px', color: '#9ca3af', width: '70px', flexShrink: 0, textAlign: 'right' }}>
+              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', width: '70px', flexShrink: 0, textAlign: 'right' }}>
                 {topic.freq}
               </span>
             </div>

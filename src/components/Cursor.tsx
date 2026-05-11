@@ -7,6 +7,9 @@ export function Cursor() {
   const raf = useRef<number>(0);
 
   useEffect(() => {
+    // Skip on touch devices — no mouse cursor needed
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;

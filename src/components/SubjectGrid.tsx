@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
-import { BarChart2, BookOpen, ArrowRight, CheckCircle, Lock } from 'lucide-react';
+import { BarChart2, BookOpen, CheckCircle, Lock } from 'lucide-react';
 
 interface Subject {
   code: string;
@@ -10,8 +10,6 @@ interface Subject {
   color: string;
   stats?: { papers: number; topics: number; marks: number; hitRate: string };
   findings?: string[];
-  analysisHref?: string;
-  pdfHref?: string;
 }
 
 const SUBJECTS: Subject[] = [
@@ -26,90 +24,63 @@ const SUBJECTS: Subject[] = [
       'Pandas + Matplotlib appear in every paper',
       'Safe combo: Wrangling + Viz + 1 ML = 65/75',
     ],
-    analysisHref: '#overview',
-    pdfHref: '../exam_bible.html',
   },
-  {
-    code: 'TBC',
-    name: 'Cloud Computing using Blockchain',
-    status: 'coming',
-    color: '#7c3aed',
-  },
-  {
-    code: 'TBC',
-    name: 'Compiler Design',
-    status: 'coming',
-    color: '#0891b2',
-  },
-  {
-    code: 'TBC',
-    name: 'Advanced Cryptography',
-    status: 'coming',
-    color: '#dc2626',
-  },
-  {
-    code: 'TBC',
-    name: 'Software Engineering & Project Management',
-    status: 'coming',
-    color: '#059669',
-  },
-  {
-    code: 'TBC',
-    name: 'Hybrid Vehicles',
-    status: 'coming',
-    color: '#d97706',
-  },
+  { code: 'TBC', name: 'Cloud Computing using Blockchain', status: 'coming', color: '#7c3aed' },
+  { code: 'TBC', name: 'Compiler Design', status: 'coming', color: '#0891b2' },
+  { code: 'TBC', name: 'Advanced Cryptography', status: 'coming', color: '#dc2626' },
+  { code: 'TBC', name: 'Software Engineering & Project Management', status: 'coming', color: '#059669' },
+  { code: 'TBC', name: 'Hybrid Vehicles', status: 'coming', color: '#d97706' },
 ];
 
-function SubjectCard({ subject, index, inView, onViewAnalysis }: { subject: Subject; index: number; inView: boolean; onViewAnalysis: () => void }) {
+function openPDF() {
+  window.open('/DS_Prep_Guide.pdf', '_blank');
+}
+
+function SubjectCard({
+  subject, index, inView, onViewAnalysis,
+}: {
+  subject: Subject; index: number; inView: boolean; onViewAnalysis: () => void;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 22 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.58, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
       style={{
         background: '#ffffff',
         borderRadius: '18px',
-        border: '1px solid #e5e7eb',
+        border: '1px solid rgba(0,0,0,0.08)',
         overflow: 'hidden',
-        transition: 'box-shadow 0.2s, transform 0.2s',
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 6px 28px rgba(0,0,0,0.09)';
-        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
       }}
     >
       {/* Color bar */}
       <div style={{ height: '3px', background: subject.color }} />
 
-      <div style={{ padding: '22px' }}>
+      <div style={{ padding: '24px' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', gap: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px', gap: '10px' }}>
           <div style={{ minWidth: 0 }}>
             <div style={{
-              fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.09em',
-              textTransform: 'uppercase', color: '#9ca3af', marginBottom: '4px',
+              fontSize: '10px', fontWeight: 600, letterSpacing: '0.09em',
+              textTransform: 'uppercase', color: '#6e6e73', marginBottom: '5px',
               fontFamily: "'JetBrains Mono', monospace",
             }}>
               {subject.code}
             </div>
             <h3 style={{
-              fontSize: '15.5px', fontWeight: 600, color: '#1d1d1f',
-              margin: 0, letterSpacing: '-0.02em', lineHeight: 1.25,
+              fontSize: '17px', fontWeight: 600, color: '#1d1d1f',
+              margin: 0, letterSpacing: '-0.374px', lineHeight: 1.24,
             }}>
               {subject.name}
             </h3>
           </div>
+
           {subject.status === 'complete' ? (
             <div style={{
               display: 'flex', alignItems: 'center', gap: '4px',
-              fontSize: '10px', fontWeight: 700, color: '#10b981',
-              background: '#d1fae5', padding: '3px 10px', borderRadius: '100px',
-              flexShrink: 0, border: '1px solid #a7f3d0',
+              fontSize: '11px', fontWeight: 600, color: '#34c759',
+              background: 'rgba(52,199,89,0.10)', padding: '4px 10px', borderRadius: '100px',
+              flexShrink: 0, border: '1px solid rgba(52,199,89,0.2)',
             }}>
               <CheckCircle size={10} strokeWidth={2.5} />
               Complete
@@ -117,9 +88,9 @@ function SubjectCard({ subject, index, inView, onViewAnalysis }: { subject: Subj
           ) : (
             <div style={{
               display: 'flex', alignItems: 'center', gap: '4px',
-              fontSize: '10px', fontWeight: 600, color: '#9ca3af',
-              background: '#f3f4f6', padding: '3px 10px', borderRadius: '100px',
-              flexShrink: 0,
+              fontSize: '11px', fontWeight: 500, color: '#6e6e73',
+              background: '#f5f5f7', padding: '4px 10px', borderRadius: '100px',
+              flexShrink: 0, border: '1px solid rgba(0,0,0,0.06)',
             }}>
               <Lock size={9} strokeWidth={2} />
               Soon
@@ -129,11 +100,11 @@ function SubjectCard({ subject, index, inView, onViewAnalysis }: { subject: Subj
 
         {subject.status === 'complete' && subject.stats ? (
           <>
-            {/* Stats */}
+            {/* Stats grid */}
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '1px', background: '#f3f4f6', borderRadius: '10px',
-              overflow: 'hidden', marginBottom: '14px',
+              gap: '1px', background: 'rgba(0,0,0,0.06)', borderRadius: '12px',
+              overflow: 'hidden', marginBottom: '18px',
             }}>
               {[
                 { n: subject.stats.papers, l: 'Papers' },
@@ -141,22 +112,22 @@ function SubjectCard({ subject, index, inView, onViewAnalysis }: { subject: Subj
                 { n: subject.stats.marks, l: 'Marks' },
                 { n: subject.stats.hitRate, l: 'Q27' },
               ].map(({ n, l }) => (
-                <div key={l} style={{ background: '#fff', padding: '10px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: '16px', fontWeight: 700, color: subject.color, letterSpacing: '-0.03em' }}>{n}</div>
-                  <div style={{ fontSize: '10px', color: '#9ca3af', fontWeight: 500, marginTop: '1px' }}>{l}</div>
+                <div key={l} style={{ background: '#ffffff', padding: '12px 8px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '17px', fontWeight: 600, color: subject.color, letterSpacing: '-0.374px' }}>{n}</div>
+                  <div style={{ fontSize: '10px', color: '#6e6e73', fontWeight: 400, marginTop: '2px' }}>{l}</div>
                 </div>
               ))}
             </div>
 
             {/* Findings */}
-            <div style={{ marginBottom: '16px' }}>
+            <div style={{ marginBottom: '20px' }}>
               {subject.findings!.map((f, i) => (
-                <div key={i} style={{ display: 'flex', gap: '7px', alignItems: 'flex-start', marginBottom: '5px' }}>
+                <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '6px' }}>
                   <div style={{
                     width: '4px', height: '4px', borderRadius: '50%',
-                    background: subject.color, marginTop: '7px', flexShrink: 0,
+                    background: subject.color, marginTop: '8px', flexShrink: 0,
                   }} />
-                  <span style={{ fontSize: '12px', color: '#4b5563', lineHeight: 1.45 }}>{f}</span>
+                  <span style={{ fontSize: '14px', color: '#6e6e73', lineHeight: 1.47, letterSpacing: '-0.224px' }}>{f}</span>
                 </div>
               ))}
             </div>
@@ -167,50 +138,56 @@ function SubjectCard({ subject, index, inView, onViewAnalysis }: { subject: Subj
                 onClick={onViewAnalysis}
                 style={{
                   flex: 1, display: 'inline-flex', alignItems: 'center',
-                  justifyContent: 'center', gap: '5px', padding: '9px 12px',
-                  borderRadius: '10px', background: subject.color, color: '#fff',
-                  border: 'none', fontSize: '12px', fontWeight: 600,
-                  transition: 'opacity 0.15s', cursor: 'none',
+                  justifyContent: 'center', gap: '6px',
+                  padding: '11px 16px', borderRadius: '9999px',
+                  background: '#0066cc', color: '#ffffff',
+                  border: 'none', fontSize: '14px', fontWeight: 400,
+                  letterSpacing: '-0.224px', cursor: 'pointer',
+                  transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.85')}
-                onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0077ed'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0066cc'; }}
               >
-                <BarChart2 size={12} strokeWidth={1.5} />
+                <BarChart2 size={13} strokeWidth={1.5} />
                 Analysis
-                <ArrowRight size={11} strokeWidth={1.5} />
               </button>
-              <a href={subject.pdfHref} target="_blank" rel="noopener noreferrer"
+              <button
+                onClick={openPDF}
                 style={{
                   flex: 1, display: 'inline-flex', alignItems: 'center',
-                  justifyContent: 'center', gap: '5px', padding: '9px 12px',
-                  borderRadius: '10px', background: '#f9fafb', color: '#374151',
-                  textDecoration: 'none', fontSize: '12px', fontWeight: 600,
-                  border: '1px solid #e5e7eb', transition: 'background 0.15s', cursor: 'none',
+                  justifyContent: 'center', gap: '6px',
+                  padding: '10px 16px', borderRadius: '9999px',
+                  background: 'transparent', color: '#0066cc',
+                  border: '1px solid rgba(0,102,204,0.4)',
+                  fontSize: '14px', fontWeight: 400,
+                  letterSpacing: '-0.224px', cursor: 'pointer',
+                  transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.background = '#f3f4f6')}
-                onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.background = '#f9fafb')}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(0,102,204,0.06)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
               >
-                <BookOpen size={12} strokeWidth={1.5} />
+                <BookOpen size={13} strokeWidth={1.5} />
                 PDF Guide
-              </a>
+              </button>
             </div>
           </>
         ) : (
           <div style={{
-            padding: '20px', borderRadius: '10px',
-            background: '#fafafa', border: '1px dashed #e5e7eb',
+            padding: '24px', borderRadius: '12px',
+            background: '#f5f5f7',
+            border: '1px dashed rgba(0,0,0,0.10)',
             textAlign: 'center',
           }}>
             <div style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              background: `${subject.color}14`, border: `1.5px solid ${subject.color}33`,
+              width: '36px', height: '36px', borderRadius: '50%',
+              background: `${subject.color}14`, border: `1.5px solid ${subject.color}30`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 8px',
+              margin: '0 auto 10px',
             }}>
               <BarChart2 size={14} strokeWidth={1.5} style={{ color: subject.color }} />
             </div>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#6b7280' }}>Analysis in progress</div>
-            <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '3px' }}>
+            <div style={{ fontSize: '14px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.224px' }}>Analysis in progress</div>
+            <div style={{ fontSize: '12px', color: '#6e6e73', marginTop: '4px' }}>
               PYQs → Pattern → Guide
             </div>
           </div>
@@ -234,25 +211,31 @@ export function SubjectGrid({ onViewAnalysis }: GridProps) {
       padding: 'clamp(56px, 8vw, 96px) clamp(16px, 5vw, 80px)',
     }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '36px' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: '48px' }}
+        >
           <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
-            textTransform: 'uppercase', color: '#0066cc', background: '#eff6ff',
-            padding: '4px 12px', borderRadius: '100px', marginBottom: '12px',
+            fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em',
+            textTransform: 'uppercase', color: '#6e6e73', marginBottom: '10px',
           }}>
             6 Subjects · SRM Institute
           </div>
           <h2 style={{
-            fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 600, color: '#1d1d1f',
-            letterSpacing: '-0.04em', lineHeight: 1.1, margin: '0 0 10px',
+            fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 600, color: '#1d1d1f',
+            letterSpacing: '-0.03em', lineHeight: 1.07, margin: '0 0 14px',
           }}>
             Every subject. Every pattern.
           </h2>
-          <p style={{ fontSize: '15px', color: '#6b7280', margin: 0 }}>
+          <p style={{
+            fontSize: '17px', fontWeight: 400, lineHeight: 1.47, color: '#6e6e73',
+            margin: 0, letterSpacing: '-0.374px', maxWidth: '600px',
+          }}>
             4 PYQs analyzed per subject. Topic heatmaps, exam strategy, and first-principles PDF guides.
           </p>
-        </div>
+        </motion.div>
 
         <div ref={ref} style={{
           display: 'grid',

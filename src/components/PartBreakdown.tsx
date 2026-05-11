@@ -101,7 +101,7 @@ export function PartBreakdown() {
               <span
                 style={{
                   fontSize: '11px',
-                  fontWeight: 700,
+                  fontWeight: 600,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   color: part.bg,
@@ -123,7 +123,7 @@ export function PartBreakdown() {
                 {part.marks}
               </span>
             </div>
-            <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.5)', margin: '6px 0 0', fontWeight: 400 }}>
+            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: '6px 0 0', fontWeight: 400 }}>
               {part.desc}
             </p>
           </div>

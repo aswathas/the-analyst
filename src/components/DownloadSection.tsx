@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
-import { BookOpen, ExternalLink } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 export function DownloadSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -11,7 +11,7 @@ export function DownloadSection() {
     <section
       id="pdf-guide"
       style={{
-        background: '#1d1d1f',
+        background: 'rgba(5,3,2,0.56)',
         padding: 'clamp(64px, 10vw, 120px) clamp(16px, 5vw, 80px)',
       }}
     >
@@ -23,14 +23,23 @@ export function DownloadSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           style={{
             padding: 'clamp(36px, 6vw, 72px)',
-            borderRadius: '24px',
-            background: 'linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '28px',
+            background: 'rgba(255,255,255,0.07)',
+            backdropFilter: 'blur(32px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(32px) saturate(180%)',
+            border: '1px solid rgba(255,255,255,0.14)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 24px 80px rgba(0,0,0,0.3)',
             textAlign: 'center',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
+          {/* Top glass sheen */}
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
+            background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent)',
+            pointerEvents: 'none',
+          }} />
           {/* Glow accent */}
           <div
             style={{
@@ -38,9 +47,9 @@ export function DownloadSection() {
               top: '-60px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '300px',
-              height: '200px',
-              background: 'radial-gradient(ellipse, rgba(0,102,204,0.2) 0%, transparent 70%)',
+              width: '400px',
+              height: '240px',
+              background: 'radial-gradient(ellipse, rgba(99,64,232,0.18) 0%, rgba(164,48,212,0.1) 50%, transparent 70%)',
               pointerEvents: 'none',
             }}
           />
@@ -114,50 +123,41 @@ export function DownloadSection() {
               { n: '48h', label: 'Exam Prep' },
             ].map(({ n, label }) => (
               <div key={label} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '24px', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.04em' }}>
+                <div style={{ fontSize: '24px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.04em' }}>
                   {n}
                 </div>
-                <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.4)', fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', fontWeight: 400, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                   {label}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <a
-            href="../exam_bible.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '9px',
-              padding: '14px 32px',
-              borderRadius: '100px',
-              background: '#0066cc',
-              color: '#ffffff',
-              textDecoration: 'none',
-              fontSize: '15px',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              transition: 'background 0.2s, transform 0.15s',
-              cursor: 'none',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = '#0077ed';
-              el.style.transform = 'scale(1.03)';
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = '#0066cc';
-              el.style.transform = 'scale(1)';
-            }}
-          >
-            Open Study Guide
-            <ExternalLink size={15} strokeWidth={1.5} />
-          </a>
+          {/* CTA row */}
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a
+              href="/DS_Prep_Guide.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '9px',
+                padding: '14px 36px', borderRadius: '100px',
+                background: 'rgba(41,151,255,0.88)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                color: '#ffffff', textDecoration: 'none',
+                fontSize: '15px', fontWeight: 400, letterSpacing: '-0.022em',
+                border: '1px solid rgba(41,151,255,0.5)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18)',
+                transition: 'opacity 0.15s', cursor: 'none',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.85'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+            >
+              <BookOpen size={14} strokeWidth={1.5} />
+              Download Prep Guide
+            </a>
+          </div>
 
           {/* Byline */}
           <p
