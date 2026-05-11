@@ -31,7 +31,7 @@ const SUBJECTS: Subject[] = [
 ];
 
 function openPDF() {
-  window.open('/DS_Prep_Guide.pdf', '_blank');
+  window.open('/DataScience_BeautifulGuide.pdf', '_blank');
 }
 
 function SubjectCard({

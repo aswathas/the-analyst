@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, FileSpreadsheet } from 'lucide-react';
 
 export function DownloadSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -136,7 +136,7 @@ export function DownloadSection() {
           {/* CTA row */}
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="/DS_Prep_Guide.pdf"
+              href="/DataScience_BeautifulGuide.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -155,7 +155,29 @@ export function DownloadSection() {
               onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
             >
               <BookOpen size={14} strokeWidth={1.5} />
-              Download Prep Guide
+              Prep Guide
+            </a>
+            <a
+              href="/DS_PYQ_MasterSheet.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '9px',
+                padding: '14px 36px', borderRadius: '100px',
+                background: 'rgba(52,199,89,0.15)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                color: '#34c759', textDecoration: 'none',
+                fontSize: '15px', fontWeight: 400, letterSpacing: '-0.022em',
+                border: '1px solid rgba(52,199,89,0.35)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+                transition: 'opacity 0.15s', cursor: 'none',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.85'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
+            >
+              <FileSpreadsheet size={14} strokeWidth={1.5} />
+              PYQ MasterSheet
             </a>
           </div>
 

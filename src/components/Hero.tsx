@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, BarChart2 } from 'lucide-react';
+import { ChevronDown, BarChart2, BookOpen, FileSpreadsheet } from 'lucide-react';
 
 const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
@@ -215,13 +215,22 @@ export function Hero({ onViewAnalysis }: HeroProps) {
                 style={dropdownStyle}
               >
                 <button
-                  onClick={() => { window.open('/DS_Prep_Guide.pdf', '_blank'); setOpenDropdown(null); }}
+                  onClick={() => { window.open('/DataScience_BeautifulGuide.pdf', '_blank'); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
                   onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                 >
-                  <BarChart2 size={13} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
-                  DS Prep Guide
+                  <BookOpen size={13} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
+                  Prep Guide
+                </button>
+                <button
+                  onClick={() => { window.open('/DS_PYQ_MasterSheet.pdf', '_blank'); setOpenDropdown(null); }}
+                  style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'none')}
+                >
+                  <FileSpreadsheet size={13} strokeWidth={1.5} style={{ color: '#34c759', flexShrink: 0 }} />
+                  PYQ MasterSheet
                 </button>
               </motion.div>
             )}
