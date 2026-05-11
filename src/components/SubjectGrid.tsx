@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BarChart2, BookOpen, CheckCircle, Lock } from 'lucide-react';
+import { BarChart2, BookOpen, CheckCircle, Lock, FileSpreadsheet } from 'lucide-react';
 
 interface Subject {
   code: string;
@@ -132,42 +132,63 @@ function SubjectCard({
             </div>
 
             {/* CTAs */}
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <button
-                onClick={onViewAnalysis}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  onClick={onViewAnalysis}
+                  style={{
+                    flex: 1, display: 'inline-flex', alignItems: 'center',
+                    justifyContent: 'center', gap: '6px',
+                    padding: '11px 16px', borderRadius: '9999px',
+                    background: '#0066cc', color: '#ffffff',
+                    border: 'none', fontSize: '14px', fontWeight: 400,
+                    letterSpacing: '-0.224px', cursor: 'pointer',
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0077ed'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0066cc'; }}
+                >
+                  <BarChart2 size={13} strokeWidth={1.5} />
+                  Analysis
+                </button>
+                <button
+                  onClick={openPDF}
+                  style={{
+                    flex: 1, display: 'inline-flex', alignItems: 'center',
+                    justifyContent: 'center', gap: '6px',
+                    padding: '10px 16px', borderRadius: '9999px',
+                    background: 'transparent', color: '#0066cc',
+                    border: '1px solid rgba(0,102,204,0.4)',
+                    fontSize: '14px', fontWeight: 400,
+                    letterSpacing: '-0.224px', cursor: 'pointer',
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(0,102,204,0.06)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+                >
+                  <BookOpen size={13} strokeWidth={1.5} />
+                  PDF Guide
+                </button>
+              </div>
+              <a
+                href="/DS_PYQ_MasterSheet.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  flex: 1, display: 'inline-flex', alignItems: 'center',
-                  justifyContent: 'center', gap: '6px',
-                  padding: '11px 16px', borderRadius: '9999px',
-                  background: '#0066cc', color: '#ffffff',
-                  border: 'none', fontSize: '14px', fontWeight: 400,
-                  letterSpacing: '-0.224px', cursor: 'pointer',
-                  transition: 'background 0.15s',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0077ed'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0066cc'; }}
-              >
-                <BarChart2 size={13} strokeWidth={1.5} />
-                Analysis
-              </button>
-              <button
-                onClick={openPDF}
-                style={{
-                  flex: 1, display: 'inline-flex', alignItems: 'center',
-                  justifyContent: 'center', gap: '6px',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
                   padding: '10px 16px', borderRadius: '9999px',
-                  background: 'transparent', color: '#0066cc',
-                  border: '1px solid rgba(0,102,204,0.4)',
-                  fontSize: '14px', fontWeight: 400,
+                  background: 'rgba(0,102,204,0.06)', color: '#0066cc',
+                  border: '1px solid rgba(0,102,204,0.2)',
+                  fontSize: '13px', fontWeight: 400,
                   letterSpacing: '-0.224px', cursor: 'pointer',
-                  transition: 'background 0.15s',
+                  textDecoration: 'none', transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(0,102,204,0.06)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(0,102,204,0.12)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(0,102,204,0.06)'; }}
               >
-                <BookOpen size={13} strokeWidth={1.5} />
-                PDF Guide
-              </button>
+                <FileSpreadsheet size={13} strokeWidth={1.5} />
+                PYQ MasterSheet
+              </a>
             </div>
           </>
         ) : (
