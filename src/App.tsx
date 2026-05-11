@@ -1,20 +1,20 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Cursor } from './components/Cursor';
 import { Hero } from './components/Hero';
 import { StoicSection } from './components/StoicSection';
 import { SubjectGrid } from './components/SubjectGrid';
 import { PWAPrompt } from './components/PWAPrompt';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router';
 
 // Lazy-load heavy components — deferred until needed
 const DSAnalysisPage = lazy(() => import('./components/DSAnalysisPage').then(m => ({ default: m.DSAnalysisPage })));
 const DSAnalysisMobile = lazy(() => import('./components/DSAnalysisMobile').then(m => ({ default: m.DSAnalysisMobile })));
+const PYQMasterSheet = lazy(() => import('./components/PYQMasterSheet').then(m => ({ default: m.PYQMasterSheet })));
 
 // Detect mobile/touch once at module level — stable across renders
 const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
-
-type View = 'home' | 'ds-analysis';
 
 function Footer() {
   return (
@@ -47,54 +47,66 @@ function Footer() {
   );
 }
 
-function App() {
-  const [view, setView] = useState<View>('home');
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [view]);
-
+function Home() {
   return (
-    <>
-      {/* Base layer: true black behind the hero video */}
-      <div style={{ position: 'fixed', inset: 0, background: '#000000', zIndex: 0, pointerEvents: 'none' }} />
+    <div style={{ position: 'relative', zIndex: 1 }}>
+      <Hero onViewAnalysis={() => window.location.href = '/ds-analysis'} />
+      <SubjectGrid onViewAnalysis={() => window.location.href = '/ds-analysis'} />
+      <StoicSection />
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
       <Analytics />
       <Cursor />
       <PWAPrompt />
-      <AnimatePresence mode="wait">
-        {view === 'ds-analysis' ? (
-          <motion.div
-            key="ds-analysis"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
-            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'relative', zIndex: 2 }}
-          >
-            <Suspense fallback={<div style={{ minHeight: '100vh', background: '#1d1d1f' }} />}>
-              {isMobile
-                ? <DSAnalysisMobile onBack={() => setView('home')} />
-                : <DSAnalysisPage onBack={() => setView('home')} />
-              }
-            </Suspense>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
-            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            style={{ position: 'relative', zIndex: 2 }}
-          >
-            <Hero onViewAnalysis={() => setView('ds-analysis')} />
-            <SubjectGrid onViewAnalysis={() => setView('ds-analysis')} />
-            <StoicSection />
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#1d1d1f' }} />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ds-analysis" element={<DSAnalysisPageWrapper />} />
+          <Route path="/pyq-master" element={<PYQMasterSheetWrapper />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
+
+function DSAnalysisPageWrapper() {
+  const navigate = useNavigate();
+  return (
+    <motion.div
+      key="ds-analysis"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      {isMobile
+        ? <DSAnalysisMobile onBack={() => navigate('/')} />
+        : <DSAnalysisPage onBack={() => navigate('/')} />
+      }
+    </motion.div>
+  );
+}
+
+function PYQMasterSheetWrapper() {
+  const navigate = useNavigate();
+  return (
+    <motion.div
+      key="pyq-master"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      <PYQMasterSheet onBack={() => navigate('/')} />
+    </motion.div>
   );
 }
 

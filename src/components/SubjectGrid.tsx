@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { useInView } from 'framer-motion';
 import { BarChart2, BookOpen, CheckCircle, Lock } from 'lucide-react';
 
 interface Subject {
@@ -37,14 +35,15 @@ function openPDF() {
 }
 
 function SubjectCard({
-  subject, index, inView, onViewAnalysis,
+  subject, index, onViewAnalysis,
 }: {
-  subject: Subject; index: number; inView: boolean; onViewAnalysis: () => void;
+  subject: Subject; index: number; onViewAnalysis: () => void;
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 22 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px' }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
       style={{
         background: '#ffffff',
@@ -202,9 +201,6 @@ interface GridProps {
 }
 
 export function SubjectGrid({ onViewAnalysis }: GridProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
-
   return (
     <section id="subjects" style={{
       background: '#f5f5f7',
@@ -213,7 +209,8 @@ export function SubjectGrid({ onViewAnalysis }: GridProps) {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{ marginBottom: '48px' }}
         >
@@ -237,13 +234,13 @@ export function SubjectGrid({ onViewAnalysis }: GridProps) {
           </p>
         </motion.div>
 
-        <div ref={ref} style={{
+        <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: '16px',
         }}>
           {SUBJECTS.map((subject, i) => (
-            <SubjectCard key={i} subject={subject} index={i} inView={inView} onViewAnalysis={onViewAnalysis} />
+            <SubjectCard key={i} subject={subject} index={i} onViewAnalysis={onViewAnalysis} />
           ))}
         </div>
       </div>
