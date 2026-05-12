@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { BarChart2, BookOpen, CheckCircle, Lock, FileSpreadsheet } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 interface Subject {
   code: string;
@@ -23,6 +24,18 @@ const SUBJECTS: Subject[] = [
       'Safe combo: Wrangling + Viz + 1 ML = 65/75',
     ],
   },
+  {
+    code: '21ECC302T',
+    name: 'Analog and Digital Communication',
+    status: 'complete',
+    color: '#f97316',
+    stats: { papers: 3, topics: 10, marks: 75, hitRate: 'Q27' },
+    findings: [
+      'FM Carsons rule in 3/3 recent papers',
+      'AM modulation index MCQs every paper',
+      'Safe combo: AM/FM theory + Digital mod + Noise = 65/75',
+    ],
+  },
   { code: 'TBC', name: 'Cloud Computing using Blockchain', status: 'coming', color: '#7c3aed' },
   { code: 'TBC', name: 'Compiler Design', status: 'coming', color: '#0891b2' },
   { code: 'TBC', name: 'Advanced Cryptography', status: 'coming', color: '#dc2626' },
@@ -30,15 +43,66 @@ const SUBJECTS: Subject[] = [
   { code: 'TBC', name: 'Hybrid Vehicles', status: 'coming', color: '#d97706' },
 ];
 
-function openPDF() {
-  window.open('/prepguide.pdf', '_blank');
+function openPDF(subjectCode: string) {
+  const pdfs: Record<string, string> = {
+    '21CSS303T': '/prepguide.pdf',
+    '21ECC302T': '/ADC_Syllabus.pdf',
+  };
+  window.open(pdfs[subjectCode] || '/prepguide.pdf', '_blank');
 }
 
-function SubjectCard({
-  subject, index, onViewAnalysis,
-}: {
-  subject: Subject; index: number; onViewAnalysis: () => void;
-}) {
+function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
+  const navigate = useNavigate();
+  const routeMap: Record<string, string> = {
+    '21CSS303T': '/ds-analysis',
+    '21ECC302T': '/adc-analysis',
+  };
+  const masterRouteMap: Record<string, string> = {
+    '21CSS303T': '/pyq-master',
+    '21ECC302T': '/adc-master',
+  };
+  const handleViewAnalysis = () => {
+    navigate(routeMap[subject.code] || '/ds-analysis');
+  };
+  const handleViewMasterSheet = () => {
+    navigate(masterRouteMap[subject.code] || '/pyq-master');
+  };
+  const masterSheetPDFs: Record<string, string> = {
+    '21CSS303T': '/mastersheet.pdf',
+    '21ECC302T': '/adc-mastersheet.pdf',
+  };
+
+  if (subject.status === 'coming') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '0px' }}
+        transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          background: '#ffffff',
+          borderRadius: '18px',
+          border: '1px solid rgba(0,0,0,0.08)',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ height: '3px', background: subject.color }} />
+        <div style={{ padding: '24px', borderRadius: '12px', background: '#f5f5f7', border: '1px dashed rgba(0,0,0,0.10)', textAlign: 'center' }}>
+          <div style={{
+            width: '36px', height: '36px', borderRadius: '50%',
+            background: `${subject.color}14`, border: `1.5px solid ${subject.color}30`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 10px',
+          }}>
+            <BarChart2 size={14} strokeWidth={1.5} style={{ color: subject.color }} />
+          </div>
+          <div style={{ fontSize: '14px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.224px' }}>Analysis in progress</div>
+          <div style={{ fontSize: '12px', color: '#6e6e73', marginTop: '4px' }}>PYQs → Pattern → Guide</div>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 22 }}
@@ -52,11 +116,8 @@ function SubjectCard({
         overflow: 'hidden',
       }}
     >
-      {/* Color bar */}
       <div style={{ height: '3px', background: subject.color }} />
-
       <div style={{ padding: '24px' }}>
-        {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px', gap: '10px' }}>
           <div style={{ minWidth: 0 }}>
             <div style={{
@@ -73,33 +134,19 @@ function SubjectCard({
               {subject.name}
             </h3>
           </div>
-
-          {subject.status === 'complete' ? (
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '4px',
-              fontSize: '11px', fontWeight: 600, color: '#34c759',
-              background: 'rgba(52,199,89,0.10)', padding: '4px 10px', borderRadius: '100px',
-              flexShrink: 0, border: '1px solid rgba(52,199,89,0.2)',
-            }}>
-              <CheckCircle size={10} strokeWidth={2.5} />
-              Complete
-            </div>
-          ) : (
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '4px',
-              fontSize: '11px', fontWeight: 500, color: '#6e6e73',
-              background: '#f5f5f7', padding: '4px 10px', borderRadius: '100px',
-              flexShrink: 0, border: '1px solid rgba(0,0,0,0.06)',
-            }}>
-              <Lock size={9} strokeWidth={2} />
-              Soon
-            </div>
-          )}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '4px',
+            fontSize: '11px', fontWeight: 600, color: '#34c759',
+            background: 'rgba(52,199,89,0.10)', padding: '4px 10px', borderRadius: '100px',
+            flexShrink: 0, border: '1px solid rgba(52,199,89,0.2)',
+          }}>
+            <CheckCircle size={10} strokeWidth={2.5} />
+            Complete
+          </div>
         </div>
 
-        {subject.status === 'complete' && subject.stats ? (
+        {subject.stats && (
           <>
-            {/* Stats grid */}
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '1px', background: 'rgba(0,0,0,0.06)', borderRadius: '12px',
@@ -118,24 +165,24 @@ function SubjectCard({
               ))}
             </div>
 
-            {/* Findings */}
-            <div style={{ marginBottom: '20px' }}>
-              {subject.findings!.map((f, i) => (
-                <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '6px' }}>
-                  <div style={{
-                    width: '4px', height: '4px', borderRadius: '50%',
-                    background: subject.color, marginTop: '8px', flexShrink: 0,
-                  }} />
-                  <span style={{ fontSize: '14px', color: '#6e6e73', lineHeight: 1.47, letterSpacing: '-0.224px' }}>{f}</span>
-                </div>
-              ))}
-            </div>
+            {subject.findings && (
+              <div style={{ marginBottom: '20px' }}>
+                {subject.findings.map((f, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '6px' }}>
+                    <div style={{
+                      width: '4px', height: '4px', borderRadius: '50%',
+                      background: subject.color, marginTop: '8px', flexShrink: 0,
+                    }} />
+                    <span style={{ fontSize: '14px', color: '#6e6e73', lineHeight: 1.47, letterSpacing: '-0.224px' }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
-            {/* CTAs */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button
-                  onClick={onViewAnalysis}
+                  onClick={handleViewAnalysis}
                   style={{
                     flex: 1, display: 'inline-flex', alignItems: 'center',
                     justifyContent: 'center', gap: '6px',
@@ -152,7 +199,7 @@ function SubjectCard({
                   Analysis
                 </button>
                 <button
-                  onClick={openPDF}
+                  onClick={() => openPDF(subject.code)}
                   style={{
                     flex: 1, display: 'inline-flex', alignItems: 'center',
                     justifyContent: 'center', gap: '6px',
@@ -171,7 +218,7 @@ function SubjectCard({
                 </button>
               </div>
               <a
-                href="/mastersheet.pdf"
+                href={masterSheetPDFs[subject.code] || '/mastersheet.pdf'}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -187,41 +234,34 @@ function SubjectCard({
                 onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(0,102,204,0.06)'; }}
               >
                 <FileSpreadsheet size={13} strokeWidth={1.5} />
-                PYQ MasterSheet
+                PYQ MasterSheet PDF
               </a>
+              <button
+                onClick={handleViewMasterSheet}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                  padding: '10px 16px', borderRadius: '9999px',
+                  background: subject.color, color: '#ffffff',
+                  border: 'none',
+                  fontSize: '13px', fontWeight: 400,
+                  letterSpacing: '-0.224px', cursor: 'pointer',
+                  transition: 'opacity 0.15s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.85'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; }}
+              >
+                <FileSpreadsheet size={13} strokeWidth={1.5} />
+                Master Sheet
+              </button>
             </div>
           </>
-        ) : (
-          <div style={{
-            padding: '24px', borderRadius: '12px',
-            background: '#f5f5f7',
-            border: '1px dashed rgba(0,0,0,0.10)',
-            textAlign: 'center',
-          }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '50%',
-              background: `${subject.color}14`, border: `1.5px solid ${subject.color}30`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 10px',
-            }}>
-              <BarChart2 size={14} strokeWidth={1.5} style={{ color: subject.color }} />
-            </div>
-            <div style={{ fontSize: '14px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.224px' }}>Analysis in progress</div>
-            <div style={{ fontSize: '12px', color: '#6e6e73', marginTop: '4px' }}>
-              PYQs → Pattern → Guide
-            </div>
-          </div>
         )}
       </div>
     </motion.div>
   );
 }
 
-interface GridProps {
-  onViewAnalysis: () => void;
-}
-
-export function SubjectGrid({ onViewAnalysis }: GridProps) {
+export function SubjectGrid() {
   return (
     <section id="subjects" style={{
       background: '#f5f5f7',
@@ -261,7 +301,7 @@ export function SubjectGrid({ onViewAnalysis }: GridProps) {
           gap: '16px',
         }}>
           {SUBJECTS.map((subject, i) => (
-            <SubjectCard key={i} subject={subject} index={i} onViewAnalysis={onViewAnalysis} />
+            <SubjectCard key={i} subject={subject} index={i} />
           ))}
         </div>
       </div>

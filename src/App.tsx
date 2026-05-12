@@ -12,6 +12,9 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router';
 const DSAnalysisPage = lazy(() => import('./components/DSAnalysisPage').then(m => ({ default: m.DSAnalysisPage })));
 const DSAnalysisMobile = lazy(() => import('./components/DSAnalysisMobile').then(m => ({ default: m.DSAnalysisMobile })));
 const PYQMasterSheet = lazy(() => import('./components/PYQMasterSheet').then(m => ({ default: m.PYQMasterSheet })));
+const ADCAnalysisPage = lazy(() => import('./components/ADCAnalysisPage').then(m => ({ default: m.ADCAnalysisPage })));
+const ADCAnalysisMobile = lazy(() => import('./components/ADCAnalysisMobile').then(m => ({ default: m.ADCAnalysisMobile })));
+const ADCMasterSheet = lazy(() => import('./components/ADCMasterSheet').then(m => ({ default: m.ADCMasterSheet })));
 
 // Detect mobile/touch once at module level — stable across renders
 const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
@@ -69,6 +72,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/ds-analysis" element={<DSAnalysisPageWrapper />} />
           <Route path="/pyq-master" element={<PYQMasterSheetWrapper />} />
+          <Route path="/adc-analysis" element={<ADCAnalysisPageWrapper />} />
+          <Route path="/adc-master" element={<ADCMasterSheetWrapper />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
@@ -106,6 +111,41 @@ function PYQMasterSheetWrapper() {
       style={{ position: 'relative', zIndex: 2 }}
     >
       <PYQMasterSheet onBack={() => navigate('/')} />
+    </motion.div>
+  );
+}
+
+function ADCAnalysisPageWrapper() {
+  const navigate = useNavigate();
+  return (
+    <motion.div
+      key="adc-analysis"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      {isMobile
+        ? <ADCAnalysisMobile onBack={() => navigate('/')} />
+        : <ADCAnalysisPage onBack={() => navigate('/')} />
+      }
+    </motion.div>
+  );
+}
+
+function ADCMasterSheetWrapper() {
+  const navigate = useNavigate();
+  return (
+    <motion.div
+      key="adc-master"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12, transition: { duration: 0.22 } }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      <ADCMasterSheet onBack={() => navigate('/')} />
     </motion.div>
   );
 }
