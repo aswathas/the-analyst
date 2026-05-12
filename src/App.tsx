@@ -14,7 +14,7 @@ const DSAnalysisMobile = lazy(() => import('./components/DSAnalysisMobile').then
 const PYQMasterSheet = lazy(() => import('./components/PYQMasterSheet').then(m => ({ default: m.PYQMasterSheet })));
 const ADCAnalysisPage = lazy(() => import('./components/ADCAnalysisPage').then(m => ({ default: m.ADCAnalysisPage })));
 const ADCAnalysisMobile = lazy(() => import('./components/ADCAnalysisMobile').then(m => ({ default: m.ADCAnalysisMobile })));
-const ADCMasterSheet = lazy(() => import('./components/ADCMasterSheet').then(m => ({ default: m.ADCMasterSheet })));
+const ADCMasterSheet = lazy(() => import('./components/ADCMasterSheet').then(m => ({ default: m.default })));
 
 // Detect mobile/touch once at module level — stable across renders
 const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
@@ -54,7 +54,7 @@ function Home() {
   return (
     <div style={{ position: 'relative', zIndex: 1 }}>
       <Hero onViewAnalysis={() => window.location.href = '/ds-analysis'} />
-      <SubjectGrid onViewAnalysis={() => window.location.href = '/ds-analysis'} />
+      <SubjectGrid />
       <StoicSection />
       <Footer />
     </div>
