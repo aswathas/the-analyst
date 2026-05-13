@@ -8,19 +8,16 @@ import {
   ChevronUp,
   FileText,
   BookOpen,
-  AlertCircle,
   CheckCircle2,
   Target,
   TrendingUp,
   Zap,
 } from 'lucide-react';
+import type { ADCPartA, ADCPartB, ADCPartC } from '../data/adcMasterSheet';
 import {
   ADC_PART_A,
   ADC_PART_B,
   ADC_PART_C,
-  ADCPartA,
-  ADCPartB,
-  ADCPartC,
 } from '../data/adcMasterSheet';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -67,65 +64,17 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.07, duration: 0.4, ease: 'easeOut' },
+    transition: { delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   }),
 };
 
 const accordion = {
   hidden: { height: 0, opacity: 0 },
-  visible: { height: 'auto', opacity: 1, transition: { duration: 0.35, ease: 'easeInOut' } },
-  exit: { height: 0, opacity: 0, transition: { duration: 0.25, ease: 'easeInOut' } },
+  visible: { height: 'auto', opacity: 1, transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] } },
+  exit: { height: 0, opacity: 0, transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] } },
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
-
-function AccordionItem({
-  title,
-  subtitle,
-  icon: Icon,
-  children,
-  defaultOpen = false,
-}: {
-  title: string;
-  subtitle?: string;
-  icon: React.ElementType;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border border-white/10 rounded-lg overflow-hidden bg-white/3">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition-colors"
-      >
-        <Icon size={16} className="text-[#2997ff] shrink-0" />
-        <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-white/90 truncate">{title}</div>
-          {subtitle && <div className="text-xs text-white/40 mt-0.5 truncate">{subtitle}</div>}
-        </div>
-        {open ? (
-          <ChevronUp size={15} className="text-white/40 shrink-0" />
-        ) : (
-          <ChevronDown size={15} className="text-white/40 shrink-0" />
-        )}
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            variants={accordion}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 pt-1 border-t border-white/5">{children}</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 function PartAMcqRow({ q, index }: { q: ADCPartA; index: number }) {
   const letters = ['A', 'B', 'C', 'D'];
@@ -315,7 +264,8 @@ function PartCAccordion({ q, index }: { q: ADCPartC; index: number }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function ADCMasterSheet() {
+interface Props { onBack?: () => void; }
+export default function ADCMasterSheet(_props?: Props) {
   const [unitFilter, setUnitFilter] = useState<UnitFilter>('All');
   const [partAOpenTopic, setPartAOpenTopic] = useState<string | null>(null);
 

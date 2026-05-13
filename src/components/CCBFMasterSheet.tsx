@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import {
-  ArrowLeft, BookOpen, FileText, ChevronDown, ChevronUp,
-  CheckCircle2, AlertTriangle, Shield, Target, TrendingUp, Zap
+  ArrowLeft, FileText, ChevronDown, ChevronUp,
+  CheckCircle2, Shield
 } from 'lucide-react';
 
 // ─── MCQ TOPICS ─────────────────────────────────────────────────────────────

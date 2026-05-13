@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BarChart2, BookOpen, CheckCircle, FileSpreadsheet } from 'lucide-react';
+import { BarChart2, CheckCircle, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 interface Subject {
@@ -54,15 +54,6 @@ const SUBJECTS: Subject[] = [
   { code: 'TBC', name: 'Hybrid Vehicles', status: 'coming', color: '#d97706' },
 ];
 
-function openPDF(subjectCode: string) {
-  const pdfs: Record<string, string> = {
-    '21CSS303T': '/prepguide.pdf',
-    '21ECC302T': '/ADC_Prep_Guide.docx',
-    '21CCT301T': '/CCBF_Prep_Guide.docx',
-  };
-  window.open(pdfs[subjectCode] || '/prepguide.pdf', '_blank');
-}
-
 function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
   const navigate = useNavigate();
   const routeMap: Record<string, string> = {
@@ -80,11 +71,6 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
   };
   const handleViewMasterSheet = () => {
     navigate(masterRouteMap[subject.code] || '/pyq-master');
-  };
-  const masterSheetPDFs: Record<string, string> = {
-    '21CSS303T': '/mastersheet.pdf',
-    '21ECC302T': '/adc-mastersheet.pdf',
-    '21CCT301T': '/prepguide.pdf',
   };
 
   if (subject.status === 'coming') {

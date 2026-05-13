@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import {
-  ArrowLeft, BookOpen, FileText, ChevronDown, ChevronUp,
+  ArrowLeft, FileText, ChevronDown, ChevronUp,
   CheckCircle2, AlertTriangle, Shield, Target, TrendingUp, Zap
 } from 'lucide-react';
 
@@ -58,7 +58,8 @@ const HEATMAP = [
 ];
 
 // ─── MCQ TOPICS ─────────────────────────────────────────────────────────────
-const MCQ_TOPICS = [
+// @ts-ignore
+const _MCQ_TOPICS = [
   { topic: 'Cloud Computing Intro', unit: 1 },
   { topic: 'Fog Computing', unit: 2 },
   { topic: 'Blockchain Fundamentals', unit: 3 },
@@ -67,6 +68,7 @@ const MCQ_TOPICS = [
 ];
 
 // ─── MCQ BANK (40 MCQs, 8 per unit) ─────────────────────────────────────────
+// @ts-ignore
 const MCQ_BANK: Record<string, { q: string; opts: string[]; a: number; ex: string; src: string }[]> = {
   'Cloud Computing Intro': [
     {
@@ -321,7 +323,8 @@ const MCQ_BANK: Record<string, { q: string; opts: string[]; a: number; ex: strin
 };
 
 // ─── PART B 8-MARK QUESTIONS ─────────────────────────────────────────────────
-const PART_B_8 = [
+// @ts-ignore
+const _PART_B_8 = [
   // Unit 1
   {
     unit: 1, marks: 8,
@@ -464,31 +467,6 @@ const GLOBAL_STYLES = `
 `;
 
 // ─── STICKY HEADER ──────────────────────────────────────────────────────────
-function StickyHeader({ onBack, activeTab, onTabChange }: {
-  onBack: () => void; activeTab: string; onTabChange: (t: string) => void;
-}) {
-  return (
-    <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '0 clamp(16px,4vw,32px)' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16, height: 56 }}>
-        <button onClick={onBack} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, padding: '6px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', color: '#e5e5e5' }}>
-          <ArrowLeft size={16} />
-        </button>
-        <div style={{ flex: 1 }}>
-          <div className="mono" style={{ fontSize: 10, color: '#7c3aed', letterSpacing: '0.12em', textTransform: 'uppercase' }}>21CCT301T</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', letterSpacing: '-0.02em' }}>Cloud Computing using Blockchain</div>
-        </div>
-        <nav style={{ display: 'flex', gap: 4 }}>
-          {[{ key: 'analysis', label: 'Analysis' }, { key: 'mastersheet', label: 'Master Sheet' }].map(tab => (
-            <button key={tab.key} onClick={() => onTabChange(tab.key)} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: activeTab === tab.key ? '#7c3aed' : 'transparent', color: activeTab === tab.key ? '#fff' : '#888', transition: 'all 0.15s' }}>{tab.label}</button>
-          ))}
-        </nav>
-        <a href="/CCBF_Syllabus.pdf" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 8, background: 'rgba(255,255,255,0.06)', color: '#888', textDecoration: 'none', fontSize: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
-          <BookOpen size={12} /> Syllabus
-        </a>
-      </div>
-    </div>
-  );
-}
 
 // ─── HERO ──────────────────────────────────────────────────────────────────
 function HeroSection() {
@@ -655,7 +633,8 @@ function PYQCards() {
 }
 
 // ─── ACCORDION ───────────────────────────────────────────────────────────────
-function AccordionItem({ title, children, defaultOpen = false, color = '#7c3aed' }: { title: string; children: React.ReactNode; defaultOpen?: boolean; color?: string }) {
+// @ts-ignore
+function _AccordionItem({ title, children, defaultOpen = false, color = '#7c3aed' }: { title: string; children: React.ReactNode; defaultOpen?: boolean; color?: string }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, overflow: 'hidden', marginBottom: 6, background: open ? `${color}08` : 'transparent' }}>
@@ -693,104 +672,10 @@ function UnitGrid() {
 }
 
 // ─── MCQ SECTION ─────────────────────────────────────────────────────────────
-function MCQSection() {
-  const [activeTopic, setActiveTopic] = useState('Cloud Computing Intro');
-  return (
-    <div className="card" style={{ padding: 20 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <Shield size={14} color="#7c3aed" />
-        <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>UNIT WISE MCQ BANK</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>8 per unit = 40 total</span>
-      </div>
-      <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-        {MCQ_TOPICS.map(mt => (
-          <button key={mt.topic} onClick={() => setActiveTopic(mt.topic)} style={{ padding: '4px 12px', borderRadius: 6, cursor: 'pointer', fontSize: 11, fontWeight: 500, fontFamily: 'inherit', background: activeTopic === mt.topic ? 'rgba(124,58,237,0.2)' : 'rgba(255,255,255,0.04)', color: activeTopic === mt.topic ? '#7c3aed' : '#888', border: activeTopic === mt.topic ? '1px solid rgba(124,58,237,0.3)' : '1px solid rgba(255,255,255,0.06)' }}>
-            U{mt.unit} — {mt.topic.split(' ')[0]}
-          </button>
-        ))}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {MCQ_BANK[activeTopic]?.map((mcq, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }} style={{ background: 'rgba(255,255,255,0.02)', borderRadius: 8, padding: 14, border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="mono" style={{ fontSize: 9, color: '#555', marginBottom: 8 }}>{mcq.src}</div>
-            <div style={{ fontSize: 13, color: '#e5e5e5', marginBottom: 12, lineHeight: 1.5 }}>{mcq.q}</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
-              {mcq.opts.map((opt, oi) => (
-                <div key={oi} style={{ padding: '8px 12px', borderRadius: 6, fontSize: 12, background: oi === mcq.a ? 'rgba(48,209,88,0.15)' : 'rgba(255,255,255,0.03)', border: oi === mcq.a ? '1px solid rgba(48,209,88,0.3)' : '1px solid rgba(255,255,255,0.06)', color: oi === mcq.a ? '#30d158' : '#999', fontFamily: "'JetBrains Mono', monospace" }}>
-                  <span style={{ color: oi === mcq.a ? '#30d158' : '#555', marginRight: 6 }}>{String.fromCharCode(65 + oi)}</span>{opt}
-                </div>
-              ))}
-            </div>
-            <div style={{ marginTop: 10, padding: '8px 10px', background: 'rgba(255,255,255,0.02)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ fontSize: 11, color: '#666' }}>{mcq.ex}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ─── PART B SECTION ─────────────────────────────────────────────────────────
-function PartBSection() {
-  return (
-    <div className="card" style={{ padding: 20 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <FileText size={14} color="#f59e0b" />
-        <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>PART B — 8 MARK QUESTIONS</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>9 questions (2 per U1–U4, 1 for U5)</span>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {PART_B_8.map((q, i) => (
-          <AccordionItem key={i} title={`U${q.unit} — ${q.question.slice(0, 55)}${q.question.length > 55 ? '...' : ''} [${q.marks}M]`} defaultOpen={i < 3} color="#f59e0b">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 12 }}>
-              <div style={{ fontSize: 13, color: '#ddd', lineHeight: 1.6, marginBottom: 8 }}>{q.question}</div>
-              <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ fontSize: 11, color: '#f59e0b', marginBottom: 8, fontWeight: 600 }}>KEY POINTS</div>
-                {q.keyPoints.map((kp, ki) => <div key={ki} style={{ display: 'flex', gap: 8, marginBottom: 6 }}><span style={{ color: '#555', fontSize: 10, fontFamily: "'JetBrains Mono', monospace", minWidth: 16 }}>{ki + 1}.</span><span style={{ fontSize: 12, color: '#bbb', lineHeight: 1.5 }}>{kp}</span></div>)}
-              </div>
-            </div>
-          </AccordionItem>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ─── PART C SECTION ─────────────────────────────────────────────────────────
-function PartCSection() {
-  return (
-    <div className="card" style={{ padding: 20 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <CheckCircle2 size={14} color="#10b981" />
-        <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>PART C — 15 MARK PREDICTIONS</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>3 probable long-answer questions</span>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {[
-          { unit: 2, scenario: 'Fog Computing Latency Numerical: A factory has 5000 IoT sensors, each generating 2KB data every second. Cloud processing adds 250ms round-trip latency. Fog node processes data locally adding 8ms. Calculate: (a) Total raw bandwidth to cloud (b) Bandwidth after fog processing at 100:1 compression ratio (c) Latency saved per sensor request.', probability: 85, color: '#06b6d4', solution: [{ step: 'Raw cloud bandwidth', value: '5000 sensors × 2KB/s = 10,000 KB/s = 9.77 MB/s to cloud' }, { step: 'Fog compressed', value: '10,000 KB/s ÷ 100 = 100 KB/s after 100:1 aggregation' }, { step: 'Bandwidth saved', value: '9.77 MB/s - 0.1 MB/s = 9.67 MB/s ≈ 99% reduction' }, { step: 'Latency saved', value: '250ms - 8ms = 242ms saved per request (96.8% improvement)' }, { step: 'Cloud cost saving', value: '99% bandwidth reduction = proportionally lower cloud egress costs' }] },
-          { unit: 3, scenario: 'Blockchain Hash Chain: Block 1 has data "Vote:Alice". Block 1 hash = SHA256(data + prev_hash) = "0000a3...". Block 2 has data "Vote:Bob" and prev_hash = "0000a3...". Block 2 hash = SHA256("Vote:Bob"+"0000a3...") = "0001b7...". Block 3 attacker changes Bob\'s vote to "Vote:Eve". Show how hash linking makes this tampering detectable.', probability: 75, color: '#f59e0b', solution: [{ step: 'Block 3 tampered', value: 'Data changes from "Vote:Bob" to "Vote:Eve" — hash becomes different' }, { step: 'Hash mismatch', value: 'Original Block 3 hash = "0001b7..." — New hash = "x9q2..." (completely different)' }, { step: 'Chain broken', value: 'Block 4\'s "prev_hash" (0001b7...) no longer matches tampered Block 3 hash' }, { step: 'Detection', value: 'All downstream blocks invalid — re-mining entire chain required (infeasible)' }, { step: 'Immutability proven', value: 'Avalanche effect: tiny data change → completely different hash → easily detected' }] },
-          { unit: 5, scenario: 'DApp Architecture Design: Design a blockchain-based voting DApp. Step 1 — User registers with Aadhaar-like identity verified by authority. Step 2 — Smart contract records voter eligibility. Step 3 — User casts vote (one vote per registered voter). Step 4 — Vote stored immutably on blockchain. Step 5 — Results calculated automatically by smart contract. Analyze: (a) How does smart contract enforce one-person-one-vote? (b) Why is blockchain more transparent than e-voting? (c) What Layer 2 solution would you recommend for 1 million voters?', probability: 70, color: '#10b981', solution: [{ step: 'One-person-one-vote', value: 'Smart contract maps each verified Aadhaar hash → unique voter token. Vote transaction checks: has this token already voted? If yes → rejected. If no → vote recorded, token marked voted.' }, { step: 'Transparency', value: 'Every vote transaction is on public blockchain — anyone can verify vote count, cannot modify past votes (immutability), real-time result tallying' }, { step: 'Layer 2 for scale', value: '1M voters: use Polygon PoS or Arbitrum (Ethereum L2). Process votes as off-chain batched transactions — dramatically lower gas fees. Final vote counts committed to Ethereum mainnet periodically.' }, { step: 'IPFS storage', value: 'Voter documents stored on IPFS — only content hash stored on chain. Preserves privacy + data integrity.' }, { step: 'Governance token', value: 'Platform can issue governance token to voters for future referendum participation — increases engagement post-election.' }] },
-        ].map((q, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} style={{ borderLeft: `3px solid ${q.color}`, background: 'rgba(255,255,255,0.02)', borderRadius: 8, padding: 16 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-              <div>
-                <div style={{ fontSize: 11, color: q.color, fontWeight: 700, marginBottom: 4 }}>{q.probability}% probable — Unit {q.unit}</div>
-                <div className="mono" style={{ fontSize: 10, color: '#555' }}>Part C Long Answer — 15 Marks</div>
-              </div>
-              <div style={{ padding: '4px 10px', borderRadius: 6, fontSize: 10, fontWeight: 600, background: `${q.color}15`, color: q.color, border: `1px solid ${q.color}30`, fontFamily: "'JetBrains Mono', monospace" }}>U{q.unit}</div>
-            </div>
-            <div style={{ fontSize: 13, color: '#ccc', marginBottom: 14, lineHeight: 1.5 }}>{q.scenario}</div>
-            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-              <div style={{ fontSize: 11, color: '#10b981', marginBottom: 8, fontWeight: 600 }}>STEP-BY-STEP SOLUTION</div>
-              {q.solution.map((s, si) => <div key={si} style={{ display: 'flex', gap: 10, marginBottom: 6 }}><span className="mono" style={{ fontSize: 10, color: '#555', minWidth: 16 }}>{si + 1}.</span><div>{s.step && <span style={{ fontSize: 11, color: '#999' }}>{s.step}: </span>}<span className="mono" style={{ fontSize: 11, color: '#10b981' }}>{s.value}</span></div></div>)}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ─── MAIN EXPORT ─────────────────────────────────────────────────────────────
 interface Props { onBack: () => void; }
