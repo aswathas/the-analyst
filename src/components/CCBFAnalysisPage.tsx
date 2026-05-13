@@ -11,7 +11,7 @@ const PAPERS = [
   {
     code: 'May 2025 AN',
     date: '15.05.2025',
-    file: '/CCBF_May25_PYQ.pdf',
+    file: '/UNIT 4 - CCBFSD.pdf',
     highlight: 'Fog + Blockchain + Hyperledger + DApps coverage',
     keyTopics: ['Fog architecture', 'Consensus PoW/PoS', 'Hyperledger Fabric', 'Smart contracts', 'Scalability trilemma'],
   },
