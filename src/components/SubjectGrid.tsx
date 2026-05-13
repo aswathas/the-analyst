@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BarChart2, BookOpen, CheckCircle, Lock, FileSpreadsheet } from 'lucide-react';
+import { BarChart2, BookOpen, CheckCircle, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 interface Subject {
@@ -36,7 +36,18 @@ const SUBJECTS: Subject[] = [
       'Safe combo: AM/FM theory + Digital mod + Noise = 65/75',
     ],
   },
-  { code: 'TBC', name: 'Cloud Computing using Blockchain', status: 'coming', color: '#7c3aed' },
+  {
+    code: '21CCT301T',
+    name: 'Cloud Computing using Blockchain',
+    status: 'complete',
+    color: '#7c3aed',
+    stats: { papers: 1, topics: 15, marks: 75, hitRate: 'N/A' },
+    findings: [
+      'Fog architecture in 1/1 recent papers',
+      'Blockchain consensus every paper',
+      'Safe combo: Fog + BC fundamentals + DApps = 60/75',
+    ],
+  },
   { code: 'TBC', name: 'Compiler Design', status: 'coming', color: '#0891b2' },
   { code: 'TBC', name: 'Advanced Cryptography', status: 'coming', color: '#dc2626' },
   { code: 'TBC', name: 'Software Engineering & Project Management', status: 'coming', color: '#059669' },
@@ -46,7 +57,8 @@ const SUBJECTS: Subject[] = [
 function openPDF(subjectCode: string) {
   const pdfs: Record<string, string> = {
     '21CSS303T': '/prepguide.pdf',
-    '21ECC302T': '/ADC_Syllabus.pdf',
+    '21ECC302T': '/ADC_Prep_Guide.docx',
+    '21CCT301T': '/CCBF_Prep_Guide.docx',
   };
   window.open(pdfs[subjectCode] || '/prepguide.pdf', '_blank');
 }
@@ -56,10 +68,12 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
   const routeMap: Record<string, string> = {
     '21CSS303T': '/ds-analysis',
     '21ECC302T': '/adc-analysis',
+    '21CCT301T': '/ccbf-analysis',
   };
   const masterRouteMap: Record<string, string> = {
     '21CSS303T': '/pyq-master',
     '21ECC302T': '/adc-master',
+    '21CCT301T': '/ccbf-master',
   };
   const handleViewAnalysis = () => {
     navigate(routeMap[subject.code] || '/ds-analysis');
@@ -70,6 +84,7 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
   const masterSheetPDFs: Record<string, string> = {
     '21CSS303T': '/mastersheet.pdf',
     '21ECC302T': '/adc-mastersheet.pdf',
+    '21CCT301T': '/prepguide.pdf',
   };
 
   if (subject.status === 'coming') {
@@ -114,11 +129,19 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
         borderRadius: '18px',
         border: '1px solid rgba(0,0,0,0.08)',
         overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
-      <div style={{ height: '3px', background: subject.color }} />
-      <div style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px', gap: '10px' }}>
+      <div style={{ height: '3px', background: subject.color, flexShrink: 0 }} />
+      <div style={{
+        padding: '24px',
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        gap: '16px',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px' }}>
           <div style={{ minWidth: 0 }}>
             <div style={{
               fontSize: '10px', fontWeight: 600, letterSpacing: '0.09em',
@@ -150,7 +173,7 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '1px', background: 'rgba(0,0,0,0.06)', borderRadius: '12px',
-              overflow: 'hidden', marginBottom: '18px',
+              overflow: 'hidden',
             }}>
               {[
                 { n: subject.stats.papers, l: 'Papers' },
@@ -166,7 +189,7 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
             </div>
 
             {subject.findings && (
-              <div style={{ marginBottom: '20px' }}>
+              <div>
                 {subject.findings.map((f, i) => (
                   <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '6px' }}>
                     <div style={{
@@ -179,78 +202,39 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
               </div>
             )}
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button
-                  onClick={handleViewAnalysis}
-                  style={{
-                    flex: 1, display: 'inline-flex', alignItems: 'center',
-                    justifyContent: 'center', gap: '6px',
-                    padding: '11px 16px', borderRadius: '9999px',
-                    background: '#0066cc', color: '#ffffff',
-                    border: 'none', fontSize: '14px', fontWeight: 400,
-                    letterSpacing: '-0.224px', cursor: 'pointer',
-                    transition: 'background 0.15s',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0077ed'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0066cc'; }}
-                >
-                  <BarChart2 size={13} strokeWidth={1.5} />
-                  Analysis
-                </button>
-                <button
-                  onClick={() => openPDF(subject.code)}
-                  style={{
-                    flex: 1, display: 'inline-flex', alignItems: 'center',
-                    justifyContent: 'center', gap: '6px',
-                    padding: '10px 16px', borderRadius: '9999px',
-                    background: 'transparent', color: '#0066cc',
-                    border: '1px solid rgba(0,102,204,0.4)',
-                    fontSize: '14px', fontWeight: 400,
-                    letterSpacing: '-0.224px', cursor: 'pointer',
-                    transition: 'background 0.15s',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(0,102,204,0.06)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
-                >
-                  <BookOpen size={13} strokeWidth={1.5} />
-                  PDF Guide
-                </button>
-              </div>
-              <a
-                href={masterSheetPDFs[subject.code] || '/mastersheet.pdf'}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-                  padding: '10px 16px', borderRadius: '9999px',
-                  background: 'rgba(0,102,204,0.06)', color: '#0066cc',
-                  border: '1px solid rgba(0,102,204,0.2)',
-                  fontSize: '13px', fontWeight: 400,
-                  letterSpacing: '-0.224px', cursor: 'pointer',
-                  textDecoration: 'none', transition: 'background 0.15s',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(0,102,204,0.12)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(0,102,204,0.06)'; }}
-              >
-                <FileSpreadsheet size={13} strokeWidth={1.5} />
-                PYQ MasterSheet PDF
-              </a>
+            <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
               <button
-                onClick={handleViewMasterSheet}
+                onClick={handleViewAnalysis}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
-                  padding: '10px 16px', borderRadius: '9999px',
+                  flex: 1, display: 'inline-flex', alignItems: 'center',
+                  justifyContent: 'center', gap: '6px',
+                  padding: '11px 16px', borderRadius: '9999px',
                   background: subject.color, color: '#ffffff',
-                  border: 'none',
-                  fontSize: '13px', fontWeight: 400,
+                  border: 'none', fontSize: '14px', fontWeight: 500,
                   letterSpacing: '-0.224px', cursor: 'pointer',
                   transition: 'opacity 0.15s',
                 }}
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.85'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; }}
               >
-                <FileSpreadsheet size={13} strokeWidth={1.5} />
+                <BarChart2 size={13} strokeWidth={1.5} />
+                Analysis
+              </button>
+              <button
+                onClick={handleViewMasterSheet}
+                style={{
+                  flex: 1, display: 'inline-flex', alignItems: 'center',
+                  justifyContent: 'center', gap: '6px',
+                  padding: '11px 16px', borderRadius: '9999px',
+                  background: 'rgba(255,255,255,0.08)', color: '#ffffff',
+                  border: `1px solid rgba(255,255,255,0.15)`, fontSize: '14px', fontWeight: 500,
+                  letterSpacing: '-0.224px', cursor: 'pointer',
+                  transition: 'background 0.15s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.14)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; }}
+              >
+                <BookOpen size={13} strokeWidth={1.5} />
                 Master Sheet
               </button>
             </div>

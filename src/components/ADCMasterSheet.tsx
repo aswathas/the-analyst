@@ -2,809 +2,767 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, Star, ChevronDown, ChevronUp,
-  FileText, BookOpen, AlertCircle, CheckCircle2, Target, TrendingUp, Zap,
+  ArrowLeft,
+  Star,
+  ChevronDown,
+  ChevronUp,
+  FileText,
+  BookOpen,
+  AlertCircle,
+  CheckCircle2,
+  Target,
+  TrendingUp,
+  Zap,
 } from 'lucide-react';
-import { ADC_PART_A, ADC_PART_B, ADC_PART_C } from '../data/adcMasterSheet';
+import {
+  ADC_PART_A,
+  ADC_PART_B,
+  ADC_PART_C,
+  ADCPartA,
+  ADCPartB,
+  ADCPartC,
+} from '../data/adcMasterSheet';
 
-interface Props {
-  onBack: () => void;
+// ─── Types ───────────────────────────────────────────────────────────────────
+type UnitFilter = 'All' | 1 | 2 | 3 | 4 | 5;
+
+interface UnitMeta {
+  unit: number;
+  title: string;
+  priority: 'MUST' | 'IMPORTANT' | 'SAFE';
+  topics: string;
+  color: string;
+  bg: string;
+  border: string;
 }
 
-// ─────────────────────────────────────────
-// UNIT DATA
-// ─────────────────────────────────────────
-
-const UNIT_DATA = [
-  { unit: 1, name: 'Amplitude Modulation', marks: 20, badge: 'MUST', badgeColor: '#ef4444', topics: 'AM, DSB-SC, SSB' },
-  { unit: 2, name: 'Frequency & Phase Modulation', marks: 20, badge: 'MUST', badgeColor: '#ef4444', topics: 'FM, PM, Armstrong method' },
-  { unit: 3, name: 'Pulse Modulation & Sampling', marks: 15, badge: 'IMPORTANT', badgeColor: '#f59e0b', topics: 'Sampling theorem, PAM, PWM, PPM' },
-  { unit: 4, name: 'Digital Modulation', marks: 20, badge: 'IMPORTANT', badgeColor: '#f59e0b', topics: 'ASK, FSK, BPSK, QAM' },
-  { unit: 5, name: 'Noise & Noise Figure', marks: 15, badge: 'SAFE', badgeColor: '#30d158', topics: 'Thermal noise, SNR, Friis formula' },
+// ─── Constants ───────────────────────────────────────────────────────────────
+const UNITS: UnitMeta[] = [
+  { unit: 1, title: 'Analog Modulation', priority: 'MUST', topics: 'AM · DSB-SC · SSB', color: '#ef4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.3)' },
+  { unit: 2, title: 'Angle Modulation', priority: 'IMPORTANT', topics: 'FM · PM · Pre-emphasis', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.3)' },
+  { unit: 3, title: 'Pulse Modulation', priority: 'MUST', topics: 'Sampling · PAM · PWM · PPM', color: '#ef4444', bg: 'rgba(239,68,68,0.08)', border: 'rgba(239,68,68,0.3)' },
+  { unit: 4, title: 'Digital Modulation', priority: 'IMPORTANT', topics: 'ASK · FSK · PSK · QAM', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.3)' },
+  { unit: 5, title: 'Noise & Receivers', priority: 'SAFE', topics: 'Thermal Noise · SNR · NF', color: '#22c55e', bg: 'rgba(34,197,94,0.08)', border: 'rgba(34,197,94,0.3)' },
 ];
 
-// ─────────────────────────────────────────
-// HELPER COMPONENTS
-// ─────────────────────────────────────────
+const PART_A_TOPICS = ['AM', 'FM', 'Sampling', 'Digital Mod', 'Noise'] as const;
 
-function SectionTitle({ label, title, desc }: { label: string; title: string; desc?: string }) {
+const PART_A_TOPIC_UNITS: Record<string, number[]> = {
+  AM: [1],
+  FM: [2],
+  Sampling: [3],
+  'Digital Mod': [4],
+  Noise: [5],
+};
+
+const RANK_COLORS: Record<string, string> = {
+  'Highly Probable': '#ef4444',
+  'Very Likely': '#f59e0b',
+  'Possible': '#22c55e',
+};
+
+// ─── Animation Variants ──────────────────────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.07, duration: 0.4, ease: 'easeOut' },
+  }),
+};
+
+const accordion = {
+  hidden: { height: 0, opacity: 0 },
+  visible: { height: 'auto', opacity: 1, transition: { duration: 0.35, ease: 'easeInOut' } },
+  exit: { height: 0, opacity: 0, transition: { duration: 0.25, ease: 'easeInOut' } },
+};
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function AccordionItem({
+  title,
+  subtitle,
+  icon: Icon,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  subtitle?: string;
+  icon: React.ElementType;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ marginBottom: '40px' }}>
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px',
-        fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em',
-        textTransform: 'uppercase', color: '#2997ff',
-        marginBottom: '12px',
-      }}>
-        <Star size={11} strokeWidth={2} />
-        {label}
-      </div>
-      <h2 style={{
-        fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 600, color: '#ffffff',
-        letterSpacing: '-0.03em', lineHeight: 1.15, margin: '0 0 10px',
-      }}>
-        {title}
-      </h2>
-      {desc && <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.55 }}>{desc}</p>}
-    </div>
-  );
-}
-
-function PriorityBadge({ label, color }: { label: string; color: string }) {
-  return (
-    <span style={{
-      fontSize: '10px', fontWeight: 600, color,
-      background: `${color}18`, padding: '3px 8px', borderRadius: '100px',
-      border: `1px solid ${color}30`,
-    }}>{label}</span>
-  );
-}
-
-function UnitBadge({ unit }: { unit: number }) {
-  const colors = ['#ef4444', '#22c55e', '#06b6d4', '#8b5cf6', '#f59e0b'];
-  return (
-    <div style={{
-      width: '28px', height: '28px', borderRadius: '8px',
-      background: `${colors[unit - 1]}18`, border: `1px solid ${colors[unit - 1]}30`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      fontSize: '11px', fontWeight: 700, color: colors[unit - 1],
-      fontFamily: 'JetBrains Mono, monospace', flexShrink: 0,
-    }}>
-      U{unit}
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────
-// MAIN COMPONENT
-// ─────────────────────────────────────────
-
-export default function ADCMasterSheet({ onBack }: Props) {
-  const [activeUnit, setActiveUnit] = useState<number | null>(null);
-  const [openMCQTopic, setOpenMCQTopic] = useState<string | null>('AM');
-  const [openPartB, setOpenPartB] = useState<string | null>('pb1');
-  const [openPartC, setOpenPartC] = useState<string | null>('pc1');
-
-  const toggleMCQTopic = (topic: string) => setOpenMCQTopic(openMCQTopic === topic ? null : topic);
-  const togglePartB = (id: string) => setOpenPartB(openPartB === id ? null : id);
-  const togglePartC = (id: string) => setOpenPartC(openPartC === id ? null : id);
-
-  // Group Part A by topic
-  const groupedPartA = ADC_PART_A.reduce((acc, q) => {
-    if (!acc[q.topic]) acc[q.topic] = [];
-    acc[q.topic].push(q);
-    return acc;
-  }, {} as Record<string, typeof ADC_PART_A>);
-
-  // Filter helpers
-  const filterPartA = (topic: string) => {
-    let questions = groupedPartA[topic] || [];
-    if (activeUnit !== null) questions = questions.filter(q => q.unit === activeUnit);
-    return questions;
-  };
-
-  const filteredPartB = activeUnit === null
-    ? ADC_PART_B
-    : ADC_PART_B.filter(q => q.unit === activeUnit);
-
-  const filteredPartC = activeUnit === null
-    ? ADC_PART_C
-    : ADC_PART_C.filter(q => q.unit === activeUnit);
-
-  const unitBadgeIcon = (badge: string) => {
-    if (badge === 'MUST') return <AlertCircle size={11} strokeWidth={2} />;
-    if (badge === 'IMPORTANT') return <Zap size={11} strokeWidth={2} />;
-    return <CheckCircle2 size={11} strokeWidth={2} />;
-  };
-
-  return (
-    <div style={{ background: '#0a0a0a', minHeight: '100vh' }}>
-
-      {/* Sticky header */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        background: 'rgba(0,0,0,0.92)', backdropFilter: 'saturate(180%) blur(20px)',
-        WebkitBackdropFilter: 'saturate(180%) blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        padding: '12px clamp(16px, 5vw, 80px)',
-        display: 'flex', alignItems: 'center', gap: '14px',
-      }}>
-        <button
-          onClick={onBack}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '6px',
-            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px',
-            padding: '6px 12px', fontSize: '12px', fontWeight: 400, color: 'rgba(255,255,255,0.7)',
-            cursor: 'pointer',
-          }}
-        >
-          <ArrowLeft size={13} strokeWidth={1.5} />
-          Back
-        </button>
-        <div style={{ height: '16px', width: '1px', background: 'rgba(255,255,255,0.1)' }} />
-        <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>ADC</span>
-        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace' }}>21ECC302T</span>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <button
-            onClick={() => window.open('/prepguide.pdf', '_blank')}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '5px',
-              padding: '6px 14px', borderRadius: '9999px',
-              background: 'rgba(255,255,255,0.07)',
-              border: '1px solid rgba(255,255,255,0.14)',
-              color: 'rgba(255,255,255,0.85)',
-              fontSize: '12px', fontWeight: 400, cursor: 'pointer',
-            }}
-          >
-            <BookOpen size={12} strokeWidth={1.5} />
-            Prep Guide
-          </button>
+    <div className="border border-white/10 rounded-lg overflow-hidden bg-white/3">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition-colors"
+      >
+        <Icon size={16} className="text-[#2997ff] shrink-0" />
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-semibold text-white/90 truncate">{title}</div>
+          {subtitle && <div className="text-xs text-white/40 mt-0.5 truncate">{subtitle}</div>}
         </div>
-      </div>
+        {open ? (
+          <ChevronUp size={15} className="text-white/40 shrink-0" />
+        ) : (
+          <ChevronDown size={15} className="text-white/40 shrink-0" />
+        )}
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            variants={accordion}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 pt-1 border-t border-white/5">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(40px, 6vw, 80px) clamp(20px, 5vw, 64px)' }}>
+function PartAMcqRow({ q, index }: { q: ADCPartA; index: number }) {
+  const letters = ['A', 'B', 'C', 'D'];
+  return (
+    <tr className="border-b border-white/5 hover:bg-white/[0.03] transition-colors">
+      <td className="py-3 px-3 text-xs text-[#2997ff] font-mono font-bold w-8 text-center">{index}</td>
+      <td className="py-3 px-3 text-xs text-white/40 font-mono w-24">{q.paper}</td>
+      <td className="py-3 px-3 text-sm text-white/80">{q.question}</td>
+      <td className="py-3 px-3">
+        <div className="flex flex-col gap-0.5">
+          {q.options.map((opt, i) => (
+            <span
+              key={i}
+              className={`text-xs font-mono ${
+                i === q.correctAnswer ? 'text-emerald-400 font-bold' : 'text-white/40'
+              }`}
+            >
+              {letters[i]}. {opt}
+            </span>
+          ))}
+        </div>
+      </td>
+      <td className="py-3 px-3 w-10 text-center">
+        <span className="text-xs font-bold font-mono text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">
+          {letters[q.correctAnswer]}
+        </span>
+      </td>
+    </tr>
+  );
+}
 
-        {/* ── PAGE HEADER ──────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: '64px' }}
-        >
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em',
-            textTransform: 'uppercase', color: '#2997ff', marginBottom: '14px',
-          }}>
-            <FileText size={12} strokeWidth={2} />
-            21ECC302T · SRM Institute · Sixth Semester
+function PartAQTable({ questions }: { questions: ADCPartA[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-left border-collapse">
+        <thead>
+          <tr className="border-b border-white/10">
+            <th className="py-2 px-3 text-xs font-mono text-white/30 font-bold w-8 text-center">#</th>
+            <th className="py-2 px-3 text-xs font-mono text-white/30 font-bold w-24">PAPER</th>
+            <th className="py-2 px-3 text-xs font-mono text-white/30 font-bold">QUESTION</th>
+            <th className="py-2 px-3 text-xs font-mono text-white/30 font-bold w-40">OPTIONS</th>
+            <th className="py-2 px-3 text-xs font-mono text-white/30 font-bold w-10 text-center">ANS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {questions.map((q, i) => (
+            <PartAMcqRow key={q.id} q={q} index={i + 1} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ExplanationBox({ questions }: { questions: ADCPartA[] }) {
+  return (
+    <div className="mt-4 space-y-2">
+      <div className="text-xs font-bold text-white/30 uppercase tracking-widest mb-2">Explanations</div>
+      {questions.map((q, i) => (
+        <div key={q.id} className="bg-[#2997ff]/8 border border-[#2997ff]/20 rounded p-3">
+          <div className="text-xs text-[#2997ff] font-semibold mb-1">Q{i + 1}: {q.question}</div>
+          <div className="text-xs text-white/60 leading-relaxed">{q.explanation}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PartBAccordion({ q }: { q: ADCPartB }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-white/10 rounded-lg overflow-hidden bg-white/[0.02]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition-colors"
+      >
+        <div className="shrink-0">
+          <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-[#2997ff]/20 text-[#2997ff] text-xs font-bold font-mono">
+            B
+          </span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-medium text-white/80 leading-snug line-clamp-2">{q.question}</div>
+          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+            <span className="text-xs font-mono text-white/30">{q.papers.join(' · ')}</span>
+            <span className="text-xs bg-white/10 text-white/50 px-1.5 py-0.5 rounded font-mono">{q.mark} MARKS</span>
           </div>
-          <h1 style={{
-            fontSize: 'clamp(28px, 5vw, 52px)', fontWeight: 600, color: '#ffffff',
-            letterSpacing: '-0.04em', lineHeight: 1.08, margin: '0 0 14px',
-          }}>
-            ADC Master Sheet
-          </h1>
-          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0, letterSpacing: '-0.02em' }}>
-            All Questions · All Answers · Cross-Paper Analysis
-          </p>
-
-          {/* Stats bar */}
-          <div style={{ display: 'flex', gap: '12px', marginTop: '28px', flexWrap: 'wrap' }}>
-            {[
-              { n: '3', l: 'Papers', c: '#2997ff' },
-              { n: '18', l: 'MCQs', c: '#bf5af2' },
-              { n: '10', l: 'Part B Qs', c: '#30d158' },
-              { n: '3', l: 'Part C Predictions', c: '#ff9f0a' },
-              { n: '75', l: 'Total Marks', c: '#ef4444' },
-            ].map(({ n, l, c }) => (
-              <div key={l} style={{
-                display: 'flex', alignItems: 'center', gap: '10px',
-                background: '#1c1c1e', borderRadius: '12px', padding: '12px 18px',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}>
-                <div>
-                  <div style={{ fontSize: '20px', fontWeight: 600, color: c, letterSpacing: '-0.03em' }}>{n}</div>
-                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}>{l}</div>
-                </div>
+        </div>
+        {open ? (
+          <ChevronUp size={15} className="text-white/40 shrink-0 ml-2" />
+        ) : (
+          <ChevronDown size={15} className="text-white/40 shrink-0 ml-2" />
+        )}
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            variants={accordion}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 pt-1 border-t border-white/5 space-y-4">
+              <div className="bg-white/[0.04] border border-white/10 rounded p-3 mt-3">
+                <div className="text-xs font-bold text-[#2997ff] uppercase tracking-widest mb-2">Model Answer</div>
+                <pre className="text-xs text-white/70 whitespace-pre-wrap leading-relaxed font-mono">{q.modelAnswer}</pre>
               </div>
+              <div>
+                <div className="text-xs font-bold text-white/30 uppercase tracking-widest mb-2">Key Points</div>
+                <ul className="space-y-1.5">
+                  {q.keyPoints.map((kp, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-white/60">
+                      <span className="text-[#2997ff] mt-0.5 shrink-0">→</span>
+                      <span>{kp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function PartCAccordion({ q, index }: { q: ADCPartC; index: number }) {
+  const [open, setOpen] = useState(false);
+  const rankColor = RANK_COLORS[q.rank] || '#888';
+  return (
+    <div className="border border-white/10 rounded-lg overflow-hidden bg-white/[0.02]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition-colors"
+      >
+        <div className="shrink-0">
+          <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-white/10 text-white/60 text-xs font-bold font-mono">
+            C{index + 1}
+          </span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-medium text-white/80 leading-snug line-clamp-2">{q.scenario}</div>
+          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+            <span
+              className="text-xs font-bold px-1.5 py-0.5 rounded font-mono"
+              style={{ color: rankColor, backgroundColor: `${rankColor}18`, border: `1px solid ${rankColor}40` }}
+            >
+              {q.rank}
+            </span>
+            <span className="text-xs bg-white/10 text-white/50 px-1.5 py-0.5 rounded font-mono">{q.mark} MARKS</span>
+            {q.topics.map((t) => (
+              <span key={t} className="text-xs bg-white/8 text-white/40 px-1.5 py-0.5 rounded font-mono">{t}</span>
             ))}
           </div>
-        </motion.div>
+        </div>
+        {open ? (
+          <ChevronUp size={15} className="text-white/40 shrink-0 ml-2" />
+        ) : (
+          <ChevronDown size={15} className="text-white/40 shrink-0 ml-2" />
+        )}
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            variants={accordion}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 pt-1 border-t border-white/5 space-y-4">
+              <div className="bg-white/[0.04] border border-white/10 rounded p-3 mt-3">
+                <div className="text-xs font-bold text-white/30 uppercase tracking-widest mb-2">Evidence</div>
+                <p className="text-xs text-white/50 leading-relaxed">{q.evidence}</p>
+              </div>
+              <div className="bg-white/[0.04] border border-white/10 rounded p-3">
+                <div className="text-xs font-bold text-[#2997ff] uppercase tracking-widest mb-2">Step-by-Step Solution</div>
+                <pre className="text-xs text-white/70 whitespace-pre-wrap leading-relaxed font-mono">{q.modelAnswer}</pre>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
-        {/* ── UNIT FILTER ────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          style={{ marginBottom: '56px' }}
+// ─── Main Component ───────────────────────────────────────────────────────────
+export default function ADCMasterSheet() {
+  const [unitFilter, setUnitFilter] = useState<UnitFilter>('All');
+  const [partAOpenTopic, setPartAOpenTopic] = useState<string | null>(null);
+
+  const filteredPartA = (qs: ADCPartA[]) =>
+    unitFilter === 'All' ? qs : qs.filter((q) => q.unit === unitFilter);
+
+  const filteredPartB = unitFilter === 'All'
+    ? ADC_PART_B
+    : ADC_PART_B.filter((q) => q.unit === unitFilter);
+
+  const filteredPartC = unitFilter === 'All'
+    ? ADC_PART_C
+    : ADC_PART_C.filter((q) => q.unit === unitFilter);
+
+  const totalPapers = 3;
+  const totalMcqs = ADC_PART_A.length;
+  const totalPartB = ADC_PART_B.length;
+  const totalPartC = ADC_PART_C.length;
+  const totalMarks = 75;
+  const targetScore = 65;
+
+  // Build Part A sections grouped by topic, respecting unit filter
+  const partASections = (PART_A_TOPICS as readonly string[]).map((topic) => {
+    const unitsForTopic = PART_A_TOPIC_UNITS[topic] ?? [];
+    let questions = ADC_PART_A.filter((q) => unitsForTopic.includes(q.unit));
+    if (unitFilter !== 'All') {
+      questions = questions.filter((q) => q.unit === unitFilter);
+    }
+    return { topic, questions };
+  }).filter((s) => s.questions.length > 0);
+
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
+
+      {/* ── Sticky Header ────────────────────────────────────────────── */}
+      <header className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/8">
+        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-3">
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors"
+          >
+            <ArrowLeft size={15} />
+            <span className="hidden sm:inline">Back</span>
+          </button>
+          <div className="flex-1" />
+          <span className="font-mono text-xs font-bold tracking-widest text-[#2997ff] bg-[#2997ff]/12 border border-[#2997ff]/25 px-2.5 py-1 rounded">
+            21ECC302T
+          </span>
+          <button className="flex items-center gap-1.5 text-xs font-bold bg-white/8 hover:bg-white/14 border border-white/12 text-white/80 hover:text-white px-3 py-1.5 rounded transition-colors">
+            <BookOpen size={13} />
+            <span className="hidden sm:inline">Prep Guide</span>
+          </button>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-4 pb-20 space-y-14">
+
+        {/* ── Hero ────────────────────────────────────────────────────── */}
+        <motion.section
+          className="pt-10 pb-4 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
         >
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+          <motion.div variants={fadeUp} custom={0}>
+            <div className="inline-flex items-center gap-2 border border-white/12 bg-white/4 px-3 py-1.5 rounded-full mb-6">
+              <FileText size={12} className="text-[#2997ff]" />
+              <span className="text-xs font-mono text-white/50 tracking-widest uppercase">Analog and Digital Communication</span>
+            </div>
+          </motion.div>
+
+          <motion.h1
+            variants={fadeUp}
+            custom={1}
+            className="font-black text-5xl sm:text-6xl tracking-tight text-white leading-none mb-3"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            ADC Master Sheet
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            custom={2}
+            className="font-mono text-xs text-white/40 tracking-widest uppercase mb-8"
+          >
+            All Questions · All Answers · Cross-Paper Analysis
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            custom={3}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-w-2xl mx-auto"
+          >
+            {[
+              { icon: FileText, label: 'PAPERS', value: `${totalPapers} Papers` },
+              { icon: Zap, label: 'PART A', value: `${totalMcqs} MCQs` },
+              { icon: FileText, label: 'PART B', value: `${totalPartB} Qs` },
+              { icon: Star, label: 'PART C', value: `${totalPartC} Predictions` },
+              { icon: Target, label: 'TOTAL', value: `${totalMarks} Marks` },
+              { icon: TrendingUp, label: 'TARGET', value: `${targetScore}+ Score` },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} className="border border-white/10 bg-white/[0.03] rounded p-3 text-center">
+                <Icon size={14} className="text-[#2997ff] mx-auto mb-1.5" />
+                <div className="font-mono text-xs text-white/30 mb-0.5">{label}</div>
+                <div className="font-mono text-sm font-bold text-white/90">{value}</div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.section>
+
+        {/* ── Unit Filter Pills ───────────────────────────────────────── */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.4 } } }}
+        >
+          <motion.div variants={fadeUp} custom={0} className="flex flex-wrap gap-2 justify-center">
             <button
-              onClick={() => setActiveUnit(null)}
-              style={{
-                padding: '7px 16px', borderRadius: '9999px', fontSize: '12px', fontWeight: 500,
-                cursor: 'pointer', border: '1px solid',
-                background: activeUnit === null ? '#2997ff' : 'transparent',
-                borderColor: activeUnit === null ? '#2997ff' : 'rgba(255,255,255,0.15)',
-                color: activeUnit === null ? '#fff' : 'rgba(255,255,255,0.6)',
-                transition: 'all 0.2s',
-              }}
+              onClick={() => setUnitFilter('All')}
+              className={`font-mono text-xs font-bold px-4 py-2 rounded border transition-all ${
+                unitFilter === 'All'
+                  ? 'bg-[#2997ff] border-[#2997ff] text-white'
+                  : 'bg-white/5 border-white/12 text-white/50 hover:text-white hover:bg-white/8'
+              }`}
             >
-              All Units
+              All
             </button>
-            {[1, 2, 3, 4, 5].map(u => (
+            {[1, 2, 3, 4, 5].map((u) => (
               <button
                 key={u}
-                onClick={() => setActiveUnit(activeUnit === u ? null : u)}
-                style={{
-                  padding: '7px 16px', borderRadius: '9999px', fontSize: '12px', fontWeight: 500,
-                  cursor: 'pointer', border: '1px solid',
-                  background: activeUnit === u ? '#2997ff' : 'transparent',
-                  borderColor: activeUnit === u ? '#2997ff' : 'rgba(255,255,255,0.15)',
-                  color: activeUnit === u ? '#fff' : 'rgba(255,255,255,0.6)',
-                  transition: 'all 0.2s',
-                }}
+                onClick={() => setUnitFilter(u as UnitFilter)}
+                className={`font-mono text-xs font-bold px-4 py-2 rounded border transition-all ${
+                  unitFilter === u
+                    ? 'bg-[#2997ff] border-[#2997ff] text-white'
+                    : 'bg-white/5 border-white/12 text-white/50 hover:text-white hover:bg-white/8'
+                }`}
               >
                 U{u}
               </button>
             ))}
-          </div>
-          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>
-            {activeUnit ? `Showing Unit ${activeUnit} content only` : 'Showing all units — click a unit to filter'}
-          </div>
-        </motion.div>
+          </motion.div>
+        </motion.section>
 
-        {/* ── UNIT PRIORITY CARDS ────────────────────── */}
+        {/* ── Unit Priority Cards ──────────────────────────────────────── */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: '72px' }}
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.08, delayChildren: 0.5 } } }}
         >
-          <SectionTitle
-            label="Unit Priority"
-            title="Unit-wise Breakdown"
-            desc="Know which units carry the most marks and how to prioritize your revision."
-          />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
-            {UNIT_DATA.map((unit) => {
-              const isActive = activeUnit === unit.unit;
-              return (
-                <motion.div
-                  key={unit.unit}
-                  layout
-                  onClick={() => setActiveUnit(isActive ? null : unit.unit)}
-                  style={{
-                    background: '#1c1c1e', borderRadius: '14px', padding: '20px',
-                    border: `1px solid ${isActive ? unit.badgeColor + '50' : 'rgba(255,255,255,0.07)'}`,
-                    cursor: 'pointer',
-                    transition: 'border-color 0.2s',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      style={{
-                        position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
-                        background: unit.badgeColor,
-                      }}
-                    />
-                  )}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                    <div style={{
-                      fontSize: '11px', fontWeight: 700, color: '#2997ff',
-                      background: 'rgba(41,151,255,0.12)', padding: '3px 8px', borderRadius: '6px',
-                      fontFamily: 'JetBrains Mono, monospace',
-                    }}>
-                      Unit {unit.unit}
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: unit.badgeColor }}>
-                      {unitBadgeIcon(unit.badge)}
-                      <span style={{ fontSize: '10px', fontWeight: 600 }}>{unit.badge}</span>
-                    </div>
-                  </div>
-                  <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff', margin: '0 0 6px', lineHeight: 1.3 }}>
-                    {unit.name}
-                  </h3>
-                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', margin: '0 0 12px', lineHeight: 1.5 }}>
-                    {unit.topics}
+          <motion.h2 variants={fadeUp} custom={0} className="text-xs font-mono text-white/30 uppercase tracking-widest mb-4 text-center">
+            Unit Priority Map
+          </motion.h2>
+          <motion.div variants={fadeUp} custom={1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            {UNITS.map((u) => (
+              <motion.button
+                key={u.unit}
+                layout
+                onClick={() => setUnitFilter(u.unit === unitFilter ? 'All' : (u.unit as UnitFilter))}
+                className="text-left rounded-lg p-4 border transition-all hover:scale-[1.02] active:scale-[0.99]"
+                style={{
+                  backgroundColor: u.bg,
+                  borderColor: unitFilter === u.unit ? u.color : u.border,
+                  boxShadow: unitFilter === u.unit ? `0 0 20px ${u.color}25` : 'none',
+                }}
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-white/40">UNIT {u.unit}</span>
+                  <span
+                    className="font-mono text-xs font-bold px-1.5 py-0.5 rounded"
+                    style={{ color: u.color, backgroundColor: `${u.color}20`, border: `1px solid ${u.color}40` }}
+                  >
+                    {u.priority}
+                  </span>
+                </div>
+                <div className="font-bold text-sm text-white/90 mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>{u.title}</div>
+                <div className="font-mono text-xs text-white/35">{u.topics}</div>
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.section>
+
+        {/* ── Part A Master List ──────────────────────────────────────── */}
+        {partASections.length > 0 && (
+          <motion.section
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.7 } } }}
+          >
+            <motion.div variants={fadeUp} custom={0}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-1 h-6 bg-[#2997ff] rounded-full" />
+                <div>
+                  <h2 className="font-black text-xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    Part A — Multiple Choice
+                  </h2>
+                  <p className="font-mono text-xs text-white/30 mt-0.5">
+                    {filteredPartA(ADC_PART_A).length} Questions · Click topic to expand
                   </p>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '22px', fontWeight: 700, color: unit.badgeColor }}>{unit.marks}</span>
-                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)' }}>marks</span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.section>
-
-        {/* ── PART A: MCQ MASTER LIST ──────────────────── */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: '72px' }}
-        >
-          <SectionTitle
-            label="Part A · 18 × 1 = 18 marks"
-            title="MCQ Master List — All Topics"
-            desc="All Part A questions grouped by topic from all 3 papers. Master these for 18 guaranteed marks."
-          />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {Object.entries(groupedPartA).map(([topic, questions]) => {
-              const isOpen = openMCQTopic === topic;
-              return (
-                <motion.div
-                  key={topic}
-                  layout
-                  style={{
-                    background: '#1c1c1e', borderRadius: '14px',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <button
-                    onClick={() => toggleMCQTopic(topic)}
-                    style={{
-                      width: '100%', padding: '16px 20px', display: 'flex',
-                      alignItems: 'center', gap: '12px', background: 'transparent',
-                      border: 'none', cursor: 'pointer', textAlign: 'left',
-                    }}
-                  >
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>{topic}</span>
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>
-                        {filterPartA(topic).length} Qs
-                      </span>
-                    </div>
-                    {isOpen
-                      ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />
-                      : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div style={{ padding: '0 20px 16px', overflowX: 'auto' }}>
-                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', minWidth: '560px' }}>
-                            <thead>
-                              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                                {['Q', 'Paper', 'Question', 'Options', 'Answer'].map(h => (
-                                  <th key={h} style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.35)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</th>
-                                ))}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {questions.map((q, qi) => (
-                                <tr key={qi} style={{ borderBottom: qi < questions.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
-                                  <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace', fontSize: '11px' }}>{qi + 1}</td>
-                                  <td style={{ padding: '10px 8px' }}>
-                                    <span style={{ fontSize: '10px', fontWeight: 600, color: '#2997ff', background: 'rgba(41,151,255,0.12)', padding: '2px 6px', borderRadius: '100px' }}>{q.paper}</span>
-                                  </td>
-                                  <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.4, maxWidth: '240px' }}>{q.question}</td>
-                                  <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.45)', fontSize: '11px', lineHeight: 1.4 }}>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                                      {q.options.map((opt, oi) => (
-                                        <span key={oi} style={{ color: oi === q.correctAnswer ? '#30d158' : 'rgba(255,255,255,0.35)' }}>
-                                          {String.fromCharCode(65 + oi)}. {opt}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </td>
-                                  <td style={{ padding: '10px 8px', fontFamily: 'JetBrains Mono, monospace', color: '#30d158', fontSize: '11px', fontWeight: 600 }}>
-                                    {String.fromCharCode(65 + q.correctAnswer)}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                          {/* Explanation section */}
-                          <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {questions.map((q, qi2) => (
-                              <div key={q.id} style={{
-                                background: 'rgba(41,151,255,0.05)', borderRadius: '8px', padding: '12px 14px',
-                                border: '1px solid rgba(41,151,255,0.12)',
-                              }}>
-                                <div style={{ fontSize: '11px', fontWeight: 600, color: '#2997ff', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                  Q{qi2 + 1} · {q.topic} · {q.paper}
-                                </div>
-                                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.55 }}>{q.explanation}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.section>
-
-        {/* ── PART B: LONG ANSWER ─────────────────────── */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: '72px' }}
-        >
-          <SectionTitle
-            label="Part B · 4 × 10 = 40 marks"
-            title="Long Answer Questions"
-            desc="All Part B questions with full model answers and key points. Prepare 4 of these."
-          />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {filteredPartB.map((q) => {
-              const isOpen = openPartB === q.id;
-              const priorityBadgeColor = q.mark === 15 ? '#ef4444' : q.mark === 10 ? '#f59e0b' : '#6b7280';
-              return (
-                <motion.div
-                  key={q.id}
-                  layout
-                  style={{
-                    background: '#1c1c1e', borderRadius: '14px',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <button
-                    onClick={() => togglePartB(q.id)}
-                    style={{
-                      width: '100%', padding: '16px 20px', display: 'flex',
-                      alignItems: 'center', gap: '12px', background: 'transparent',
-                      border: 'none', cursor: 'pointer', textAlign: 'left',
-                    }}
-                  >
-                    <UnitBadge unit={q.unit} />
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>{q.topic}</span>
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>
-                        {q.mark} marks
-                      </span>
-                      <PriorityBadge label={q.mark === 15 ? 'HIGH VALUE' : 'STANDARD'} color={priorityBadgeColor} />
-                    </div>
-                    {isOpen
-                      ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />
-                      : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div style={{ padding: '0 20px 20px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                          {/* Question text */}
-                          <div style={{ paddingTop: '12px' }}>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#2997ff', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Question
-                            </div>
-                            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, fontStyle: 'italic' }}>
-                              {q.question}
-                            </div>
-                          </div>
-
-                          {/* Papers */}
-                          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                            {q.papers.map((paper) => (
-                              <span key={paper} style={{
-                                fontSize: '10px', fontWeight: 600, color: '#2997ff',
-                                background: 'rgba(41,151,255,0.1)', padding: '3px 8px', borderRadius: '100px',
-                                border: '1px solid rgba(41,151,255,0.2)',
-                              }}>{paper}</span>
-                            ))}
-                            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', marginLeft: '4px', alignSelf: 'center' }}>appeared</span>
-                          </div>
-
-                          {/* Model answer */}
-                          <div>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#30d158', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Model Answer
-                            </div>
-                            <div style={{
-                              background: 'rgba(48,209,88,0.04)', borderRadius: '10px', padding: '14px 16px',
-                              border: '1px solid rgba(48,209,88,0.12)',
-                              fontSize: '13px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.75,
-                              whiteSpace: 'pre-wrap', wordBreak: 'break-word',
-                            }}>
-                              {q.modelAnswer}
-                            </div>
-                          </div>
-
-                          {/* Key points */}
-                          <div>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#ff9f0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Key Points
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                              {q.keyPoints.map((kp, ki) => (
-                                <div key={ki} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#ff9f0a', flexShrink: 0, marginTop: '1px' }}>→</span>
-                                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{kp}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.section>
-
-        {/* ── PART C: 15-MARK NUMERICAL ───────────────── */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: '72px' }}
-        >
-          <SectionTitle
-            label="Part C · 1 × 15 = 15 marks"
-            title="15-Mark Numerical Predictions"
-            desc="Step-by-step solutions for the most likely Part C numerical problems. Ranked by probability."
-          />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {filteredPartC.map((q) => {
-              const isOpen = openPartC === q.id;
-              const rankColors: Record<string, string> = {
-                'Highly Probable': '#ef4444',
-                'Very Likely': '#f59e0b',
-                'Possible': '#30d158',
-              };
-              const color = rankColors[q.rank] || '#2997ff';
-              return (
-                <motion.div
-                  key={q.id}
-                  layout
-                  style={{
-                    background: '#1c1c1e', borderRadius: '14px',
-                    border: `1px solid ${color}25`,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <button
-                    onClick={() => togglePartC(q.id)}
-                    style={{
-                      width: '100%', padding: '16px 20px', display: 'flex',
-                      alignItems: 'center', gap: '12px', background: 'transparent',
-                      border: 'none', cursor: 'pointer', textAlign: 'left',
-                    }}
-                  >
-                    <UnitBadge unit={q.unit} />
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff', flex: 1 }}>{q.scenario.slice(0, 65)}...</span>
-                      <PriorityBadge label={q.rank} color={color} />
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>
-                        {q.mark} marks
-                      </span>
-                    </div>
-                    {isOpen
-                      ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />
-                      : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div style={{ padding: '0 20px 20px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                          {/* Topics */}
-                          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', paddingTop: '12px' }}>
-                            {q.topics.map((t) => (
-                              <span key={t} style={{
-                                fontSize: '10px', fontWeight: 600, color: '#a855f7',
-                                background: 'rgba(168,85,247,0.1)', padding: '3px 8px', borderRadius: '100px',
-                                border: '1px solid rgba(168,85,247,0.2)',
-                              }}>{t}</span>
-                            ))}
-                          </div>
-
-                          {/* Full question */}
-                          <div>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#2997ff', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Full Question
-                            </div>
-                            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>
-                              {q.scenario}
-                            </div>
-                          </div>
-
-                          {/* Evidence */}
-                          <div style={{
-                            background: 'rgba(168,85,247,0.05)', borderRadius: '10px', padding: '12px 14px',
-                            border: '1px solid rgba(168,85,247,0.15)',
-                          }}>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#a855f7', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Evidence
-                            </div>
-                            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.55 }}>{q.evidence}</div>
-                          </div>
-
-                          {/* Step-by-step solution */}
-                          <div>
-                            <div style={{ fontSize: '11px', fontWeight: 600, color: '#30d158', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              Step-by-Step Solution
-                            </div>
-                            <div style={{
-                              background: 'rgba(48,209,88,0.04)', borderRadius: '10px', padding: '14px 16px',
-                              border: '1px solid rgba(48,209,88,0.12)',
-                              fontSize: '13px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.8,
-                              whiteSpace: 'pre-wrap', wordBreak: 'break-word',
-                            }}>
-                              {q.modelAnswer}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.section>
-
-        {/* ── STUDY PLAN & EXAM STRATEGY ──────────────── */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: '72px' }}
-        >
-          <SectionTitle
-            label="Study Plan"
-            title="Exam Strategy & Score Breakdown"
-            desc="How to approach each part for maximum marks."
-          />
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-            {/* Part A Strategy */}
-            <div style={{
-              background: '#1c1c1e', borderRadius: '14px', padding: '20px',
-              border: '1px solid rgba(191,90,242,0.2)',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <div style={{ color: '#bf5af2' }}><Star size={16} strokeWidth={1.5} /></div>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>Part A Strategy</span>
+                </div>
               </div>
-              <ul style={{ margin: 0, padding: '0 0 0 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  'Focus on FM deviation ratio and Carson\'s rule — most repeated topic',
-                  'AM power calculations: m = Em/Ec, Pt = Pc(1 + m²/2)',
-                  'Nyquist sampling theorem: fs ≥ 2B — must know definition',
-                  'BPSK: 1 bit/symbol, QPSK: 2 bits/symbol — memorize constellation',
-                  'Noise: Pn = kTB, SNR(dB) = 10 log₁₀(Ps/Pn) — formula-based',
-                  'Review all 18 MCQs from data file — 1 mark each',
-                ].map((s, i) => (
-                  <li key={i} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{s}</li>
+
+              <div className="space-y-3">
+                {partASections.map(({ topic, questions }) => {
+                  const isOpen = partAOpenTopic === topic;
+                  const topicUnit = PART_A_TOPIC_UNITS[topic]?.[0] ?? 0;
+                  return (
+                    <div key={topic} className="border border-white/10 rounded-lg overflow-hidden bg-white/[0.02]">
+                      <button
+                        onClick={() => setPartAOpenTopic(isOpen ? null : topic)}
+                        className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-white/5 transition-colors"
+                      >
+                        <div
+                          className="flex items-center justify-center w-7 h-7 rounded bg-[#2997ff]/15 text-[#2997ff] text-xs font-bold font-mono shrink-0"
+                        >
+                          {topicUnit}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="font-bold text-sm text-white/90">{topic}</span>
+                          <span className="ml-2 font-mono text-xs text-white/30">{questions.length} Qs</span>
+                        </div>
+                        {isOpen ? (
+                          <ChevronUp size={14} className="text-white/40 shrink-0" />
+                        ) : (
+                          <ChevronDown size={14} className="text-white/40 shrink-0" />
+                        )}
+                      </button>
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            variants={accordion}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="overflow-hidden"
+                          >
+                            <div className="border-t border-white/5">
+                              <PartAQTable questions={questions} />
+                              <ExplanationBox questions={questions} />
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </motion.section>
+        )}
+
+        {/* ── Part B ──────────────────────────────────────────────────── */}
+        {filteredPartB.length > 0 && (
+          <motion.section
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.8 } } }}
+          >
+            <motion.div variants={fadeUp} custom={0}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-1 h-6 bg-emerald-400/60 rounded-full" />
+                <div>
+                  <h2 className="font-black text-xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    Part B — Descriptive
+                  </h2>
+                  <p className="font-mono text-xs text-white/30 mt-0.5">
+                    {filteredPartB.length} Questions · {filteredPartB.reduce((s, q) => s + q.mark, 0)} Marks total
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {filteredPartB.map((q) => (
+                  <PartBAccordion key={q.id} q={q} />
                 ))}
-              </ul>
+              </div>
+            </motion.div>
+          </motion.section>
+        )}
+
+        {/* ── Part C ──────────────────────────────────────────────────── */}
+        {filteredPartC.length > 0 && (
+          <motion.section
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.9 } } }}
+          >
+            <motion.div variants={fadeUp} custom={0}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-1 h-6 bg-amber-400/60 rounded-full" />
+                <div>
+                  <h2 className="font-black text-xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    Part C — Numerical Predictions
+                  </h2>
+                  <p className="font-mono text-xs text-white/30 mt-0.5">
+                    {filteredPartC.length} Probable Numericals · Ranked by likelihood
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {filteredPartC.map((q, i) => (
+                  <PartCAccordion key={q.id} q={q} index={i} />
+                ))}
+              </div>
+            </motion.div>
+          </motion.section>
+        )}
+
+        {/* ── Exam Strategy ───────────────────────────────────────────── */}
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 1.0 } } }}
+        >
+          <motion.div variants={fadeUp} custom={0}>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-1 h-6 bg-purple-400/60 rounded-full" />
+              <div>
+                <h2 className="font-black text-xl text-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  Exam Strategy
+                </h2>
+                <p className="font-mono text-xs text-white/30 mt-0.5">Tactical approach for maximum score</p>
+              </div>
             </div>
 
-            {/* Part B Strategy */}
-            <div style={{
-              background: '#1c1c1e', borderRadius: '14px', padding: '20px',
-              border: '1px solid rgba(48,209,88,0.2)',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <div style={{ color: '#30d158' }}><Target size={16} strokeWidth={1.5} /></div>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>Part B Strategy</span>
-              </div>
-              <ul style={{ margin: 0, padding: '0 0 0 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  'Pick any 4 of 6 — choose what you know best',
-                  'AM derivation + m ≤ 1 condition — 10 marks, easy',
-                  'BPSK probability of error: Pe = Q(√(2Es/N0)) — memorize',
-                  'Friis formula: first stage dominates (divide by G1)',
-                  'Sampling theorem: fs ≥ 2B — state, prove, aliasing',
-                  'Always include a table in comparison questions',
-                ].map((s, i) => (
-                  <li key={i} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{s}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Part C Strategy */}
-            <div style={{
-              background: '#1c1c1e', borderRadius: '14px', padding: '20px',
-              border: '1px solid rgba(255,159,10,0.2)',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <div style={{ color: '#ff9f0a' }}><TrendingUp size={16} strokeWidth={1.5} /></div>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>Part C Strategy</span>
-              </div>
-              <ul style={{ margin: 0, padding: '0 0 0 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {[
-                  'Highly Probable: AM numerical (sidebands, power, BW)',
-                  'Highly Probable: FM Carson\'s rule + deviation ratio',
-                  'Very Likely: Friis formula cascade noise figure',
-                  'Always show all steps — partial marks for method',
-                  'Include given values at start of solution',
-                  'Comment on relationship in final part',
-                ].map((s, i) => (
-                  <li key={i} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{s}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Score breakdown */}
-          <div style={{
-            background: '#1c1c1e', borderRadius: '14px', padding: '20px',
-            border: '1px solid rgba(255,255,255,0.08)',
-          }}>
-            <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', marginBottom: '16px' }}>Score Breakdown Target</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
               {[
-                { part: 'Part A (MCQ)', target: '18', total: '18', color: '#bf5af2', tip: 'Target: 18/18 — all MCQs are predictable from past papers' },
-                { part: 'Part B (Long)', target: '35', total: '40', color: '#30d158', tip: 'Target: 35+/40 — answer 4 well-structured questions' },
-                { part: 'Part C (Numerical)', target: '12', total: '15', color: '#ff9f0a', tip: 'Target: 12+/15 — one solid numerical with all steps shown' },
-                { part: 'Total Target', target: '65', total: '75', color: '#ef4444', tip: 'Target: 65+/75 — B+ grade, very achievable' },
-              ].map((row) => (
-                <div key={row.part} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff', marginBottom: '2px' }}>{row.part}</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)' }}>{row.tip}</div>
+                {
+                  part: 'Part A',
+                  icon: CheckCircle2,
+                  color: '#2997ff',
+                  tips: [
+                    'Attempt all MCQs — no negative marking',
+                    'Use elimination: remove obviously wrong options first',
+                    'AM/FM bandwidth formulas — most repeated topic',
+                    'BPSK: 1 bit/symbol · QPSK: 2 bits/symbol',
+                    'Pn = kTB — noise power formula must know',
+                  ],
+                },
+                {
+                  part: 'Part B',
+                  icon: FileText,
+                  color: '#22c55e',
+                  tips: [
+                    'Answer with structure: define → derive → conclude',
+                    'Draw diagrams wherever applicable',
+                    'Include key equations even if derivation is partial',
+                    'Time allocation: ~10 min per question',
+                  ],
+                },
+                {
+                  part: 'Part C',
+                  icon: Target,
+                  color: '#f59e0b',
+                  tips: [
+                    'Highly Probable — solve completely, show all steps',
+                    'Write given/find/formula/substitute/answer',
+                    'Units matter — always include in final answer',
+                    'Partial marks for method shown',
+                  ],
+                },
+              ].map(({ part, icon: Icon, color, tips }) => (
+                <div key={part} className="border border-white/10 bg-white/[0.02] rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon size={14} style={{ color }} />
+                    <span className="font-bold text-sm text-white/90">{part}</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-                    <span style={{ fontSize: '22px', fontWeight: 700, color: row.color }}>{row.target}</span>
-                    <span style={{ fontSize: '14px', color: 'rgba(255,255,255,0.3)' }}>/{row.total}</span>
-                  </div>
+                  <ul className="space-y-2">
+                    {tips.map((tip, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-white/50">
+                        <span style={{ color }}>›</span>
+                        <span>{tip}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
-          </div>
+
+            {/* Score Breakdown Table */}
+            <div className="border border-white/10 rounded-lg overflow-hidden">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-white/10 bg-white/[0.03]">
+                    <th className="py-3 px-4 font-mono text-xs font-bold text-white/40 uppercase tracking-widest">Section</th>
+                    <th className="py-3 px-4 font-mono text-xs font-bold text-white/40 uppercase tracking-widest text-center">Questions</th>
+                    <th className="py-3 px-4 font-mono text-xs font-bold text-white/40 uppercase tracking-widest text-center">Marks/Q</th>
+                    <th className="py-3 px-4 font-mono text-xs font-bold text-white/40 uppercase tracking-widest text-center">Total</th>
+                    <th className="py-3 px-4 font-mono text-xs font-bold text-white/40 uppercase tracking-widest text-center">Target</th>
+                  </tr>
+                </thead>
+                <tbody className="font-mono text-sm">
+                  {[
+                    { section: 'Part A', questions: '20', marks: '1', total: '20', target: '18+' },
+                    { section: 'Part B', questions: '5 of 8', marks: '10/15', total: '35', target: '25+' },
+                    { section: 'Part C', questions: '2 of 5', marks: '15', total: '30', target: '22+' },
+                  ].map(({ section, questions, marks, total, target }) => (
+                    <tr key={section} className="border-b border-white/5 hover:bg-white/[0.02]">
+                      <td className="py-3 px-4 text-white/80 font-bold">{section}</td>
+                      <td className="py-3 px-4 text-white/50 text-center">{questions}</td>
+                      <td className="py-3 px-4 text-white/50 text-center">{marks}</td>
+                      <td className="py-3 px-4 text-white/50 text-center">{total}</td>
+                      <td className="py-3 px-4 text-center">
+                        <span className="text-emerald-400 font-bold">{target}</span>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="bg-white/[0.04]">
+                    <td className="py-3 px-4 text-white font-bold">TOTAL</td>
+                    <td colSpan={3} className="py-3 px-4 text-white/50 text-center">75</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[#2997ff] font-bold">65+</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
         </motion.section>
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            textAlign: 'center', padding: '32px 0 16px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-          }}
+        {/* ── Footer ──────────────────────────────────────────────────── */}
+        <motion.footer
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={1}
+          className="text-center py-8 border-t border-white/8"
         >
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '-0.01em' }}>
-            Aswath AS · SRM Institute · "I got bored studying. So I analysed all 3 previous year papers."
+          <p className="font-mono text-xs text-white/20">
+            ADC Master Sheet · 21ECC302T · Built for exam preparation
           </p>
-        </motion.div>
-      </div>
+          <p className="font-mono text-xs text-white/10 mt-1">
+            All data sourced from Jan 2026 FN · Jul 2025 FN · May 2025 AN
+          </p>
+        </motion.footer>
+      </main>
     </div>
   );
 }
