@@ -7,7 +7,7 @@ import { StoicSection } from './components/StoicSection';
 import { SubjectGrid } from './components/SubjectGrid';
 import { PWAPrompt } from './components/PWAPrompt';
 import SplashCursor from './components/SplashCursor';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router';
 import { Sun, Moon } from 'lucide-react';
 
 // Lazy-load heavy components — deferred until needed
@@ -274,15 +274,52 @@ function App() {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
-  const theme = CURSOR_THEMES[themeIndex];
-
   return (
     <BrowserRouter>
+      <AppShell
+        isDark={isDark}
+        setIsDark={setIsDark}
+        themeIndex={themeIndex}
+        setThemeIndex={setThemeIndex}
+        paletteOpen={paletteOpen}
+        setPaletteOpen={setPaletteOpen}
+        cursorOff={cursorOff}
+        setCursorOff={setCursorOff}
+      />
+    </BrowserRouter>
+  );
+}
+
+function AppShell({
+  isDark,
+  setIsDark,
+  themeIndex,
+  setThemeIndex,
+  paletteOpen,
+  setPaletteOpen,
+  cursorOff,
+  setCursorOff,
+}: {
+  isDark: boolean;
+  setIsDark: (v: boolean) => void;
+  themeIndex: number;
+  setThemeIndex: (v: number) => void;
+  paletteOpen: boolean;
+  setPaletteOpen: (v: boolean) => void;
+  cursorOff: boolean;
+  setCursorOff: (v: boolean) => void;
+}) {
+  const theme = CURSOR_THEMES[themeIndex];
+  const location = useLocation();
+  const showHomeCursor = location.pathname === '/';
+
+  return (
+    <>
       <Analytics />
       <Cursor />
       <PWAPrompt />
       <style>{THEME_VARS[isDark ? 'dark' : 'light']}</style>
-      {!cursorOff && (
+      {!cursorOff && showHomeCursor && (
         <SplashCursor
           key={themeIndex}
           DENSITY_DISSIPATION={theme.densityDissipation}
@@ -316,7 +353,7 @@ function App() {
           <Route path="/sepm-analysis" element={<SEPMAnalysisPageWrapper />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </>
   );
 }
 
