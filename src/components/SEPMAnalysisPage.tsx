@@ -231,10 +231,10 @@ const PART_B_QUESTIONS: PartBQuestion[] = [
     unit: 1, question: 'Compare Waterfall, Incremental, Agile/Scrum, and Spiral models with suitable project scenarios.',
     sources: ['SEPM_PYQ_Final_ExamPack.docx','Jul25','Nov25'], marks: 8,
     answer: [
-      '**Waterfall (2 marks):** Linear and phase-wise. Best for stable requirements, clear scope, and compliance-heavy projects. Weak for late requirement changes.',
-      '**Incremental (2 marks):** Product delivered in small functional releases. Useful when core features must go live early and enhancements can follow iteratively.',
-      '**Agile/Scrum (2 marks):** Iterative, sprint-based, and feedback-driven. Best for evolving requirements, close customer collaboration, and fast release cycles.',
-      '**Spiral (2 marks):** Iterative with explicit risk analysis in each cycle. Best for large/high-risk projects where technical and business uncertainty is high.',
+      '**Comparison Basis (2 marks):**\n- Waterfall: sequential and document-heavy\n- Incremental: staged releases in functional chunks\n- Agile/Scrum: iterative sprints with rapid feedback\n- Spiral: iterative with mandatory risk analysis in each loop',
+      '**Change & Risk Handling (2 marks):**\n- Waterfall handles change poorly after baseline freeze\n- Incremental supports moderate change between increments\n- Agile/Scrum handles frequent requirement change best\n- Spiral is best when technical/business risk is high',
+      '**Best-Fit Scenarios (2 marks):**\n- Waterfall: payroll/compliance systems with fixed requirements\n- Incremental: student portal where modules release in phases\n- Agile/Scrum: startup product with evolving market needs\n- Spiral: mission-critical or high-uncertainty enterprise products',
+      '**Final Selection Rule (2 marks):**\nChoose based on requirement volatility, risk level, stakeholder availability, and delivery urgency.\nIf scope is fixed -> Waterfall.\nIf early value is needed -> Incremental.\nIf change is frequent -> Agile/Scrum.\nIf risk is dominant -> Spiral.',
     ],
     diagramType: 'agile-waterfall',
   },
@@ -242,28 +242,29 @@ const PART_B_QUESTIONS: PartBQuestion[] = [
     unit: 2, question: 'Explain requirements engineering steps and the characteristics of a good SRS.',
     sources: ['SEPM_PYQ_GPT55_WrittenAnswers_ExamPack.docx','Jul24','Nov25'], marks: 8,
     answer: [
-      '**Requirements Engineering Steps (5 marks):**\n1. Feasibility study\n2. Elicitation (interviews, observation, workshops)\n3. Analysis and negotiation\n4. Specification (SRS)\n5. Validation\n6. Requirements management (change control and traceability)',
-      '**Good SRS Characteristics (3 marks):**\n- Correct and complete\n- Consistent and unambiguous\n- Verifiable/testable\n- Modifiable and traceable\n- Clear contract between customer and development team',
+      '**Requirements Engineering Workflow (4 marks):**\n1. Feasibility: technical, economic, schedule viability\n2. Elicitation: interviews, observation, questionnaire, workshops\n3. Analysis/Negotiation: remove conflicts and ambiguity\n4. Specification: convert into structured SRS\n5. Validation: reviews/prototypes/testability checks\n6. Management: baseline, versioning, controlled change requests',
+      '**Functional vs Non-Functional Capture (2 marks):**\nFunctional requirements define system services (what system does).\nNon-functional requirements define quality constraints (performance, security, reliability, usability).\nBoth must be traceable from requirement -> design -> test case.',
+      '**Good SRS Characteristics (2 marks):**\nCorrect, complete, consistent, unambiguous, verifiable, modifiable, and traceable.\nA good SRS acts as the contract between customer and development team and prevents scope creep.',
     ],
   },
   {
     unit: 3, question: 'Explain software architecture and layered architecture with merits and limitations.',
     sources: ['SEPM_Complete_PYQ_Analysis_Breakdown.docx','Jul24','May25'], marks: 8,
     answer: [
-      '**Software Architecture (2 marks):** High-level blueprint of system components, connectors, and constraints; drives maintainability, scalability, and team coordination.',
-      '**Layered Architecture (3 marks):** Typical layers are Presentation, Business Logic, and Data Access. Each layer should interact primarily with adjacent layers.',
-      '**Merits (2 marks):** Separation of concerns, easier maintenance/testing, independent evolution of layers, and cleaner team ownership.',
-      '**Limitations (1 mark):** Performance overhead from cross-layer calls and reduced flexibility when strict layering is over-enforced.',
+      '**Software Architecture (2 marks):**\nArchitecture is the high-level blueprint of components, interfaces, data flow, and constraints.\nIt determines quality attributes such as maintainability, scalability, reliability, and deployability.',
+      '**Layered Architecture Structure (3 marks):**\n- Presentation Layer: UI, input capture, view logic\n- Business Layer: core rules, workflow, validation\n- Data Layer: persistence, repositories, DB access\nEach layer should depend only on adjacent layers to reduce coupling.',
+      '**Merits (2 marks):**\nClear separation of concerns, parallel team development, easier testing, easier maintenance, and better reuse of lower-layer services.',
+      '**Limitations & Conclusion (1 mark):**\nToo many layer hops can increase latency, and rigid layering may block optimizations.\nStill, it is a strong default architecture for enterprise systems needing maintainability.',
     ],
   },
   {
     unit: 4, question: 'Explain software review techniques: desk check, walkthrough, and formal review. Compare with testing.',
     sources: ['SEPM_Complete_PYQ_Analysis_Breakdown.docx','May24','Nov25'], marks: 8,
     answer: [
-      '**Desk Check (2 marks):** Author manually traces logic/code with sample inputs to catch obvious defects early.',
-      '**Walkthrough (2 marks):** Author-led peer session to explain design/code and collect feedback; less formal but effective for shared understanding.',
-      '**Formal Review/Inspection (2 marks):** Structured, role-based process with checklists, defect logging, and follow-up actions.',
-      '**Review vs Testing (2 marks):** Reviews are static verification (without execution); testing is dynamic verification (with execution). Both are complementary for quality.',
+      '**Desk Check (2 marks):**\nDeveloper manually traces logic using sample data before execution.\nLow cost, very early defect detection, useful for algorithm and boundary-condition mistakes.',
+      '**Walkthrough (2 marks):**\nAuthor presents design/code to peers and receives feedback.\nImproves shared understanding and catches usability/design consistency issues early.',
+      '**Formal Review / Inspection (2 marks):**\nModerator-led, checklist-based, role-driven (author, reviewer, recorder).\nFindings are logged, classified, and tracked to closure for process quality control.',
+      '**Review vs Testing (2 marks):**\nReviews are static verification (no execution); testing is dynamic verification (execute and observe behavior).\nBest practice is both: review to prevent defects, testing to detect runtime defects.',
     ],
     diagramType: 'testing-levels',
   },
@@ -271,8 +272,9 @@ const PART_B_QUESTIONS: PartBQuestion[] = [
     unit: 5, question: 'Explain software maintenance types and reengineering process with suitable examples.',
     sources: ['SEPM_PYQ_GPT55_WrittenAnswers_ExamPack.docx','Dec24','Nov25'], marks: 8,
     answer: [
-      '**Maintenance Types (5 marks):**\n- Corrective: bug fixes after release\n- Adaptive: changes for new OS/regulations/environment\n- Perfective: feature/performance/usability enhancement\n- Preventive: refactoring and improvements to reduce future faults',
-      '**Reengineering (3 marks):** Modernization without changing external behavior. Flow: Reverse Engineering -> Restructuring -> Forward Engineering. Used for legacy systems with high business value and poor maintainability.',
+      '**Maintenance Types with Examples (5 marks):**\n- Corrective: fix defects after release (e.g., wrong tax calculation bug)\n- Adaptive: adapt to new environment (e.g., browser/OS/API upgrade)\n- Perfective: improve features/performance (e.g., faster dashboard, better UX)\n- Preventive: reduce future failures (e.g., refactoring, modularization, better logging)',
+      '**Why Reengineering is Needed (1 mark):**\nWhen legacy systems have high business value but poor maintainability, full rewrite is risky and expensive.',
+      '**Reengineering Process (2 marks):**\nReverse Engineering -> Restructuring -> Forward Engineering.\nGoal: improve internal quality while preserving external behavior and business logic.',
     ],
     diagramType: 'reengineering',
   },
@@ -577,7 +579,7 @@ function DiagramSelector({ type }: { type: string }) {
 
 function StickyHeader({ onBack, activeTab, onTabChange }: { onBack: () => void; activeTab: string; onTabChange: (t: string) => void }) {
   return (
-    <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '0 clamp(16px, 4vw, 32px)' }}>
+    <div style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--analysis-nav)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--analysis-border)', padding: '0 clamp(16px, 4vw, 32px)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16, height: 56 }}>
         <button onClick={onBack} style={{ background: 'var(--analysis-input)', border: '1px solid var(--analysis-border)', borderRadius: 8, padding: '6px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', color: '#e5e5e5' }}><ArrowLeft size={16} /></button>
         <div style={{ flex: 1 }}>
@@ -586,7 +588,7 @@ function StickyHeader({ onBack, activeTab, onTabChange }: { onBack: () => void; 
         </div>
         <nav style={{ display: 'flex', gap: 4 }}>
           {[{ key: 'analysis', label: 'Analysis' }, { key: 'mastersheet', label: 'Master Sheet' }].map(tab => (
-            <button key={tab.key} onClick={() => onTabChange(tab.key)} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: activeTab === tab.key ? '#059669' : 'transparent', color: activeTab === tab.key ? '#fff' : '#888', transition: 'all 0.15s' }}>{tab.label}</button>
+            <button key={tab.key} onClick={() => onTabChange(tab.key)} style={{ padding: '6px 16px', borderRadius: 8, border: activeTab === tab.key ? '1px solid rgba(5,150,105,0.35)' : '1px solid var(--analysis-border)', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: activeTab === tab.key ? '#059669' : 'var(--analysis-input)', color: activeTab === tab.key ? '#fff' : 'var(--analysis-muted)', transition: 'all 0.15s' }}>{tab.label}</button>
           ))}
         </nav>
         <a href="/SEPM_Prep.pdf" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px', borderRadius: 8, background: 'var(--analysis-input)', color: '#888', textDecoration: 'none', fontSize: 12, border: '1px solid var(--analysis-border)' }}><BookOpen size={12} /> Prep Guide</a>
@@ -791,7 +793,9 @@ function MasterSheet() {
   const [activePartA, setActivePartA] = useState(Object.keys(PART_A_MCQS)[0]);
   const topicsPartA = Object.keys(PART_A_MCQS);
   const totalPartAMcqs = Object.values(PART_A_MCQS).reduce((sum, list) => sum + list.length, 0);
-  const filteredPartB = PART_B_QUESTIONS.filter(q => activeUnit === 'all' || q.unit === activeUnit);
+  const filteredPartB = PART_B_QUESTIONS
+    .filter(q => activeUnit === 'all' || q.unit === activeUnit)
+    .sort((a, b) => a.unit - b.unit || a.question.localeCompare(b.question));
   const unitColors: Record<number, string> = { 1: '#ef4444', 2: '#f59e0b', 3: '#2997ff', 4: '#059669', 5: '#a855f7' };
 
   return (
@@ -845,7 +849,7 @@ function MasterSheet() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {filteredPartB.map((q, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-              <AccordionItem title={`U${q.unit} — ${q.question.slice(0, 60)}...`} defaultOpen={i === 0} color={unitColors[q.unit]}>
+              <AccordionItem title={`U${q.unit} — ${q.question}`} defaultOpen={i === 0} color={unitColors[q.unit]}>
                 <div className="mono" style={{ fontSize: 10, color: '#666', marginBottom: 8 }}>Sources: {q.sources.join(' | ')} · {q.marks} marks</div>
                 {q.answer.map((para, pi) => (
                   <div key={pi} style={{ marginBottom: 12 }}>
