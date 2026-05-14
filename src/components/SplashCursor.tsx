@@ -699,7 +699,6 @@ function SplashCursor({
 
     updateKeywords();
     initFramebuffers();
-    let colorUpdateTimer = 0.0;
 
     function updateFrame() {
       if (!isActive) return;

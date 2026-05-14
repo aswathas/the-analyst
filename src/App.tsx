@@ -62,6 +62,8 @@ const CURSOR_THEMES = [
   { name: 'Sun Yellow', color: '#FF6B00', densityDissipation: 0.8, velocityDissipation: 0.4, pressure: 0.04, curl: 10, splatForce: 3000, colorUpdateSpeed: 4, rainbow: false },
   { name: 'Shadow Monarch', color: '#6d28d9', densityDissipation: 1.5, velocityDissipation: 1, pressure: 0.15, curl: 40, splatForce: 6000, colorUpdateSpeed: 8, rainbow: false },
   { name: 'Winter Frost', color: '#ffe8e8', densityDissipation: 4, velocityDissipation: 10, pressure: 0.2, curl: 39, splatRadius: 0.21, splatForce: 20000, colorUpdateSpeed: 1, rainbow: false, colors: ['#152232', '#253c2c', '#7d9c72', '#c2d9df', '#e5e6e1'] },
+  { name: 'Emerald Tide', color: '#34d399', densityDissipation: 2.4, velocityDissipation: 1.2, pressure: 0.14, curl: 26, splatForce: 6500, colorUpdateSpeed: 6, rainbow: false },
+  { name: 'Rose Quartz', color: '#fb7185', densityDissipation: 1.6, velocityDissipation: 1.1, pressure: 0.16, curl: 34, splatForce: 5800, colorUpdateSpeed: 5, rainbow: false },
 ];
 
 const THEME_VARS = {
