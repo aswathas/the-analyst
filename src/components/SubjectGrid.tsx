@@ -50,7 +50,18 @@ const SUBJECTS: Subject[] = [
   },
   { code: 'TBC', name: 'Compiler Design', status: 'coming', color: '#0891b2' },
   { code: 'TBC', name: 'Advanced Cryptography', status: 'coming', color: '#dc2626' },
-  { code: 'TBC', name: 'Software Engineering & Project Management', status: 'coming', color: '#059669' },
+  {
+    code: '21CSC303J',
+    name: 'Software Engineering & Project Management',
+    status: 'complete',
+    color: '#059669',
+    stats: { papers: 6, topics: 15, marks: 75, hitRate: '100%' },
+    findings: [
+      'Process models + Requirements in ALL 6 papers',
+      'COCOMO estimation appears in every paper',
+      'Safe combo: Process Models + Req Eng + Testing + Risk = 65/75',
+    ],
+  },
   { code: 'TBC', name: 'Hybrid Vehicles', status: 'coming', color: '#d97706' },
 ];
 
@@ -60,11 +71,13 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
     '21CSS303T': '/ds-analysis',
     '21ECC302T': '/adc-analysis',
     '21CCT301T': '/ccbf-analysis',
+    '21CSC303J': '/sepm-analysis',
   };
   const masterRouteMap: Record<string, string> = {
     '21CSS303T': '/pyq-master',
     '21ECC302T': '/adc-master',
     '21CCT301T': '/ccbf-master',
+    '21CSC303J': '/sepm-analysis',
   };
   const handleViewAnalysis = () => {
     navigate(routeMap[subject.code] || '/ds-analysis');
@@ -212,13 +225,13 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
                   flex: 1, display: 'inline-flex', alignItems: 'center',
                   justifyContent: 'center', gap: '6px',
                   padding: '11px 16px', borderRadius: '9999px',
-                  background: 'rgba(255,255,255,0.08)', color: '#ffffff',
-                  border: `1px solid rgba(255,255,255,0.15)`, fontSize: '14px', fontWeight: 500,
+                  background: 'var(--btn-master-bg)', color: 'var(--btn-master-text)',
+                  border: `1px solid var(--btn-master-border)`, fontSize: '14px', fontWeight: 500,
                   letterSpacing: '-0.224px', cursor: 'pointer',
                   transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.14)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--btn-master-border)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--btn-master-bg)'; }}
               >
                 <BookOpen size={13} strokeWidth={1.5} />
                 Master Sheet
