@@ -58,7 +58,7 @@ function Footer() {
 const CURSOR_THEMES = [
   { name: 'Burning Red', color: '#f53636', densityDissipation: 1, velocityDissipation: 2, pressure: 0.2, curl: 50, splatForce: 5500, colorUpdateSpeed: 10, rainbow: false },
   { name: 'Ice Blue', color: '#00d4ff', densityDissipation: 1, velocityDissipation: 2, pressure: 0.12, curl: 20, splatForce: 5000, colorUpdateSpeed: 7, rainbow: false },
-  { name: 'Ghost White', color: '#e0e0e0', densityDissipation: 4, velocityDissipation: 0.5, pressure: 0.1, curl: 30, splatForce: 4000, colorUpdateSpeed: 3, rainbow: false },
+  { name: 'Ghost White', color: '#e0e0e0', densityDissipation: 4, velocityDissipation: 0.5, pressure: 0.1, curl: 30, splatForce: 4000, colorUpdateSpeed: 3, rainbow: true },
   { name: 'Sun Yellow', color: '#FF6B00', densityDissipation: 0.8, velocityDissipation: 0.4, pressure: 0.04, curl: 10, splatForce: 3000, colorUpdateSpeed: 4, rainbow: false },
   { name: 'Shadow Monarch', color: '#6d28d9', densityDissipation: 1.5, velocityDissipation: 1, pressure: 0.15, curl: 40, splatForce: 6000, colorUpdateSpeed: 8, rainbow: false },
   { name: 'Winter Frost', color: '#ffe8e8', densityDissipation: 4, velocityDissipation: 10, pressure: 0.2, curl: 39, splatRadius: 0.21, splatForce: 20000, colorUpdateSpeed: 1, rainbow: false, colors: ['#152232', '#253c2c', '#7d9c72', '#c2d9df', '#e5e6e1'] },
@@ -266,7 +266,7 @@ function App() {
     const saved = localStorage.getItem('theme');
     return saved !== 'light';
   });
-  const [themeIndex, setThemeIndex] = useState(0);
+  const [themeIndex, setThemeIndex] = useState(2);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [cursorOff, setCursorOff] = useState(false);
 
