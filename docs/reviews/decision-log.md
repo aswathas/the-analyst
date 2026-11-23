@@ -179,3 +179,34 @@ Drive permission quirk, a release already existing, a token scope problem. Creat
 turns "the publish step failed" into "the publish step uploaded into an existing container", and
 lets the upload agent focus on the actual upload. The Drive folder was created with the `gws`
 CLI using the already-authenticated account.
+
+---
+
+## 2026-11-24 — PDFs are hosted on the site itself, not on public Drive links
+
+**Decision.** The canonical student download is the site's own URL (`/master-pdfs/<FILE>.pdf`,
+served from `public/` by Vercel). The GitHub Release `sem7-master-pdfs` is the mirror. The Drive
+folder `Sem 7 Master PDFs` (id `1smxYHA0tuyz_juQe8gM0EKEeYBrOPhEp`) is kept as the working copy
+the owner uploads from and can share to a domain, but it is NOT the link students get.
+
+**Who.** Claude, after testing the Drive permission API.
+
+**Driver.** The original plan made Drive canonical with an "anyone with the link" permission. That
+is impossible on this account. The authenticated Google account is
+`aswath@aichargelabs.com`, a Workspace account whose admin policy blocks publishing files outside
+the organisation: `gws drive permissions create` with `{"role":"reader","type":"anyone"}` returns
+`publishOutNotPermitted`, and domain-scoped sharing is accepted only for `aichargelabs.com`, which
+SRM students do not belong to. The earlier e-Curricula project's public links were created under a
+different account — the current token can no longer even list their permissions.
+
+Hosting on the site is better on every axis that mattered:
+- No Drive quota, no "too many users have viewed this file recently" throttle, no 600-address cap.
+- One less hop for the student — no Google sign-in redirect, no Drive preview page.
+- The site already serves PDFs from `public/` with the right headers (`vercel.json` sets
+  `Content-Type: application/pdf` and `Content-Disposition: inline` for `/(.*)\.pdf`), so the
+  mechanism exists and is proven by the sem 6 papers.
+- Vercel CDN handles the traffic; GitHub Releases stays as the independent mirror.
+
+**Still true from the original plan:** Drive throttling under viral load was the reason for having
+a mirror at all. That reasoning holds — it is just GitHub Releases, not Drive, that carries the
+load, and the site carries the primary.
