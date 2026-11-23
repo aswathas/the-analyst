@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, type ReactElement } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Play, Pause, SkipForward } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 /* =======================================================
    TOPIC DATA - 20 Cryptography Concepts
@@ -277,6 +276,8 @@ const TOPICS = [
       ],
       examTip: "PREVENTION: (1) Use HMAC - it is specifically designed to prevent this. (2) Use SHA-3 (sponge - no length extension). (3) Use construction: H(message||key) not H(key||message) - though HMAC is still preferred. Never use raw Merkle-Damgard hash with a secret for authentication.",
     },
+  },
+  {
     id: 16,
     unit: 4,
     title: 'CBC-MAC Splicing Attack',
@@ -311,6 +312,8 @@ const TOPICS = [
       whyItMatters: 'Quantum computing threatens to break the mathematical foundations of internet security. Timeline is uncertain (10-20+ years for cryptographically relevant QC) but the threat is serious enough that NIST finalized PQC standards in 2024. Harvest now, decrypt later attacks already target data that needs long-term confidentiality.',
       examTip: 'EXAM FACT: AES-256 vs RSA-2048 quantum security: AES-256 -> 2^128 quantum steps (Grover) -> still secure. RSA-2048 -> polynomial time (Shor) -> BROKEN. So: use AES-256 for long-term confidentiality; migrate to PQC (CRYSTALS-Kyber/Libreswan) for key exchange. Doubling symmetric key size is the immediate fix.',
     },
+  },
+  {
     id: 18,
     unit: 5,
     title: 'PQC 4 Families',
@@ -420,6 +423,11 @@ function AvalancheDiagram() {
       <rect x="280" y="40" width="28" height="16" fill="#f97316" rx="2" />
       <rect x="315" y="40" width="28" height="16" fill="#f97316" rx="2" />
       <rect x="350" y="40" width="28" height="16" fill="#f97316" rx="2" />
+      <text x="200" y="130" fill="#fff" fontSize="9" textAnchor="middle" fontFamily="monospace">One input bit flips ~half the output bits</text>
+      <text x="200" y="146" fill="#7D7D7D" fontSize="8" textAnchor="middle" fontFamily="monospace">SHA-256: any 1-bit change gives a completely different digest</text>
+    </svg>
+  );
+}
 
 function FeistelDiagram() {
   return (
@@ -490,7 +498,11 @@ function RSATrapdoorDiagram() {
 }
 
 function GenericDiagram({ topic }: { topic: string }) {
-  const diagrams: Record<string, JSX.Element> = {
+  const diagrams: Record<string, ReactElement> = {
+    confusionDiffusion: <ConfusionDiffusionDiagram />,
+    avalanche: <AvalancheDiagram />,
+    feistel: <FeistelDiagram />,
+    rsaTrapdoor: <RSATrapdoorDiagram />,
     streamBlock: (
       <svg viewBox="0 0 400 180" style={{ width: '100%', maxWidth: 500 }}>
         <rect width="400" height="180" fill="#1c1c1e" rx="8" />
@@ -803,7 +815,7 @@ function GenericDiagram({ topic }: { topic: string }) {
 /* =======================================================
    SLIDE COMPONENTS - each slide type with animations
 ======================================================== */
-function TitleSlide({ data, topicIndex }: { data: TOPICS[0]['slides']['title']; topicIndex: number }) {
+function TitleSlide({ data, topicIndex }: { data: (typeof TOPICS)[0]['slides']['title']; topicIndex: number }) {
   return (
     <motion.div key={`title-${topicIndex}`} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 24, textAlign: 'center' }}>
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} style={{ padding: '6px 16px', borderRadius: 2, background: 'rgba(255,192,0,0.1)', border: '1px solid rgba(255,192,0,0.3)', fontSize: '11px', fontFamily: "'JetBrains Mono', monospace", color: '#FFC000', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
@@ -837,7 +849,7 @@ function WhatIsSlide({ data, topicIndex }: { data: string; topicIndex: number })
   );
 }
 
-function DiagramSlide({ diagram, topicIndex, color }: { diagram: string; topicIndex: number; color: string }) {
+function DiagramSlide({ diagram, topicIndex }: { diagram: string; topicIndex: number; color: string }) {
   return (
     <motion.div key={`diag-${topicIndex}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 20, alignItems: 'center' }}>
       <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} style={{ fontSize: 'clamp(20px, 4vw, 32px)', color: '#fff', fontWeight: 600, letterSpacing: '-0.02em', margin: 0 }}>
@@ -946,11 +958,10 @@ interface CryptoLearnModeProps {
 }
 
 export function CryptoLearnMode({ onBack }: CryptoLearnModeProps) {
-  const navigate = useNavigate();
   const [topicIndex, setTopicIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(false);
-  const autoPlayRef = useRef<ReturnType<typeof setTimeoutGT | null>(null);
+  const autoPlayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const topic = TOPICS[topicIndex];
   const slides = topic.slides;
@@ -959,7 +970,7 @@ export function CryptoLearnMode({ onBack }: CryptoLearnModeProps) {
     <WhatIsSlide data={slides.whatIs} topicIndex={topicIndex} />,
     <DiagramSlide diagram={slides.diagram} topicIndex={topicIndex} color={topic.color} />,
     <HowItWorksSlide data={slides.howItWorks} topicIndex={topicIndex} />,
-    <WhyItMattersSlide data={slides.whyItMatters} topicIndex={topicIndex} />,
+    <WhyItMattersSlide data={slides.whyItMatters ?? ''} topicIndex={topicIndex} />,
     <ExamTipSlide data={slides.examTip} topicIndex={topicIndex} />,
   ];
 
@@ -984,13 +995,6 @@ export function CryptoLearnMode({ onBack }: CryptoLearnModeProps) {
   const goNextTopic = useCallback(() => {
     if (topicIndex < TOPICS.length - 1) {
       setTopicIndex(t => t + 1);
-      setSlideIndex(0);
-    }
-  }, [topicIndex]);
-
-  const goPrevTopic = useCallback(() => {
-    if (topicIndex > 0) {
-      setTopicIndex(t => t - 1);
       setSlideIndex(0);
     }
   }, [topicIndex]);
