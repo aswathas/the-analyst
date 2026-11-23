@@ -23,6 +23,8 @@
 - PDF hosting: Drive is canonical (public "anyone with the link"), GitHub Release `sem7-master-pdfs` is the mirror. Every subject page shows both.
 - Existing sem-6 pages, routes and data files are not modified except `src/App.tsx` (route additions) and `src/components/SubjectGrid.tsx` (semester-aware rework).
 - No new runtime dependency. `@playwright/test` and `playwright` are already devDependencies; Chromium is already downloaded.
+- Type system: the site's existing Inter + JetBrains Mono pairing stays. New components use the same pair.
+- New sem-7 components must not use a thick one-side accent border (`borderLeft: 3px solid ...`) on cards — that is the site's most recognisable generic-AI tell and it appears on 8 pre-existing sem-6 cards that are not being reworked in this plan. Use a full border plus a small coloured dot or label to carry the unit colour instead.
 - Subject exam dates (FN = forenoon, AN = afternoon):
   - 21CSE435T Smart Contracts and Application Development — 2026-11-25 FN
   - 21CSE433T Blockchain Business Models — 2026-11-26 FN
@@ -826,7 +828,7 @@ Renders `spec.safeCombo` as a list of cards. The first card shows `claim` inside
 
 - [ ] **Step 6: Write `src/components/subject/UnitBreakdown.tsx`**
 
-Renders the five units in order. For each unit: the unit number and name, and a table of its topics with a priority badge (`must` = red, `should` = amber, `skip` = grey), the estimated minutes, and the `why` line. Add a per-unit total minutes line.
+Renders the five units in order. For each unit: the unit number and name in a header row that carries the unit colour as a small coloured dot (not a side border), and a table of its topics with a priority badge (`must` = red, `should` = amber, `skip` = grey), the estimated minutes, and the `why` line. Add a per-unit total minutes line.
 
 - [ ] **Step 7: Write `src/components/subject/QuestionBank.tsx`**
 
