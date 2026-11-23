@@ -64,10 +64,12 @@ export interface Resource {
   note?: string;
 }
 export interface PdfLinks {
-  /** Public Drive file id or link. Empty string means not uploaded yet. */
-  driveUrl: string;
-  /** GitHub release asset URL. Empty string means not uploaded yet. */
+  /** Canonical: the site's own URL for the PDF, served from public/master-pdfs/. */
+  siteUrl: string;
+  /** Mirror: the GitHub release asset URL. */
   releaseUrl: string;
+  /** Owner's working copy on Drive. May be empty if the Drive upload failed. */
+  driveUrl: string;
   pages: number;
 }
 
