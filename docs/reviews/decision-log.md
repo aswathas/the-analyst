@@ -164,3 +164,18 @@ Marks | Part C Descriptive 2x10=20 Marks", FT3 on 13.10.2026). The sem-6 site's 
 result; this could not be verified against a real paper. If that paper is open-book, that subject's
 page needs a study-guide shape instead of an exam-archetype shape. Raised with the owner on
 2026-11-24 and not yet answered.
+
+---
+
+## 2026-11-24 — Drive folder and GitHub release pre-created before the upload step
+
+**Decision.** The Drive folder `Sem 7 Master PDFs` (id `1smxYHA0tuyz_juQe8gM0EKEeYBrOPhEp`) and the
+GitHub release `sem7-master-pdfs` were created up front rather than inside the publish script.
+
+**Who.** Claude.
+
+**Driver.** Both are one-shot API calls that can fail for reasons unrelated to the build — a
+Drive permission quirk, a release already existing, a token scope problem. Creating them first
+turns "the publish step failed" into "the publish step uploaded into an existing container", and
+lets the upload agent focus on the actual upload. The Drive folder was created with the `gws`
+CLI using the already-authenticated account.
