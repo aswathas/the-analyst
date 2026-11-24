@@ -1238,4 +1238,10 @@ export const HYPERLEDGER_21CSE432T: SubjectSpec = {
       note: 'The reference for peer and ordering configuration, the chaincode lifecycle, endorsement policies, private data collections and CAP behaviour.',
     },
   ],
+  pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE432T-Hyperledger-Master-PDF.pdf',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE432T-Hyperledger-Master-PDF.pdf',
+    driveUrl: 'https://drive.google.com/file/d/1mmtxbSxK7Mz2ZN-wd3ZmVTCOu35Yo2zU/view',
+    pages: 14,
+  },
 };

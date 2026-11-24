@@ -1220,4 +1220,10 @@ export const BITCOIN_21CSE436T: SubjectSpec = {
       note: 'Albert Szmigielski — the course text that maps directly onto Units 1 to 3: wallets, the network, mining hardware and economics.',
     },
   ],
+  pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf',
+    driveUrl: 'https://drive.google.com/file/d/14LH1RbvHQ5NPIT7r689sEatzF41mxpnz/view',
+    pages: 13,
+  },
 };

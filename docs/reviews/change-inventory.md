@@ -86,3 +86,20 @@ first claim contains "of 75", and the prescribed textbook list.
 | `tests/home.spec.ts` | Sem 7 default, sem 6 switch, countdown chip on a card | `npx playwright test tests/home.spec.ts` |
 | `tests/pdf.spec.ts` | Manifest exists, every PDF ≤50 pages, every subject has a Drive URL and a release mirror | `npx playwright test tests/pdf.spec.ts` |
 | `tests/share.spec.ts` | A share card per subject, growth kit exists | `npx playwright test tests/share.spec.ts` |
+
+## Hosting and routes (revision after Task 11 testing)
+
+| File | What | Why | Verified by |
+| --- | --- | --- | --- |
+| `src/data/subjects/index.ts` | Registry now holds the five sem-7 subjects, not an empty array | The PDF builder loads the registry through this file and refused to write an empty manifest | `npm run pdf:build` → 5 subjects loaded |
+| `src/components/subject/registry.ts` | Re-exports the data registry instead of keeping a second copy of the five imports | Two registries could drift; the data layer is the single source | `tests/home.spec.ts`, `tests/subject-page.spec.ts` |
+| `src/App.tsx` | Routes `/subject/:code` and `/subject/:code/master`, plus `SubjectAnalysisWrapper` and `SubjectMasterWrapper` with a not-found state | Serve the new pages; an unknown code must not render a blank page | `tests/subject-page.spec.ts` — unknown code shows `subject-not-found` |
+| `src/App.tsx` | Hero CTA now points at `/subject/21CSE435T`; `onOpenSubject` prop added | The home page must point at the current semester | `tests/home.spec.ts` |
+| `src/components/Hero.tsx` | Tagline "across 6 subjects" → "across 11 subjects"; five sem-7 entries in the Analysis dropdown | Sem 7 must be reachable from the nav pill | manual check, `npm run build` |
+| `src/components/SubjectGrid.tsx` | Semester switcher (sem 7 default), sem-7 cards built from the registry, countdown chip per card, `data-testid="subject-card-<code>"` | Semester-aware navigation, sem 7 default | `tests/home.spec.ts` — 3 tests |
+| `src/components/SubjectGrid.tsx` | React key changed from `subject.code` to `${code}-${index}` | The three sem-6 "coming" subjects all use the placeholder code `TBC`, which produced duplicate-key warnings | console warning gone in the test run |
+| `src/components/subject/CountdownChip.tsx` | Clock read once at mount via `useState(() => Date.now())` | `Date.now()` during render is an impure read (`react-hooks/purity`) | `npx eslint src/components/subject/` clean |
+| `src/components/subject/UnitDonutGeneric.tsx` | Cumulative segment offsets computed with `reduce` instead of a reassigned `let` | `offset += dash` after render is a reassignment (`react-hooks/immutability`) | `npx eslint src/components/subject/` clean |
+| `vite.config.ts` | PWA manifest name "Analyst — Sem 6 Prep" → "Analyst — Exam Prep", description updated | The installed app should not say sem 6 | `npm run build` |
+| `public/master-pdfs/*.pdf` | 5 generated master PDFs, committed so Vercel serves them | Canonical student download: no Drive quota, no throttle, no sign-in redirect | `tests/pdf.spec.ts` — committed-PDF test; anonymous GitHub Release download verified |
+| `public/share/*.png` | 5 share cards at 1080×1350 | The forwarded artifact | `tests/share.spec.ts`; card read back and confirmed readable |

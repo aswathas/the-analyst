@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, basename } from 'node:path';
 import { chromium } from 'playwright';
@@ -46,7 +46,41 @@ if (SUBJECTS.length === 0) {
 
 mkdirSync(outDir, { recursive: true });
 
-const browser = await chromium.launch();
+function chromiumExecutable() {
+  if (existsSync(chromium.executablePath())) return undefined;
+  const base = join(process.env.LOCALAPPDATA || process.env.HOME || '', 'ms-playwright');
+  if (!existsSync(base)) return undefined;
+  const candidates = [];
+  for (const dir of readdirSync(base)) {
+    if (dir.startsWith('chromium-')) {
+      for (const rel of [
+        ['chrome-win64', 'chrome.exe'],
+        ['chrome-win', 'chrome.exe'],
+        ['chrome-linux', 'chrome'],
+      ]) {
+        const candidate = join(base, dir, ...rel);
+        if (existsSync(candidate)) candidates.push(candidate);
+      }
+    }
+    if (dir.startsWith('chromium_headless_shell-')) {
+      for (const rel of [
+        ['chrome-headless-shell-win64', 'chrome-headless-shell.exe'],
+        ['chrome-headless-shell-win', 'chrome-headless-shell.exe'],
+        ['chrome-headless-shell-linux64', 'chrome-headless-shell'],
+      ]) {
+        const candidate = join(base, dir, ...rel);
+        if (existsSync(candidate)) candidates.push(candidate);
+      }
+    }
+  }
+  return candidates.sort().pop();
+}
+
+const executablePath = chromiumExecutable();
+if (executablePath) {
+  console.log(`Using installed Chromium at ${executablePath}`);
+}
+const browser = await chromium.launch(executablePath ? { executablePath } : {});
 const page = await browser.newPage();
 const manifest = {};
 

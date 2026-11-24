@@ -17,14 +17,16 @@ export function UnitDonutGeneric({ units, total = 75 }: { units: DonutUnit[]; to
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
-  let offset = 0;
-  const segments = units.map(u => {
-    const dash = (u.pct / 100) * CIRCUMFERENCE;
-    const gap = CIRCUMFERENCE - dash;
-    const seg = { dash, gap, offset, ...u };
-    offset += dash;
-    return seg;
-  });
+  const segments = units.reduce<Array<DonutUnit & { dash: number; gap: number; offset: number }>>(
+    (acc, u) => {
+      const dash = (u.pct / 100) * CIRCUMFERENCE;
+      const gap = CIRCUMFERENCE - dash;
+      const offset = acc.length ? acc[acc.length - 1].offset + acc[acc.length - 1].dash : 0;
+      acc.push({ dash, gap, offset, ...u });
+      return acc;
+    },
+    [],
+  );
 
   return (
     <div ref={ref} style={{ display: 'flex', alignItems: 'center', gap: '28px', flexWrap: 'wrap' }}>

@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 export function CountdownChip({ examDate, examSession }: { examDate: string; examSession: 'FN' | 'AN' }) {
+  // Read the clock once at mount: Date.now() during render is an impure read.
+  const [now] = useState(() => Date.now());
   const target = new Date(`${examDate}T09:00:00`).getTime();
-  const now = Date.now();
   const days = Math.ceil((target - now) / 86_400_000);
 
   let label: string;
