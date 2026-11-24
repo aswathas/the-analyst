@@ -2112,9 +2112,10 @@ export const BUSINESS_MODELS_21CSE433T: SubjectSpec = {
       label: 'Elad Elrom, "The Blockchain Developer" (Apress, Jul 2019, ISBN 9781484248478)',
       note: 'Reference for Unit 4 Merkle trees, shared data and smart contracts, and for the Unit 4 identity-contract case study.',
     },
-  ],pdf: {
-    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE433T-Business-Models-Master-PDF.pdf',
-    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE433T-Business-Models-Master-PDF.pdf',
+  ],
+pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE433T-Business-Models-Master-PDF.pdf?v=e39dd3d6',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE433T-Business-Models-Master-PDF.pdf?v=e39dd3d6',
     driveUrl: 'https://drive.google.com/file/d/1tXUVTKx_2wrB6cA0rjHQmU1bOYchfkJM/view',
     pages: 25,
   },

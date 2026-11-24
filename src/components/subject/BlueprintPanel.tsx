@@ -19,7 +19,7 @@ function Row({
         alignItems: 'baseline',
         gap: '14px',
         padding: '12px 0',
-        borderBottom: '1px solid rgba(0,0,0,0.06)',
+        borderBottom: '1px solid var(--border-subtle)',
         flexWrap: 'wrap',
       }}
     >
@@ -62,7 +62,7 @@ export function BlueprintPanel({ spec }: { spec: SubjectSpec }) {
       />
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '14px', paddingTop: '14px', flexWrap: 'wrap' }}>
         <div style={{ width: '78px', flexShrink: 0, ...mono, color: muted, textTransform: 'uppercase' }}>Total</div>
-        <div data-testid="blueprint-total" style={{ ...mono, color: spec.accent, fontWeight: 700, fontSize: '16px' }}>
+        <div data-testid="blueprint-total" style={{ ...mono, color: 'var(--accent-ink)', fontWeight: 700, fontSize: '16px' }}>
           {b.total} marks
         </div>
       </div>

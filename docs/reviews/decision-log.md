@@ -271,3 +271,96 @@ GitHub Release mirror.
 anonymous request. The Workspace admin policy blocks "anyone with the link". A student clicking
 "Drive copy" lands on a Google sign-in wall and concludes the site is broken. A button that cannot
 work for its audience is worse than no button.
+
+---
+
+## 2026-11-24 — D22 — Light mode rebuilt on a token layer, not a colour swap
+
+**Decision.** Light mode is driven by one token file (`src/theme.css`) that uses `light-dark()` and
+switches `color-scheme` on `<html data-theme>`. Legacy analysis pages stay dark islands in both
+themes (their surfaces are hard-coded `#1c1c1e` / `#0a0a0a`), so their ink stays hard-coded light.
+
+**Who.** Claude (Claude Code), with the owner choosing the scope: "Token fix + new surfaces".
+
+**Driver.** The owner's report — "light mode isnt working good". The root cause was threefold:
+`body{background:#000}` was never themed; a `THEME_VARS` block injected light values while the
+surrounding chrome was dark; and 1,380 hard-coded colour literals bypassed any theme switch
+entirely. A colour swap could not fix that, so the token layer was rebuilt.
+
+**Consequence.** `src/theme.css` is the single source of truth for surface, ink, line, control,
+status and accent tokens. `--analysis-*`, `--bg-hero*` and `--text-hero*` are theme-invariant by
+design — those regions are dark in both themes. A pre-paint script in `index.html` sets
+`data-theme` before first paint so there is no flash of the wrong theme.
+
+---
+
+## 2026-11-24 — D23 — Accent derivative recipe is 58% black in light, 74% white in dark
+
+**Decision.** Every accent colour derives its ink, fill, soft and line variants through
+`color-mix(in srgb, var(--accent) 58%, #000000)` in light mode and `74% #ffffff` in dark mode.
+
+**Driver.** WCAG AA. Each accent in the palette was tested against its own surface at several
+mix ratios; 78% failed at 4.44:1, 58% clears 4.5:1 for every accent in light mode and 74% clears
+it in dark mode. The `[data-accent]` selector pattern is required because `color-mix` only resolves
+against `var(--accent)` on the same element or an ancestor of the consuming rule — a root-scoped
+derivation from a child-scoped accent does not resolve.
+
+---
+
+## 2026-11-24 — D24 — Published PDFs get content-versioned URLs, not a rebuild
+
+**Decision.** `scripts/publish-pdfs.mjs` appends `?v=<md5-8-of-file-content>` to every published
+PDF URL, and the five subject data files carry the same query string.
+
+**Driver.** The owner reported "im seeing same pdf as before why didnt u change?". `vercel.json`
+gives `/master-pdfs/*.pdf` a 30-day `max-age` at a fixed path, so a rebuilt file with an unchanged
+URL is served stale from the edge cache. A content hash in the query string busts the cache. No
+rebuild or CDN purge is required.
+
+---
+
+## 2026-11-24 — D25 — A programmatic contrast audit replaces eyeballing screenshots
+
+**Decision.** `scripts/audit-contrast.mjs` walks every text node on 12 routes in both themes,
+composites the effective background with proper source-over alpha, and reports any pair below the
+WCAG AA threshold (4.5:1, or 3:1 for large text).
+
+**Driver.** Screenshot review kept disagreeing with the audit — the model reported text as "not
+visible" where the computed ratio was fine, and missed real failures. The first audit run also
+reported 70 phantom failures because it read `color(srgb 0.62 0.43 0.95)` as 0–255 channels, and
+later hid real failures because its compositing function always returned alpha 1. Both were fixed
+before the numbers were trusted.
+
+**Consequence.** The audit now reports 0 failures on all 12 routes in both themes — 24 route/theme
+combinations. The Impeccable detector reports 0 findings. The Playwright suite is 25/25.
+
+---
+
+## 2026-11-24 — D26 — The "Personal AI Response System" becomes a 14-page study PDF
+
+**Decision.** The pasted master meta-instruction is reproduced as a typeset A4 study guide at
+`docs/study/personal-ai-response-system.pdf`, with the source kept as
+`docs/study/personal-ai-response-system.html` and the renderer at
+`scripts/render-study-pdf.mjs`.
+
+**Who.** Claude (Claude Code), from the owner's instruction: "use this and create a pdf for me to
+study also install neccesary diagram skills needed".
+
+**Consequence.** Three hand-drawn SVG diagrams carry the structure that prose alone loses: the
+request-to-capability flow, the seven-step explanation sequence, the six-layer teaching stack and
+the mode-selection heuristic. The original prompt remains the source of truth; the PDF is a study
+reference.
+
+---
+
+## 2026-11-24 — D27 — Diagram skills added to the active skill set
+
+**Decision.** Seven diagram skills — `algorithmic-art`, `architecture-diagram`,
+`baoyu-infographic`, `canvas-design`, `component-canvas`, `create-canvas`, `excalidraw-diagram` —
+are added to `~/.agents/skills-active.list.json` alongside the already-active `anatomy`, `mdview`
+and `pdf`, and linked into every harness by the catalogue gate.
+
+**Driver.** The owner's request to "install neccesary diagram skills needed" for the study PDF.
+All seven already existed in the canonical store at `~/.agents/skills` but were parked outside the
+active set, so no harness could see them. No new skill was authored, so nothing needed publishing
+to the aswath-skills repository.

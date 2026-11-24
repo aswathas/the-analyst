@@ -152,15 +152,15 @@ export function renderMasterHtml(spec: SubjectSpec): string {
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
   .unit-block { page-break-inside: auto; }
   .teach { margin: 10px 0 7px; padding-bottom: 2px; border-bottom: 1px solid #e5e7eb; color: ${esc(spec.accent)}; text-transform: uppercase; letter-spacing: .6px; font-size: 8.6pt; }
-  .topic { page-break-inside: auto; margin-bottom: 9px; border-left: 2px solid ${esc(spec.accent)}; padding-left: 9px; }
+  .topic { page-break-inside: auto; margin-bottom: 9px; border-top: 1.5pt solid ${esc(spec.accent)}; padding-top: 4px; }
   .topic-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 3px; page-break-after: avoid; break-after: avoid; }
   .topic-meta { white-space: nowrap; font-size: 8pt; }
   .principles { margin: 2px 0 4px 15px; font-size: 9.1pt; page-break-after: avoid; break-after: avoid; }
   .principles li { margin: 2px 0; }
   .why { font-size: 8.5pt; color: #374151; margin: 3px 0 0; }
-  .analogy { background: #fffbeb; border-left: 2px solid #f59e0b; padding: 4px 7px; margin: 3px 0 4px; page-break-inside: avoid; font-size: 9pt; color: #78350f; border-radius: 0 4px 4px 0; }
+  .analogy { background: #fffbeb; border: 0.5pt solid #e0b76a; padding: 4px 7px; margin: 3px 0 4px; page-break-inside: avoid; font-size: 9pt; color: #78350f; border-radius: 4px; }
   .analogy-tag { display: block; font-size: 7.2pt; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #b45309; margin-bottom: 1px; }
-  .example { background: #f0fdf4; border-left: 2px solid #16a34a; padding: 4px 7px; margin: 3px 0 4px; page-break-inside: avoid; font-size: 8.9pt; color: #14532d; border-radius: 0 4px 4px 0; }
+  .example { background: #f0fdf4; border: 0.5pt solid #93c9ab; padding: 4px 7px; margin: 3px 0 4px; page-break-inside: avoid; font-size: 8.9pt; color: #14532d; border-radius: 4px; }
   .example-tag { display: block; font-size: 7.2pt; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #15803d; margin-bottom: 1px; }
   .dg { margin: 4px 0 5px; page-break-inside: avoid; }
   .dg svg { max-width: 100%; height: auto; }

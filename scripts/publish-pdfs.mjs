@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { join, basename } from 'node:path';
 
@@ -164,9 +165,14 @@ for (const [code, entry] of Object.entries(manifest)) {
     console.warn(`  Drive permission for ${code} reported an error; the file is still the owner's working copy.`);
   }
 
+  // Content-version the URLs. Vercel caches /master-pdfs/*.pdf for 30 days at a
+  // fixed path, so a rebuilt PDF is invisible to anyone who already fetched it.
+  // A ?v=<hash> query makes every publish a new URL and busts that cache.
+  const version = createHash('md5').update(readFileSync(filePath)).digest('hex').slice(0, 8);
+
   published[code] = {
-    siteUrl: `${SITE_BASE}/master-pdfs/${basename(entry.file)}`,
-    releaseUrl: `https://github.com/${REPO}/releases/download/${RELEASE_TAG}/${basename(entry.file)}`,
+    siteUrl: `${SITE_BASE}/master-pdfs/${basename(entry.file)}?v=${version}`,
+    releaseUrl: `https://github.com/${REPO}/releases/download/${RELEASE_TAG}/${basename(entry.file)}?v=${version}`,
     driveUrl: `https://drive.google.com/file/d/${fileId}/view`,
     pages: entry.pages,
   };

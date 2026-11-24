@@ -1,5 +1,5 @@
 import type { SubjectSpec } from '../../data/subjects/types';
-import { card, sectionTitle, mono, muted, dot, unitColor, PRIORITY_COLOR } from './styles';
+import { card, sectionTitle, mono, muted, dot, unitColor, PRIORITY_COLOR, PRIORITY_SOFT, PRIORITY_LINE } from './styles';
 
 export function UnitBreakdown({ spec }: { spec: SubjectSpec }) {
   return (
@@ -7,7 +7,7 @@ export function UnitBreakdown({ spec }: { spec: SubjectSpec }) {
       <h3 style={sectionTitle}>Unit breakdown</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {spec.units.map((unit, ui) => {
-          const color = unitColor(ui, spec.accent);
+          const color = unitColor(ui);
           const totalMinutes = unit.topics.reduce((sum, t) => sum + t.minutes, 0);
           return (
             <div key={unit.unit}>
@@ -26,7 +26,7 @@ export function UnitBreakdown({ spec }: { spec: SubjectSpec }) {
                       gap: '12px',
                       alignItems: 'flex-start',
                       padding: '10px 12px',
-                      border: '1px solid rgba(0,0,0,0.06)',
+                      border: '1px solid var(--border-subtle)',
                       borderRadius: '12px',
                       flexWrap: 'wrap',
                     }}
@@ -41,8 +41,8 @@ export function UnitBreakdown({ spec }: { spec: SubjectSpec }) {
                       style={{
                         ...mono,
                         color: PRIORITY_COLOR[topic.priority],
-                        border: `1px solid ${PRIORITY_COLOR[topic.priority]}33`,
-                        background: `${PRIORITY_COLOR[topic.priority]}12`,
+                        border: `1px solid ${PRIORITY_LINE[topic.priority]}`,
+                        background: PRIORITY_SOFT[topic.priority],
                         borderRadius: '999px',
                         padding: '3px 9px',
                         fontWeight: 600,

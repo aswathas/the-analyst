@@ -46,46 +46,46 @@ const PART_B_QUESTIONS = [
 ];
 
 const PART_C_PREDICTIONS = [
-  { rank: 1, label: 'Highly Probable', color: '#ef4444', scenario: 'dropna + fillna + value_counts + GroupBy + bar chart', evidence: 'Jul25 Q27 exactly. Core pattern repeated across all papers. Simplest to ask.', code: `df = pd.read_csv('data.csv')\nprint(df.isnull().sum())\ndf = df.dropna(subset=['important_col'])\ndf['age'].fillna(df['age'].mean(), inplace=True)\nprint(df['category'].value_counts())\nresult = df.groupby('region')['sales'].agg(['sum','mean'])\nresult['sum'].plot(kind='bar', title='Sales by Region')\nplt.xlabel('Region'); plt.ylabel('Sales'); plt.show()`, papers: ['Jul25 Q27', 'All papers have dropna/fillna'] },
-  { rank: 2, label: 'Very Likely', color: '#f59e0b', scenario: 'merge + groupby + seaborn heatmap', evidence: 'May25 Q27 exactly. merge() is tested heavily in MCQ too.', code: `df1 = pd.read_csv('orders.csv')\ndf2 = pd.read_csv('customers.csv')\nmerged = pd.merge(df1, df2, on='customer_id', how='inner')\npivot = merged.groupby(['region','product'])['amount'].sum().unstack()\nplt.figure(figsize=(10,6))\nsns.heatmap(pivot, annot=True, fmt='.0f', cmap='Blues')\nplt.title('Sales Heatmap by Region and Product')\nplt.show()`, papers: ['May25 Q27'] },
-  { rank: 3, label: 'Possible', color: '#3b82f6', scenario: 'pivot_table + concat + matplotlib subplots', evidence: 'Dec25 Q27. If Dec25 is fresh in examiner memory.', code: `df1 = pd.read_csv('q1.csv')\ndf2 = pd.read_csv('q2.csv')\ncombined = pd.concat([df1, df2], ignore_index=True)\ntable = pd.pivot_table(combined, values='sales', index='month', columns='product', aggfunc='sum')\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\ntable.plot(kind='bar', ax=ax1, title='Sales by Month')\ncombined.groupby('product')['sales'].sum().plot(kind='pie', ax=ax2, autopct='%1.1f%%', title='Product Share')\nplt.tight_layout(); plt.show()`, papers: ['Dec25 Q27'] },
+  { rank: 1, label: 'Highly Probable', color: '#ff8a8a', scenario: 'dropna + fillna + value_counts + GroupBy + bar chart', evidence: 'Jul25 Q27 exactly. Core pattern repeated across all papers. Simplest to ask.', code: `df = pd.read_csv('data.csv')\nprint(df.isnull().sum())\ndf = df.dropna(subset=['important_col'])\ndf['age'].fillna(df['age'].mean(), inplace=True)\nprint(df['category'].value_counts())\nresult = df.groupby('region')['sales'].agg(['sum','mean'])\nresult['sum'].plot(kind='bar', title='Sales by Region')\nplt.xlabel('Region'); plt.ylabel('Sales'); plt.show()`, papers: ['Jul25 Q27', 'All papers have dropna/fillna'] },
+  { rank: 2, label: 'Very Likely', color: '#fbbf24', scenario: 'merge + groupby + seaborn heatmap', evidence: 'May25 Q27 exactly. merge() is tested heavily in MCQ too.', code: `df1 = pd.read_csv('orders.csv')\ndf2 = pd.read_csv('customers.csv')\nmerged = pd.merge(df1, df2, on='customer_id', how='inner')\npivot = merged.groupby(['region','product'])['amount'].sum().unstack()\nplt.figure(figsize=(10,6))\nsns.heatmap(pivot, annot=True, fmt='.0f', cmap='Blues')\nplt.title('Sales Heatmap by Region and Product')\nplt.show()`, papers: ['May25 Q27'] },
+  { rank: 3, label: 'Possible', color: '#60a5fa', scenario: 'pivot_table + concat + matplotlib subplots', evidence: 'Dec25 Q27. If Dec25 is fresh in examiner memory.', code: `df1 = pd.read_csv('q1.csv')\ndf2 = pd.read_csv('q2.csv')\ncombined = pd.concat([df1, df2], ignore_index=True)\ntable = pd.pivot_table(combined, values='sales', index='month', columns='product', aggfunc='sum')\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\ntable.plot(kind='bar', ax=ax1, title='Sales by Month')\ncombined.groupby('product')['sales'].sum().plot(kind='pie', ax=ax2, autopct='%1.1f%%', title='Product Share')\nplt.tight_layout(); plt.show()`, papers: ['Dec25 Q27'] },
 ];
 
 /* ─── INSIGHT DATA ─────────────────────────────────────────── */
 
 const TOPIC_INSIGHTS = [
-  { topic: 'Pandas + Wrangling', score: 98, papers: 4, color: '#ef4444', bar: '#ef4444' },
-  { topic: 'Matplotlib / Seaborn', score: 96, papers: 4, color: '#f59e0b', bar: '#f59e0b' },
-  { topic: 'GroupBy + Aggregation', score: 92, papers: 4, color: '#f59e0b', bar: '#f59e0b' },
-  { topic: 'NumPy Fundamentals', score: 88, papers: 4, color: '#3b82f6', bar: '#3b82f6' },
-  { topic: 'Missing Data + Merge', score: 86, papers: 4, color: '#3b82f6', bar: '#3b82f6' },
-  { topic: 'Preprocessing / Outliers', score: 82, papers: 4, color: '#3b82f6', bar: '#3b82f6' },
-  { topic: 'Train/Test + Sklearn', score: 78, papers: 3, color: '#8b5cf6', bar: '#8b5cf6' },
+  { topic: 'Pandas + Wrangling', score: 98, papers: 4, color: '#ff8a8a', bar: '#ef4444' },
+  { topic: 'Matplotlib / Seaborn', score: 96, papers: 4, color: '#fbbf24', bar: '#f59e0b' },
+  { topic: 'GroupBy + Aggregation', score: 92, papers: 4, color: '#fbbf24', bar: '#f59e0b' },
+  { topic: 'NumPy Fundamentals', score: 88, papers: 4, color: '#60a5fa', bar: '#3b82f6' },
+  { topic: 'Missing Data + Merge', score: 86, papers: 4, color: '#60a5fa', bar: '#3b82f6' },
+  { topic: 'Preprocessing / Outliers', score: 82, papers: 4, color: '#60a5fa', bar: '#3b82f6' },
+  { topic: 'Train/Test + Sklearn', score: 78, papers: 3, color: '#a78bfa', bar: '#8b5cf6' },
   { topic: 'Large Data / APIs', score: 65, papers: 2, color: '#6b7280', bar: '#6b7280' },
   { topic: 'Machine Learning', score: 58, papers: 1, color: '#6b7280', bar: '#6b7280' },
 ];
 
 const KEY_INSIGTS = [
-  { icon: <Target size={16} strokeWidth={1.5} />, text: 'Q27 = Data Wrangling in 3/3 recent papers — 100% hit rate', color: '#ef4444' },
-  { icon: <TrendingUp size={16} strokeWidth={1.5} />, text: 'Pandas + Viz topics appear in ALL 4 papers — no skipping', color: '#30d158' },
-  { icon: <AlertTriangle size={16} strokeWidth={1.5} />, text: 'Dec 2025 added 8 new ML MCQs (Q13-20) — first time ever', color: '#f59e0b' },
-  { icon: <Award size={16} strokeWidth={1.5} />, text: 'Wrangling + Viz + 1 ML Q = 65+ marks safe strategy', color: '#2997ff' },
+  { icon: <Target size={16} strokeWidth={1.5} />, text: 'Q27 = Data Wrangling in 3/3 recent papers — 100% hit rate', color: '#ff8a8a' },
+  { icon: <TrendingUp size={16} strokeWidth={1.5} />, text: 'Pandas + Viz topics appear in ALL 4 papers — no skipping', color: '#4ade80' },
+  { icon: <AlertTriangle size={16} strokeWidth={1.5} />, text: 'Dec 2025 added 8 new ML MCQs (Q13-20) — first time ever', color: '#fbbf24' },
+  { icon: <Award size={16} strokeWidth={1.5} />, text: 'Wrangling + Viz + 1 ML Q = 65+ marks safe strategy', color: '#60a5fa' },
 ];
 
 /* ─── HELPERS ─────────────────────────────────────────────── */
 
-const PROB_COLOR = (p: number) => p >= 90 ? '#ef4444' : p >= 80 ? '#f59e0b' : p >= 70 ? '#3b82f6' : '#6b7280';
+const PROB_COLOR = (p: number) => p >= 90 ? '#ff8f8f' : p >= 80 ? '#fbbf24' : p >= 70 ? '#93c5fd' : '#a1a1a6';
 
 const TYPE_BADGE: Record<string, { bg: string; color: string; label: string }> = {
-  must:   { bg: '#fee2e2', color: '#dc2626', label: 'MUST DO' },
-  safe:   { bg: '#d1fae5', color: '#059669', label: 'SAFE PICK' },
+  must:   { bg: '#fee2e2', color: '#f87171', label: 'MUST DO' },
+  safe:   { bg: '#d1fae5', color: '#34d399', label: 'SAFE PICK' },
   risky:  { bg: '#fef3c7', color: '#d97706', label: 'RISKY' },
 };
 
 function SectionTitle({ label, title, desc }: { label: string; title: string; desc?: string }) {
   return (
     <div style={{ marginBottom: '40px' }}>
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#2997ff', marginBottom: '12px' }}>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#60a5fa', marginBottom: '12px' }}>
         <Star size={11} strokeWidth={2} />
         {label}
       </div>
@@ -130,7 +130,7 @@ export function DSAnalysisPage({ onBack }: Props) {
         </button>
         <div style={{ height: '16px', width: '1px', background: 'rgba(255,255,255,0.1)' }} />
         <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>Data Science</span>
-        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
+        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.58)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button onClick={() => window.open('/prepguide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.85)', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
             <BookOpen size={12} strokeWidth={1.5} />
@@ -140,7 +140,7 @@ export function DSAnalysisPage({ onBack }: Props) {
             <FileSpreadsheet size={12} strokeWidth={1.5} />
             MasterSheet
           </button>
-          <button onClick={() => navigate('/pyq-master')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(41,151,255,0.15)', border: '1px solid rgba(41,151,255,0.3)', color: '#2997ff', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
+          <button onClick={() => navigate('/pyq-master')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '9999px', background: 'rgba(41,151,255,0.15)', border: '1px solid rgba(41,151,255,0.3)', color: '#60a5fa', fontSize: '12px', fontWeight: 400, cursor: 'pointer' }}>
             Master Sheet
           </button>
         </div>
@@ -158,7 +158,7 @@ export function DSAnalysisPage({ onBack }: Props) {
           style={{ marginBottom: '80px' }}
         >
           {/* Header label */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#2997ff', marginBottom: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#60a5fa', marginBottom: '14px' }}>
             <CheckCircle size={12} strokeWidth={2} />
             4 Papers · 80 MCQs · 28 Part B Qs · 8 Part C Qs
           </div>
@@ -182,7 +182,7 @@ export function DSAnalysisPage({ onBack }: Props) {
               <div key={l} style={{ flex: '1 1 140px', background: '#1c1c1e', borderRadius: '16px', padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ fontSize: '28px', fontWeight: 600, color: c, letterSpacing: '-0.04em', lineHeight: 1 }}>{n}</div>
                 <div style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.8)', marginTop: '4px' }}>{l}</div>
-                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)' }}>{sub}</div>
+                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.58)' }}>{sub}</div>
               </div>
             ))}
           </div>
@@ -219,12 +219,11 @@ export function DSAnalysisPage({ onBack }: Props) {
                       whileInView={{ width: `${item.score}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.7, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                      style={{ height: '100%', background: item.bar, borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10px' }}
-                    >
-                      <span style={{ fontSize: '11px', fontWeight: 600, color: '#fff' }}>{item.score}%</span>
-                    </motion.div>
+                      style={{ height: '100%', background: item.bar, borderRadius: '8px' }}
+                    />
                   </div>
-                  <div style={{ width: '50px', fontSize: '11px', color: 'rgba(255,255,255,0.3)', textAlign: 'right', fontFamily: 'JetBrains Mono, monospace' }}>{item.papers}/4</div>
+                  <div style={{ width: '42px', fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', textAlign: 'right', fontFamily: 'JetBrains Mono, monospace' }}>{item.score}%</div>
+                  <div style={{ width: '50px', fontSize: '11px', color: 'rgba(255,255,255,0.55)', textAlign: 'right', fontFamily: 'JetBrains Mono, monospace' }}>{item.papers}/4</div>
                 </motion.div>
               ))}
             </div>
@@ -239,7 +238,7 @@ export function DSAnalysisPage({ onBack }: Props) {
               ].map(({ c, l }) => (
                 <div key={l} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <div style={{ width: '10px', height: '10px', borderRadius: '3px', background: c }} />
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>{l}</span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)' }}>{l}</span>
                 </div>
               ))}
             </div>
@@ -276,7 +275,7 @@ export function DSAnalysisPage({ onBack }: Props) {
           <SectionTitle label="Exam Structure" title="75 Marks — How It Breaks Down" desc="Understand the mark distribution before you strategize which questions to pick." />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
             <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 }} style={{ background: '#1c1c1e', borderRadius: '20px', padding: '36px 40px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '20px' }}>Marks by Unit</div>
+              <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.62)', marginBottom: '20px' }}>Marks by Unit</div>
               <UnitDonut />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.16 }}>
@@ -316,7 +315,7 @@ export function DSAnalysisPage({ onBack }: Props) {
               const c = colors[u];
               const isActive = activeUnit === u;
               return (
-                <button key={u} onClick={() => setActiveUnit(u)} style={{ padding: '8px 20px', borderRadius: '100px', fontSize: '13px', fontWeight: 600, background: isActive ? `${c}22` : 'rgba(255,255,255,0.04)', border: isActive ? `1.5px solid ${c}55` : '1.5px solid rgba(255,255,255,0.1)', color: isActive ? c : 'rgba(255,255,255,0.35)', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+                <button key={u} onClick={() => setActiveUnit(u)} style={{ padding: '8px 20px', borderRadius: '100px', fontSize: '13px', fontWeight: 600, background: isActive ? `${c}22` : 'rgba(255,255,255,0.04)', border: isActive ? `1.5px solid ${c}55` : '1.5px solid rgba(255,255,255,0.1)', color: isActive ? c : 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'all 0.2s ease' }}>
                   {u === 'all' ? `All — ${count}` : `Unit ${u} — ${count}`}
                 </button>
               );
@@ -329,14 +328,14 @@ export function DSAnalysisPage({ onBack }: Props) {
                 <motion.div key={item.topic} initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.32, delay: (i % 4) * 0.04 }} style={{ background: '#1c1c1e', borderRadius: '16px', padding: '22px 26px', border: '1px solid rgba(255,255,255,0.07)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                     <div style={{ flexShrink: 0, padding: '3px 10px', borderRadius: '8px', background: `${PROB_COLOR(item.prob)}18`, border: `1px solid ${PROB_COLOR(item.prob)}44`, fontSize: '12px', fontWeight: 600, color: PROB_COLOR(item.prob) }}>{item.prob}%</div>
-                    <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>U{item.unit}</div>
+                    <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>U{item.unit}</div>
                   </div>
                   <div style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff', marginBottom: '8px', lineHeight: 1.3 }}>{item.topic}</div>
                   <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, marginBottom: item.trap ? '12px' : 0 }}>{item.tip}</div>
                   {item.trap && (
                     <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-start', background: 'rgba(255,159,10,0.1)', borderRadius: '8px', padding: '8px 12px', border: '1px solid rgba(255,159,10,0.25)' }}>
-                      <AlertTriangle size={12} strokeWidth={2} style={{ color: '#ff9f0a', marginTop: '2px', flexShrink: 0 }} />
-                      <span style={{ fontSize: '12px', color: '#ff9f0a', fontWeight: 400 }}>TRAP: {item.trap}</span>
+                      <AlertTriangle size={12} strokeWidth={2} style={{ color: '#fbbf24', marginTop: '2px', flexShrink: 0 }} />
+                      <span style={{ fontSize: '12px', color: '#fbbf24', fontWeight: 400 }}>TRAP: {item.trap}</span>
                     </div>
                   )}
                 </motion.div>
@@ -356,16 +355,16 @@ export function DSAnalysisPage({ onBack }: Props) {
               const labels = { all: 'All', must: 'Must Do', safe: 'Safe Pick', risky: 'Risky' };
               const isActive = filterType === f;
               return (
-                <button key={f} onClick={() => setFilterType(f)} style={{ padding: '8px 22px', borderRadius: '100px', fontSize: '13px', fontWeight: 600, background: isActive ? '#2997ff' : 'rgba(255,255,255,0.08)', color: isActive ? '#ffffff' : 'rgba(255,255,255,0.55)', border: isActive ? '1px solid transparent' : '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', transition: 'all 0.2s ease' }}>{labels[f]}</button>
+                <button key={f} onClick={() => setFilterType(f)} style={{ padding: '8px 22px', borderRadius: '100px', fontSize: '13px', fontWeight: 600, background: isActive ? '#0066cc' : 'rgba(255,255,255,0.08)', color: isActive ? '#ffffff' : 'rgba(255,255,255,0.55)', border: isActive ? '1px solid transparent' : '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', transition: 'all 0.2s ease' }}>{labels[f]}</button>
               );
             })}
           </div>
 
           <div style={{ background: 'rgba(41,151,255,0.08)', borderRadius: '20px', padding: '22px 28px', marginBottom: '32px', border: '1px solid rgba(41,151,255,0.2)', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <Zap size={20} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
+            <Zap size={20} strokeWidth={1.5} style={{ color: '#60a5fa', flexShrink: 0 }} />
             <div>
               <div style={{ fontSize: '16px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.022em', marginBottom: '5px' }}>
-                Safest combo: <span style={{ color: '#2997ff' }}>Q19 + Q21 + Q23 + Q25</span>
+                Safest combo: <span style={{ color: '#60a5fa' }}>Q19 + Q21 + Q23 + Q25</span>
               </div>
               <div style={{ fontSize: '14px', fontWeight: 400, color: 'rgba(255,255,255,0.55)', letterSpacing: '-0.014em' }}>
                 Data cleaning + Visualization + GroupBy + Merge — all appeared in 3+ papers. Guaranteed 40 marks.
@@ -382,7 +381,7 @@ export function DSAnalysisPage({ onBack }: Props) {
                   <div style={{ padding: '20px 26px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.6)', fontFamily: 'JetBrains Mono, monospace' }}>{q.qNum}</span>
                     <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff', flex: 1 }}>{q.topic}</span>
-                    <div style={{ padding: '2px 10px', borderRadius: '100px', fontSize: '10px', fontWeight: 600, background: q.type === 'must' ? 'rgba(255,69,58,0.15)' : q.type === 'safe' ? 'rgba(48,209,88,0.12)' : 'rgba(255,159,10,0.12)', color: q.type === 'must' ? '#ff453a' : q.type === 'safe' ? '#30d158' : '#ff9f0a', border: `1px solid ${q.type === 'must' ? 'rgba(255,69,58,0.3)' : q.type === 'safe' ? 'rgba(48,209,88,0.25)' : 'rgba(255,159,10,0.25)'}` }}>{badge.label}</div>
+                    <div style={{ padding: '2px 10px', borderRadius: '100px', fontSize: '10px', fontWeight: 600, background: q.type === 'must' ? 'rgba(255,69,58,0.15)' : q.type === 'safe' ? 'rgba(48,209,88,0.12)' : 'rgba(255,159,10,0.12)', color: q.type === 'must' ? '#ff8f8f' : q.type === 'safe' ? '#30d158' : '#ff9f0a', border: `1px solid ${q.type === 'must' ? 'rgba(255,69,58,0.3)' : q.type === 'safe' ? 'rgba(48,209,88,0.25)' : 'rgba(255,159,10,0.25)'}` }}>{badge.label}</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '13px', fontWeight: 600, color: PROB_COLOR(q.prob) }}>
                       <TrendingUp size={12} strokeWidth={1.5} />
                       {q.prob}%
@@ -391,8 +390,8 @@ export function DSAnalysisPage({ onBack }: Props) {
                   <div style={{ padding: '20px 26px' }}>
                     <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', margin: '0 0 14px', lineHeight: 1.6 }}>{q.desc}</p>
                     <div style={{ display: 'flex', gap: '6px', marginBottom: '16px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', fontWeight: 600 }}>Appeared:</span>
-                      {q.appeared.map(p => <span key={p} style={{ fontSize: '11px', fontWeight: 600, color: '#2997ff', background: 'rgba(41,151,255,0.12)', padding: '2px 8px', borderRadius: '100px' }}>{p}</span>)}
+                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.58)', fontWeight: 600 }}>Appeared:</span>
+                      {q.appeared.map(p => <span key={p} style={{ fontSize: '11px', fontWeight: 600, color: '#60a5fa', background: 'rgba(41,151,255,0.12)', padding: '2px 8px', borderRadius: '100px' }}>{p}</span>)}
                     </div>
                     <button onClick={() => toggleCodeB(origIdx)} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '5px 12px', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', cursor: 'pointer', marginBottom: '10px' }}>
                       {showCodeB[origIdx] ? <ChevronUp size={12} strokeWidth={2} /> : <ChevronDown size={12} strokeWidth={2} />}
@@ -402,14 +401,14 @@ export function DSAnalysisPage({ onBack }: Props) {
                       {showCodeB[origIdx] && (
                         <motion.div key="code" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ overflow: 'hidden', marginBottom: '10px' }}>
                           <div style={{ background: '#000000', borderRadius: '10px', padding: '12px 14px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                            <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '5px' }}>Template</div>
+                            <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '5px' }}>Template</div>
                             <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.55, fontFamily: 'JetBrains Mono, monospace' }}>{q.template}</div>
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      {q.keyFunctions.map(fn => <span key={fn} style={{ fontSize: '11px', fontWeight: 400, color: '#2997ff', background: 'rgba(41,151,255,0.1)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'JetBrains Mono, monospace' }}>{fn}</span>)}
+                      {q.keyFunctions.map(fn => <span key={fn} style={{ fontSize: '11px', fontWeight: 400, color: '#60a5fa', background: 'rgba(41,151,255,0.1)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'JetBrains Mono, monospace' }}>{fn}</span>)}
                     </div>
                   </div>
                 </motion.div>
@@ -425,14 +424,14 @@ export function DSAnalysisPage({ onBack }: Props) {
           <SectionTitle label="Part C · 1 × 15 = 15 marks" title="Q27 Prediction — 3 Probable Questions" desc="Q27 = Data Wrangling pipeline in 3 of 3 recent papers. This is the most predictable question in the paper." />
 
           <div style={{ background: '#1c1c1e', borderRadius: '18px', padding: '24px 30px', marginBottom: '36px', display: 'flex', alignItems: 'center', gap: '18px', flexWrap: 'wrap' }}>
-            <Target size={26} strokeWidth={1.5} style={{ color: '#ef4444', flexShrink: 0 }} />
+            <Target size={26} strokeWidth={1.5} style={{ color: '#ff8a8a', flexShrink: 0 }} />
             <div>
               <div style={{ fontSize: '16px', fontWeight: 600, color: '#ffffff', marginBottom: '5px' }}>Q27 = Data Wrangling — 3/3 recent papers (100% hit rate)</div>
               <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)' }}>May25 Q27 · Jul25 Q27 · Dec25 Q27 — all wrangling pipelines.</div>
             </div>
             <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-              <div style={{ fontSize: '28px', fontWeight: 600, color: '#ef4444', letterSpacing: '-0.04em' }}>100%</div>
-              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>hit rate</div>
+              <div style={{ fontSize: '28px', fontWeight: 600, color: '#ff8a8a', letterSpacing: '-0.04em' }}>100%</div>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)' }}>hit rate</div>
             </div>
           </div>
 
@@ -442,7 +441,7 @@ export function DSAnalysisPage({ onBack }: Props) {
                 <div style={{ height: '3px', background: pred.color }} />
                 <div style={{ padding: '22px 26px 0' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', flexWrap: 'wrap' }}>
-                    <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: pred.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 600, color: '#fff', flexShrink: 0 }}>{pred.rank}</div>
+                    <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: pred.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 600, color: '#1c1c1e', flexShrink: 0 }}>{pred.rank}</div>
                     <span style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: pred.color }}>{pred.label}</span>
                     <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', flex: 1 }}>{pred.scenario}</span>
                     <div style={{ display: 'flex', gap: '5px' }}>
@@ -460,7 +459,7 @@ export function DSAnalysisPage({ onBack }: Props) {
                     {showCodeC[i] && (
                       <motion.div key="code-c" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ overflow: 'hidden' }}>
                         <div style={{ background: '#000000', borderRadius: '10px', padding: '14px 16px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'auto' }}>
-                          <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Template Code</div>
+                          <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Template Code</div>
                           <pre style={{ margin: 0, fontSize: '12px', lineHeight: 1.65, fontFamily: 'JetBrains Mono, monospace', color: 'rgba(255,255,255,0.8)', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{pred.code}</pre>
                         </div>
                       </motion.div>
@@ -473,9 +472,9 @@ export function DSAnalysisPage({ onBack }: Props) {
 
           <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '14px', padding: '20px 24px', border: '1px solid rgba(255,255,255,0.08)', marginTop: '24px' }}>
             <div style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>Q28 (alternative) — ML Pipeline</div>
-            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.6 }}>
+            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.62)', lineHeight: 1.6 }}>
               If Q27 is wrangling (which it will be), Q28 is an ML pipeline:
-              <code style={{ fontFamily: 'JetBrains Mono, monospace', background: 'rgba(255,255,255,0.08)', padding: '1px 5px', borderRadius: '4px', marginLeft: '4px', fontSize: '12px', color: '#2997ff' }}>train_test_split → fit → predict → confusion_matrix</code>.
+              <code style={{ fontFamily: 'JetBrains Mono, monospace', background: 'rgba(255,255,255,0.08)', padding: '1px 5px', borderRadius: '4px', marginLeft: '4px', fontSize: '12px', color: '#60a5fa' }}>train_test_split → fit → predict → confusion_matrix</code>.
               Pick Q27 — wrangling is easier to score full marks on.
             </div>
           </div>
@@ -491,7 +490,7 @@ export function DSAnalysisPage({ onBack }: Props) {
               <thead>
                 <tr style={{ background: '#1c1c1e', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                   <th style={{ padding: '16px 20px', textAlign: 'left', color: 'rgba(255,255,255,0.5)', fontWeight: 600, letterSpacing: '0.04em', fontSize: '12px', textTransform: 'uppercase', minWidth: '200px' }}>Topic</th>
-                  {['May 25', 'Jul 25', 'Dec 25', 'Dec 23'].map(p => <th key={p} style={{ padding: '16px 20px', textAlign: 'center', color: '#2997ff', fontWeight: 600, letterSpacing: '0.04em', fontSize: '12px', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>{p}</th>)}
+                  {['May 25', 'Jul 25', 'Dec 25', 'Dec 23'].map(p => <th key={p} style={{ padding: '16px 20px', textAlign: 'center', color: '#60a5fa', fontWeight: 600, letterSpacing: '0.04em', fontSize: '12px', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>{p}</th>)}
                   <th style={{ padding: '16px 20px', textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontWeight: 600, fontSize: '12px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Score</th>
                 </tr>
               </thead>
@@ -520,11 +519,11 @@ export function DSAnalysisPage({ onBack }: Props) {
                       <td style={{ padding: '14px 20px', color: '#ffffff', fontWeight: 400, fontSize: '14px' }}>{topic}</td>
                       {[m25, j25, d25, d23].map((appeared, ci) => (
                         <td key={ci} style={{ padding: '14px 20px', textAlign: 'center' }}>
-                          {appeared ? <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', borderRadius: '6px', background: 'rgba(48,209,88,0.15)', border: '1px solid rgba(48,209,88,0.3)', fontSize: '12px', color: '#30d158' }}>✓</span> : <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', borderRadius: '6px', background: 'rgba(255,255,255,0.04)', fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>—</span>}
+                          {appeared ? <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', borderRadius: '6px', background: 'rgba(48,209,88,0.15)', border: '1px solid rgba(48,209,88,0.3)', fontSize: '12px', color: '#4ade80' }}>✓</span> : <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', borderRadius: '6px', background: 'rgba(255,255,255,0.04)', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>—</span>}
                         </td>
                       ))}
                       <td style={{ padding: '14px 20px', textAlign: 'center' }}>
-                        <span style={{ display: 'inline-block', minWidth: '32px', padding: '2px 8px', borderRadius: '9999px', fontSize: '11px', fontWeight: 600, background: score === 4 ? 'rgba(48,209,88,0.15)' : score === 3 ? 'rgba(41,151,255,0.15)' : score >= 2 ? 'rgba(255,159,10,0.15)' : 'rgba(255,255,255,0.06)', color: score === 4 ? '#30d158' : score === 3 ? '#2997ff' : score >= 2 ? '#ff9f0a' : 'rgba(255,255,255,0.3)', border: `1px solid ${score === 4 ? 'rgba(48,209,88,0.3)' : score === 3 ? 'rgba(41,151,255,0.25)' : score >= 2 ? 'rgba(255,159,10,0.25)' : 'rgba(255,255,255,0.08)'}` }}>{score}/4</span>
+                        <span style={{ display: 'inline-block', minWidth: '32px', padding: '2px 8px', borderRadius: '9999px', fontSize: '11px', fontWeight: 600, background: score === 4 ? 'rgba(48,209,88,0.15)' : score === 3 ? 'rgba(41,151,255,0.15)' : score >= 2 ? 'rgba(255,159,10,0.15)' : 'rgba(255,255,255,0.06)', color: score === 4 ? '#30d158' : score === 3 ? '#60a5fa' : score >= 2 ? '#ff9f0a' : 'rgba(255,255,255,0.55)', border: `1px solid ${score === 4 ? 'rgba(48,209,88,0.3)' : score === 3 ? 'rgba(41,151,255,0.25)' : score >= 2 ? 'rgba(255,159,10,0.25)' : 'rgba(255,255,255,0.08)'}` }}>{score}/4</span>
                       </td>
                     </motion.tr>
                   );
@@ -536,7 +535,7 @@ export function DSAnalysisPage({ onBack }: Props) {
             {[{ c: '#30d158', bg: 'rgba(48,209,88,0.15)', label: '4/4 — Must study' }, { c: '#2997ff', bg: 'rgba(41,151,255,0.15)', label: '3/4 — High priority' }, { c: '#ff9f0a', bg: 'rgba(255,159,10,0.15)', label: '2/4 — Medium' }].map(({ c, bg, label }) => (
               <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '3px', background: bg, border: `1px solid ${c}40` }} />
-                <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>{label}</span>
+                <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)' }}>{label}</span>
               </div>
             ))}
           </div>
@@ -549,7 +548,7 @@ export function DSAnalysisPage({ onBack }: Props) {
           <h3 style={{ fontSize: '26px', fontWeight: 600, color: '#fff', letterSpacing: '-0.03em', margin: '0 0 12px' }}>Need the full study guide?</h3>
           <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', margin: '0 0 28px', lineHeight: 1.6 }}>First principles explanations · Memory techniques · All model answers · Code arsenal</p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
-            <button onClick={() => window.open('/prepguide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: '#2997ff', color: '#fff', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: 'none' }}>
+            <button onClick={() => window.open('/prepguide.pdf', '_blank')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '100px', background: '#0066cc', color: '#fff', fontSize: '14px', fontWeight: 400, letterSpacing: '-0.022em', cursor: 'pointer', border: 'none' }}>
               <BookOpen size={15} strokeWidth={1.5} />
               Prep Guide
             </button>
@@ -559,7 +558,7 @@ export function DSAnalysisPage({ onBack }: Props) {
             </button>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <button onClick={() => navigate('/pyq-master')} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '9px 22px', borderRadius: '100px', background: 'transparent', color: 'rgba(255,255,255,0.45)', fontSize: '13px', fontWeight: 400, letterSpacing: '-0.01em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', transition: 'color 0.15s, border-color 0.15s' }}
+            <button onClick={() => navigate('/pyq-master')} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '9px 22px', borderRadius: '100px', background: 'transparent', color: 'rgba(255,255,255,0.66)', fontSize: '13px', fontWeight: 400, letterSpacing: '-0.01em', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.12)', transition: 'color 0.15s, border-color 0.15s' }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.85)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.45)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)'; }}
             >
@@ -571,7 +570,7 @@ export function DSAnalysisPage({ onBack }: Props) {
 
         {/* Footer tagline */}
         <div style={{ textAlign: 'center', padding: '32px 0 16px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '-0.01em' }}>Aswath AS · SRM Institute · "I got bored studying. So I analysed all 4 previous year papers."</p>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', margin: 0, letterSpacing: '-0.01em' }}>Aswath AS · SRM Institute · "I got bored studying. So I analysed all 4 previous year papers."</p>
         </div>
 
       </div>

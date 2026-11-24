@@ -1,12 +1,6 @@
 import type { Topic } from '../../data/subjects/types';
 import { renderDiagram } from '../../lib/diagram';
-import { mono, muted } from './styles';
-
-const PRIORITY_COLOR = {
-  must: '#0066cc',
-  should: '#6e6e73',
-  skip: '#dc2626',
-} as const;
+import { mono, muted, PRIORITY_COLOR, PRIORITY_SOFT, PRIORITY_LINE } from './styles';
 
 /**
  * One topic, taught: first principles, an analogy, a diagram and a worked example.
@@ -19,8 +13,8 @@ export function TopicNotes({ topic, accent }: { topic: Topic; accent: string }) 
     <div
       data-testid="topic-notes"
       style={{
-        border: '1px solid rgba(0,0,0,0.06)',
-        borderLeft: `3px solid ${accent}`,
+        border: '1px solid var(--border-subtle)',
+        borderTop: `2px solid ${accent}`,
         borderRadius: '0 12px 12px 0',
         padding: '14px 16px',
         display: 'flex',
@@ -37,8 +31,8 @@ export function TopicNotes({ topic, accent }: { topic: Topic; accent: string }) 
             style={{
               ...mono,
               color: PRIORITY_COLOR[topic.priority],
-              border: `1px solid ${PRIORITY_COLOR[topic.priority]}33`,
-              background: `${PRIORITY_COLOR[topic.priority]}12`,
+              border: `1px solid ${PRIORITY_LINE[topic.priority]}`,
+              background: PRIORITY_SOFT[topic.priority],
               borderRadius: '999px',
               padding: '3px 9px',
               fontWeight: 600,
@@ -63,27 +57,27 @@ export function TopicNotes({ topic, accent }: { topic: Topic; accent: string }) 
       )}
 
       {topic.analogy && (
-        <div style={{ background: '#fffbeb', borderLeft: '3px solid #f59e0b', borderRadius: '0 8px 8px 0', padding: '10px 12px' }}>
-          <div style={{ ...mono, color: '#b45309', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '3px' }}>
+        <div style={{ background: 'var(--callout-warn-bg)', border: '1px solid var(--callout-warn-line)', borderRadius: '8px', padding: '10px 12px' }}>
+          <div style={{ ...mono, color: 'var(--callout-warn-label)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '3px' }}>
             Remember it this way
           </div>
-          <div style={{ fontSize: '14px', color: '#78350f', lineHeight: 1.5 }}>{topic.analogy}</div>
+          <div style={{ fontSize: '14px', color: 'var(--callout-warn-ink)', lineHeight: 1.5 }}>{topic.analogy}</div>
         </div>
       )}
 
       {diagram && (
         <div
-          style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.06)', borderRadius: '10px', padding: '12px', overflowX: 'auto' }}
+          style={{ background: 'var(--bg-figure)', border: '1px solid var(--border-figure)', borderRadius: '10px', padding: '12px', overflowX: 'auto' }}
           dangerouslySetInnerHTML={{ __html: diagram }}
         />
       )}
 
       {topic.example && (
-        <div style={{ background: '#f0fdf4', borderLeft: '3px solid #16a34a', borderRadius: '0 8px 8px 0', padding: '10px 12px' }}>
-          <div style={{ ...mono, color: '#15803d', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '3px' }}>
+        <div style={{ background: 'var(--callout-ok-bg)', border: '1px solid var(--callout-ok-line)', borderRadius: '8px', padding: '10px 12px' }}>
+          <div style={{ ...mono, color: 'var(--callout-ok-label)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '3px' }}>
             Worked example
           </div>
-          <div style={{ fontSize: '14px', color: '#14532d', lineHeight: 1.55 }}>{topic.example}</div>
+          <div style={{ fontSize: '14px', color: 'var(--callout-ok-ink)', lineHeight: 1.55 }}>{topic.example}</div>
         </div>
       )}
 

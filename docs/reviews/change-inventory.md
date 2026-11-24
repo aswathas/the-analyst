@@ -134,3 +134,34 @@ first claim contains "of 75", and the prescribed textbook list.
 | `scripts/build-share-cards.mjs` | Footnote updated and enlarged to 21px | The old footnote described a question bank and was too small to read on a phone | card rasterised and inspected |
 | `docs/growth/kit.md` | Post copy, reel 4 and the footer line rewritten: no more "20 MCQs with answers", reel 4 is now a diagram reel | The copy advertised the old product | manual read |
 | `public/master-pdfs/*.pdf` | Rebuilt: 27 / 27 / 25 / 32 / 44 pages | The new teaching PDFs | `npm run pdf:build`; page counts read from `dist-pdf/manifest.json` |
+
+## Light mode rebuild, PDF versioning and contrast remediation (2026-11-24)
+
+| File | What | Why | Verified by |
+| --- | --- | --- | --- |
+| `src/theme.css` | **New.** The token layer: surfaces, ink, lines, controls, status, figure plate, callouts, stoic, hero, analysis surfaces, accent derivatives (`--accent-ink/-fill/-label/-soft/-line`), unit hues, priority tokens. Uses `light-dark()` with `color-scheme` switching | The old `THEME_VARS` injection mixed light values into dark chrome and 1,380 hard-coded literals ignored the theme entirely | `scripts/audit-contrast.mjs`: 0 failures on 12 routes × 2 themes |
+| `index.html` | Pre-paint theme bootstrap: reads `localStorage.theme`, sets `data-theme` and `color-scheme` on `<html>`, updates the `theme-color` meta | Avoids a flash of the wrong theme on load | Visual check in both themes |
+| `src/index.css` | Imports `./theme.css` before Tailwind; `body` uses `--bg-body`/`--text-primary`; adds `:focus-visible` outline and `::selection` colours | Single token source for the shell | Build passes; audit clean |
+| `src/App.tsx` | Deleted the `THEME_VARS` block and the injected `<style>`; the theme effect now writes `data-theme`, `color-scheme` and the `theme-color` meta | The injected style was the main cause of the broken light mode | Build passes; audit clean |
+| `src/App.css` | Deleted | Every rule in it was superseded by the token layer | Build passes |
+| `src/components/subject/styles.ts` | `accentScope()` helper; `PRIORITY_COLOR/SOFT/LINE` token maps; `unitColor()` | Per-subject accent must resolve on the element that uses it for `color-mix` to work | Subject pages audit clean in both themes |
+| `src/components/subject/SubjectAnalysis.tsx`, `SubjectMasterSheet.tsx` | Root carries `data-accent=""` + `accentScope(spec.accent, …)` | Same reason | Same |
+| `src/components/SubjectGrid.tsx` | Per-card `data-accent` scope; stat numbers and the Analysis button use `--accent-ink`/`--accent-fill`/`--accent-label`; 10px labels → 11px | Accent contrast and minimum label size | Home + subject pages audit clean |
+| `src/components/subject/UnitDonutGeneric.tsx` | SVG `stroke` moved from presentation attributes to `style` | SVG presentation attributes do not resolve `var()` | Subject pages audit clean |
+| `src/components/subject/CountdownChip.tsx` | Tone map is token-driven (`--prio-skip` / `--prio-must` / `--accent-ink`) | Chips were hard-coded | Subject pages audit clean |
+| `src/components/subject/TopicNotes.tsx` | Priority chip, callouts and the diagram plate use tokens; the 3px accent side-tab became a 2px top border | Contrast, plus the side-tab pattern ban | Subject pages audit clean |
+| `src/components/subject/AnalysisVerdict.tsx`, `AnswerPlaybook.tsx`, `BlueprintPanel.tsx`, `PdfDownload.tsx`, `SafeComboPanel.tsx`, `SemesterSwitcher.tsx`, `StudyPlanTable.tsx`, `UnitBreakdown.tsx` | Hard-coded colours replaced with the token layer | Same | Subject pages audit clean |
+| `src/components/Hero.tsx`, `StoicSection.tsx`, `PWAPrompt.tsx` | Hero, stoic and PWA surfaces use tokens; hero stays dark in both themes | Hero was the surface the owner wanted kept dark | Home audit clean both themes |
+| `src/components/DSAnalysisPage.tsx` | Probability chips, unit tabs, score column, rank circles and CTA buttons re-coloured for AA; the score column no longer uses a theme token (the chart card is hard-coded dark) | Legacy dark-island page, 61 light / 52 dark contrast failures | `/ds-analysis` now 0 failures in both themes |
+| `src/components/UnitDonut.tsx`, `PartBreakdown.tsx`, `Heatmap.tsx`, `PYQCards.tsx` | Muted inks raised to 0.55 alpha; unit/part colours lightened to AA-ink variants | Shared legacy components, 52 failures each | `/ds-analysis` 0 failures both themes |
+| `src/components/SEPMAnalysisPage.tsx`, `ADCAnalysisPage.tsx` | Active tab fills darkened to `#047857` / `#0066cc`; inactive tab ink lightened | White-on-`#2997ff` was 3.02:1 | `/sepm-analysis`, `/adc-analysis` 0 failures both themes |
+| `src/components/CDAnalysisPage.tsx`, `CDAnalysisMobile.tsx`, `CDMasterSheet.tsx`, `CryptoAnalysisPage.tsx`, `CryptoFlashCards.tsx` | "Not published yet" placeholder uses `var(--text-muted)` | `#6e6e73` was 3.9:1 on the dark body | `/cd-analysis`, `/crypto-flash` 0 failures both themes |
+| `src/components/CCBFAnalysisPage.tsx`, `CCBFMasterSheet.tsx`, `CryptoExamAnalysis.tsx`, `PYQMasterSheet.tsx` | Priority chips and section eyebrows lightened | Legacy dark-island contrast | `/ccbf-analysis`, `/pyq-master`, `/crypto-exam` 0 failures both themes |
+| `src/lib/master-pdf-template.ts` | Side tabs replaced with full borders and top rules | Side-tab pattern ban | Build passes |
+| `scripts/publish-pdfs.mjs` | Publishes `?v=<md5-8>` content-versioned URLs | Edge cache served the stale PDF | `tests/pdf.spec.ts` passes |
+| `src/data/subjects/21cse432t.ts`, `21cse433t.ts`, `21cse435t.ts`, `21cse436t.ts`, `21meo104t.ts` | PDF URLs carry the same `?v=` hash | Same | `tests/pdf.spec.ts` passes |
+| `tests/pdf.spec.ts` | Splits the query string off the filename before asserting | The `?v=` suffix broke the filename match | 25/25 Playwright tests pass |
+| `scripts/audit-contrast.mjs` | **New.** 12 routes × 2 themes; source-over alpha compositing; `color(srgb …)` channel scaling; large-text threshold | Eyeballing screenshots disagreed with the computed ratios | Reports 0 across all 24 combinations |
+| `docs/study/personal-ai-response-system.html` | **New.** Source of the study PDF: 13 sections, 4 hand-drawn SVG diagrams | "create a pdf for me to study" | Rendered and visually inspected |
+| `docs/study/personal-ai-response-system.pdf` | **New.** 14-page A4 study guide | Same | 14 pages confirmed via PyMuPDF; pages 1 and 4 visually inspected |
+| `scripts/render-study-pdf.mjs` | **New.** Playwright headless renderer for the study PDF | Keeps the PDF reproducible from source | `node scripts/render-study-pdf.mjs` produces the PDF |

@@ -49,9 +49,9 @@ export function AnswerPlaybook({ spec }: { spec: SubjectSpec }) {
             <span
               style={{
                 ...mono,
-                color: spec.accent,
-                border: `1px solid ${spec.accent}33`,
-                background: `${spec.accent}12`,
+                color: 'var(--accent-ink)',
+                border: '1px solid var(--accent-line)',
+                background: 'var(--accent-soft)',
                 borderRadius: '999px',
                 padding: '3px 0',
                 textAlign: 'center',
@@ -67,7 +67,7 @@ export function AnswerPlaybook({ spec }: { spec: SubjectSpec }) {
         ))}
       </div>
 
-      <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid rgba(0,0,0,0.07)' }}>
+      <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid var(--border-subtle)' }}>
         <div style={{ ...mono, fontWeight: 600, color: 'var(--text-primary, #1d1d1f)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
           The four-part answer
         </div>

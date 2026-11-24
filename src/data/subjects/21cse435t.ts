@@ -1232,9 +1232,10 @@ export const SMART_CONTRACTS_21CSE435T: SubjectSpec = {
     { label: 'Singhal, Dhameja, Panda, Beginning Blockchain (Apress, 2018)', note: 'Unit 3-4 Ethereum development' },
     { label: 'Albert Szmigielski, Bitcoin Essentials (2016)', note: 'Unit 4 mining background' },
     { label: 'Local course deck: SmartContract-A-Promise-That-Keeps-Itself.pdf', note: 'C:/Users/ADMIN/OneDrive/SmartContract-21CSE435T/' },
-  ],pdf: {
-    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE435T-Smart-Contracts-Master-PDF.pdf',
-    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE435T-Smart-Contracts-Master-PDF.pdf',
+  ],
+pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE435T-Smart-Contracts-Master-PDF.pdf?v=b0eb0c88',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE435T-Smart-Contracts-Master-PDF.pdf?v=b0eb0c88',
     driveUrl: 'https://drive.google.com/file/d/15AHQGfFevQtPV_dgFcFHdwSu4cAA4Q4k/view',
     pages: 27,
   },

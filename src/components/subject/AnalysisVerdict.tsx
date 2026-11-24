@@ -19,7 +19,7 @@ export function AnalysisVerdict({ spec }: { spec: SubjectSpec }) {
   const shouldHours = Math.round((shouldMinutes / 60) * 10) / 10;
 
   return (
-    <div style={{ ...card, borderTop: `3px solid ${spec.accent}` }}>
+    <div style={{ ...card, borderTop: '3px solid var(--accent-ink)' }}>
       <h3 style={sectionTitle}>The verdict</h3>
 
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -36,10 +36,10 @@ export function AnalysisVerdict({ spec }: { spec: SubjectSpec }) {
         </div>
 
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <Stat n={String(must.length)} label="Must learn" color={spec.accent} />
-          <Stat n={`${hours}h`} label="To clear the core" color="#dc2626" />
-          <Stat n={String(skip.length)} label="Safe to skip" color="#6e6e73" />
-          <Stat n={`${Math.round((totalMinutes / 60) * 10) / 10}h`} label="Full syllabus" color="#10b981" />
+          <Stat n={String(must.length)} label="Must learn" color="var(--accent-ink)" />
+          <Stat n={`${hours}h`} label="To clear the core" color="var(--prio-must)" />
+          <Stat n={String(skip.length)} label="Safe to skip" color="var(--prio-skip)" />
+          <Stat n={`${Math.round((totalMinutes / 60) * 10) / 10}h`} label="Full syllabus" color="var(--prio-should)" />
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export function AnalysisVerdict({ spec }: { spec: SubjectSpec }) {
 
 function Stat({ n, label, color }: { n: string; label: string; color: string }) {
   return (
-    <div style={{ border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '12px 16px', minWidth: '92px' }}>
+    <div style={{ border: '1px solid var(--border-card)', borderRadius: '14px', padding: '12px 16px', minWidth: '92px' }}>
       <div style={{ fontSize: '26px', fontWeight: 600, color, letterSpacing: '-0.03em', lineHeight: 1.1 }}>{n}</div>
       <div style={{ ...mono, color: muted, textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '3px' }}>{label}</div>
     </div>
@@ -84,7 +84,7 @@ function Stat({ n, label, color }: { n: string; label: string; color: string }) 
 
 function Plan({ title, lines }: { title: string; lines: string[] }) {
   return (
-    <div style={{ border: '1px solid rgba(0,0,0,0.07)', borderRadius: '14px', padding: '14px 16px', background: 'rgba(0,0,0,0.015)' }}>
+    <div style={{ border: '1px solid var(--border-subtle)', borderRadius: '14px', padding: '14px 16px', background: 'var(--bg-inset)' }}>
       <div style={{ ...mono, fontWeight: 600, color: 'var(--text-primary, #1d1d1f)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
         {title}
       </div>

@@ -44,7 +44,7 @@ export function StudyPlanTable({ spec }: { spec: SubjectSpec }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         {rows.map((row, i) => {
           const unitIndex = spec.units.findIndex((u) => u.unit === row.unit.unit);
-          const color = unitColor(unitIndex, spec.accent);
+          const color = unitColor(unitIndex);
           return (
             <div
               key={`${row.unit.unit}-${row.topic.name}`}
@@ -55,8 +55,8 @@ export function StudyPlanTable({ spec }: { spec: SubjectSpec }) {
                 alignItems: 'baseline',
                 padding: '8px 10px',
                 borderRadius: '10px',
-                background: i < mustCount ? 'rgba(220,38,38,0.045)' : 'transparent',
-                border: '1px solid rgba(0,0,0,0.05)',
+                background: i < mustCount ? 'var(--prio-must-soft)' : 'transparent',
+                border: '1px solid var(--border-subtle)',
               }}
             >
               <span style={{ ...mono, color: muted, textAlign: 'right' }}>{i + 1}</span>

@@ -70,7 +70,7 @@ export function Heatmap() {
                   transition={{ duration: 0.8, delay: 0.06 * i, ease: [0.16, 1, 0.3, 1] }}
                 />
               </div>
-              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', width: '70px', flexShrink: 0, textAlign: 'right' }}>
+              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', width: '70px', flexShrink: 0, textAlign: 'right' }}>
                 {topic.freq}
               </span>
             </div>

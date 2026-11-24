@@ -248,7 +248,7 @@ function SectionTitle({ label, title, desc }: { label: string; title: string; de
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: '6px',
         fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em',
-        textTransform: 'uppercase', color: '#2997ff',
+        textTransform: 'uppercase', color: '#60a5fa',
         marginBottom: '12px',
       }}>
         <Star size={11} strokeWidth={2} />
@@ -300,7 +300,7 @@ export function PYQMasterSheet({ onBack }: Props) {
         </button>
         <div style={{ height: '16px', width: '1px', background: 'rgba(255,255,255,0.1)' }} />
         <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>Data Science</span>
-        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
+        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.58)', fontFamily: 'JetBrains Mono, monospace' }}>21CSS303T</span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button
             onClick={() => window.open('/prepguide.pdf', '_blank')}
@@ -331,7 +331,7 @@ export function PYQMasterSheet({ onBack }: Props) {
           <div style={{
             display: 'flex', alignItems: 'center', gap: '8px',
             fontSize: '11px', fontWeight: 600, letterSpacing: '0.06em',
-            textTransform: 'uppercase', color: '#2997ff', marginBottom: '14px',
+            textTransform: 'uppercase', color: '#60a5fa', marginBottom: '14px',
           }}>
             <FileText size={12} strokeWidth={2} />
             21CSS303T · SRM Institute · Sixth Semester
@@ -363,7 +363,7 @@ export function PYQMasterSheet({ onBack }: Props) {
               }}>
                 <div>
                   <div style={{ fontSize: '20px', fontWeight: 600, color: c, letterSpacing: '-0.03em' }}>{n}</div>
-                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}>{l}</div>
+                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)', fontWeight: 400 }}>{l}</div>
                 </div>
               </div>
             ))}
@@ -402,7 +402,7 @@ export function PYQMasterSheet({ onBack }: Props) {
                     transition={{ duration: 0.4, delay: i * 0.06 }}
                     style={{ borderBottom: i < PAPER_SUMMARY.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
                   >
-                    <td style={{ padding: '16px 20px', fontFamily: 'JetBrains Mono, monospace', color: '#2997ff', fontSize: '12px', fontWeight: 600 }}>{row.code}</td>
+                    <td style={{ padding: '16px 20px', fontFamily: 'JetBrains Mono, monospace', color: '#60a5fa', fontSize: '12px', fontWeight: 600 }}>{row.code}</td>
                     <td style={{ padding: '16px 20px', color: '#ffffff', fontWeight: 500 }}>{row.exam}</td>
                     <td style={{ padding: '16px 20px', color: 'rgba(255,255,255,0.65)', fontSize: '12px' }}>{row.partA}</td>
                     <td style={{ padding: '16px 20px', color: 'rgba(255,255,255,0.65)', fontSize: '12px' }}>{row.partB}</td>
@@ -419,7 +419,7 @@ export function PYQMasterSheet({ onBack }: Props) {
             background: 'rgba(239,68,68,0.08)', borderRadius: '12px', padding: '18px 22px',
             border: '1px solid rgba(239,68,68,0.2)', display: 'flex', gap: '12px', alignItems: 'flex-start',
           }}>
-            <Star size={16} strokeWidth={1.5} style={{ color: '#ef4444', marginTop: '2px', flexShrink: 0 }} />
+            <Star size={16} strokeWidth={1.5} style={{ color: '#ff8a8a', marginTop: '2px', flexShrink: 0 }} />
             <div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>
                 CRITICAL: Dec 2025 added 8 ML MCQs (Q13-20) + 3 ML Part B questions + ML-based Part C
@@ -471,16 +471,16 @@ export function PYQMasterSheet({ onBack }: Props) {
                       <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>{topic}</span>
                       {isNew && (
                         <span style={{
-                          fontSize: '10px', fontWeight: 600, color: '#f59e0b',
+                          fontSize: '10px', fontWeight: 600, color: '#fbbf24',
                           background: 'rgba(245,158,11,0.15)', padding: '2px 8px', borderRadius: '100px',
                           border: '1px solid rgba(245,158,11,0.3)',
                         }}>NEW</span>
                       )}
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>
+                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.58)', background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: '100px' }}>
                         {questions.length} Qs
                       </span>
                     </div>
-                    {isOpen ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
+                    {isOpen ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} />}
                   </button>
 
                   <AnimatePresence initial={false}>
@@ -496,21 +496,21 @@ export function PYQMasterSheet({ onBack }: Props) {
                           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', minWidth: '480px' }}>
                             <thead>
                               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.35)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Q</th>
-                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.35)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Paper</th>
-                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.35)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Question</th>
-                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.35)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Answer</th>
+                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.58)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Q</th>
+                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.58)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Paper</th>
+                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.58)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Question</th>
+                                <th style={{ padding: '10px 8px', textAlign: 'left', color: 'rgba(255,255,255,0.58)', fontWeight: 600, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Answer</th>
                               </tr>
                             </thead>
                             <tbody>
                               {questions.map((q, qi) => (
                                 <tr key={qi} style={{ borderBottom: qi < questions.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
-                                  <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.35)', fontFamily: 'JetBrains Mono, monospace', fontSize: '11px' }}>{qi + 1}</td>
+                                  <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.58)', fontFamily: 'JetBrains Mono, monospace', fontSize: '11px' }}>{qi + 1}</td>
                                   <td style={{ padding: '10px 8px' }}>
-                                    <span style={{ fontSize: '10px', fontWeight: 600, color: '#2997ff', background: 'rgba(41,151,255,0.12)', padding: '2px 6px', borderRadius: '100px' }}>{q.paper}</span>
+                                    <span style={{ fontSize: '10px', fontWeight: 600, color: '#60a5fa', background: 'rgba(41,151,255,0.12)', padding: '2px 6px', borderRadius: '100px' }}>{q.paper}</span>
                                   </td>
                                   <td style={{ padding: '10px 8px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.4 }}>{q.q}</td>
-                                  <td style={{ padding: '10px 8px', fontFamily: 'JetBrains Mono, monospace', color: '#30d158', fontSize: '11px', fontWeight: 500 }}>{q.answer}</td>
+                                  <td style={{ padding: '10px 8px', fontFamily: 'JetBrains Mono, monospace', color: '#4ade80', fontSize: '11px', fontWeight: 500 }}>{q.answer}</td>
                                 </tr>
                               ))}
                             </tbody>
@@ -564,19 +564,19 @@ export function PYQMasterSheet({ onBack }: Props) {
                       width: '28px', height: '28px', borderRadius: '8px',
                       background: 'rgba(41,151,255,0.12)', border: '1px solid rgba(41,151,255,0.25)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '12px', fontWeight: 600, color: '#2997ff', flexShrink: 0,
+                      fontSize: '12px', fontWeight: 600, color: '#60a5fa', flexShrink: 0,
                     }}>{theme.theme}</div>
                     <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', flex: 1 }}>{theme.name}</span>
-                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '100px' }}>
+                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.58)', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '100px' }}>
                       {theme.questions.length} Qs
                     </span>
-                    {isOpen ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
+                    {isOpen ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} />}
                   </button>
 
                   {theme.highlight && (
                     <div style={{ padding: '0 20px 12px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                       <div style={{
-                        fontSize: '12px', color: '#ff9f0a', background: 'rgba(255,159,10,0.1)',
+                        fontSize: '12px', color: '#fbbf24', background: 'rgba(255,159,10,0.1)',
                         borderRadius: '8px', padding: '8px 12px', border: '1px solid rgba(255,159,10,0.2)',
                         marginTop: '10px',
                       }}>
@@ -600,8 +600,8 @@ export function PYQMasterSheet({ onBack }: Props) {
                               display: 'flex', gap: '12px', alignItems: 'flex-start',
                               background: 'rgba(255,255,255,0.02)', borderRadius: '8px', padding: '12px 14px',
                             }}>
-                              <span style={{ fontSize: '10px', fontWeight: 600, color: '#2997ff', background: 'rgba(41,151,255,0.1)', padding: '2px 8px', borderRadius: '100px', flexShrink: 0, marginTop: '1px' }}>{q.paper}</span>
-                              <span style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.4)', fontFamily: 'JetBrains Mono, monospace', flexShrink: 0 }}>{q.qNo}</span>
+                              <span style={{ fontSize: '10px', fontWeight: 600, color: '#60a5fa', background: 'rgba(41,151,255,0.1)', padding: '2px 8px', borderRadius: '100px', flexShrink: 0, marginTop: '1px' }}>{q.paper}</span>
+                              <span style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255,255,255,0.62)', fontFamily: 'JetBrains Mono, monospace', flexShrink: 0 }}>{q.qNo}</span>
                               <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>{q.question}</span>
                             </div>
                           ))}
@@ -634,7 +634,7 @@ export function PYQMasterSheet({ onBack }: Props) {
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                   <th style={{ padding: '14px 20px', textAlign: 'left', color: 'rgba(255,255,255,0.5)', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Paper</th>
-                  <th style={{ padding: '14px 20px', textAlign: 'left', color: '#ef4444', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Q27 (Wrangling)</th>
+                  <th style={{ padding: '14px 20px', textAlign: 'left', color: '#ff8a8a', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Q27 (Wrangling)</th>
                   <th style={{ padding: '14px 20px', textAlign: 'left', color: '#bf5af2', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Q28 (Alternative)</th>
                 </tr>
               </thead>
@@ -648,7 +648,7 @@ export function PYQMasterSheet({ onBack }: Props) {
                     transition={{ duration: 0.4, delay: i * 0.06 }}
                     style={{ borderBottom: i < PART_C_DATA.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
                   >
-                    <td style={{ padding: '18px 20px', fontWeight: 600, color: '#2997ff', fontSize: '12px', fontFamily: 'JetBrains Mono, monospace' }}>{row.paper}</td>
+                    <td style={{ padding: '18px 20px', fontWeight: 600, color: '#60a5fa', fontSize: '12px', fontFamily: 'JetBrains Mono, monospace' }}>{row.paper}</td>
                     <td style={{ padding: '18px 20px', color: 'rgba(255,255,255,0.75)', fontSize: '13px', lineHeight: 1.5 }}>{row.q27}</td>
                     <td style={{ padding: '18px 20px', color: 'rgba(255,255,255,0.55)', fontSize: '13px', lineHeight: 1.5 }}>{row.q28}</td>
                   </motion.tr>
@@ -662,7 +662,7 @@ export function PYQMasterSheet({ onBack }: Props) {
             background: 'rgba(48,209,88,0.08)', borderRadius: '12px', padding: '16px 20px',
             border: '1px solid rgba(48,209,88,0.2)', display: 'flex', gap: '10px', alignItems: 'flex-start',
           }}>
-            <Target size={15} strokeWidth={1.5} style={{ color: '#30d158', marginTop: '2px', flexShrink: 0 }} />
+            <Target size={15} strokeWidth={1.5} style={{ color: '#4ade80', marginTop: '2px', flexShrink: 0 }} />
             <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.55 }}>
               DATA WRANGLING appears in Part C of ALL 4 papers in some form. This is your guaranteed 15 marks.
             </div>
@@ -688,7 +688,9 @@ export function PYQMasterSheet({ onBack }: Props) {
             <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: '14px', letterSpacing: '-0.01em' }}>MCQ Topic Frequency</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {PATTERN_ANALYSIS.mcqFrequency.map((row, i) => {
-                const priorityColor = row.priority.includes('MUST') ? '#ef4444' : row.priority.includes('HIGH') ? '#f59e0b' : row.priority.includes('NEW') ? '#bf5af2' : '#6b7280';
+                // The chip text sits on a wash of its own hue, so the ink is the
+                // light variant: the raw hue on its own wash lands near 4:1.
+                const priorityColor = row.priority.includes('MUST') ? '#ff8a8a' : row.priority.includes('HIGH') ? '#fbbf24' : row.priority.includes('NEW') ? '#d8b4fe' : '#a1a1a6';
                 return (
                   <div key={i} style={{
                     display: 'flex', alignItems: 'center', gap: '14px',
@@ -697,7 +699,7 @@ export function PYQMasterSheet({ onBack }: Props) {
                   }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff', marginBottom: '2px' }}>{row.topic}</div>
-                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>{row.papers}/4 papers</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)' }}>{row.papers}/4 papers</div>
                     </div>
                     <span style={{
                       fontSize: '10px', fontWeight: 600, color: priorityColor,
@@ -724,7 +726,7 @@ export function PYQMasterSheet({ onBack }: Props) {
                     {row.safe ? 'Safe' : 'Risky'}
                   </span>
                   <span style={{ fontSize: '13px', color: '#ffffff', flex: 1 }}>{row.theme}</span>
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', fontFamily: 'JetBrains Mono, monospace' }}>{row.frequency}</span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.66)', fontFamily: 'JetBrains Mono, monospace' }}>{row.frequency}</span>
                 </div>
               ))}
             </div>
@@ -744,12 +746,12 @@ export function PYQMasterSheet({ onBack }: Props) {
                     width: '26px', height: '26px', borderRadius: '50%',
                     background: 'rgba(41,151,255,0.15)', border: '1px solid rgba(41,151,255,0.3)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '12px', fontWeight: 600, color: '#2997ff', flexShrink: 0,
+                    fontSize: '12px', fontWeight: 600, color: '#60a5fa', flexShrink: 0,
                   }}>{i + 1}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>{r.q}</div>
                     <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{r.reason}</div>
-                    <div style={{ marginTop: '8px', fontSize: '11px', color: '#2997ff', fontFamily: 'JetBrains Mono, monospace' }}>{r.questions}</div>
+                    <div style={{ marginTop: '8px', fontSize: '11px', color: '#60a5fa', fontFamily: 'JetBrains Mono, monospace' }}>{r.questions}</div>
                   </div>
                 </div>
               ))}
@@ -781,9 +783,9 @@ export function PYQMasterSheet({ onBack }: Props) {
                   background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
                 }}
               >
-                <Code2 size={14} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
+                <Code2 size={14} strokeWidth={1.5} style={{ color: '#60a5fa', flexShrink: 0 }} />
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', flex: 1 }}>Wrangling — Standard Answer Structure</span>
-                {showTemplate === 'wrangling' ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
+                {showTemplate === 'wrangling' ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} />}
               </button>
               <AnimatePresence initial={false}>
                 {showTemplate === 'wrangling' && (
@@ -815,7 +817,7 @@ export function PYQMasterSheet({ onBack }: Props) {
               >
                 <Code2 size={14} strokeWidth={1.5} style={{ color: '#bf5af2', flexShrink: 0 }} />
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', flex: 1 }}>3D Surface Plot Template (May 2025 Part C)</span>
-                {showTemplate === 'surface' ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.4)' }} />}
+                {showTemplate === 'surface' ? <ChevronUp size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} /> : <ChevronDown size={14} strokeWidth={2} style={{ color: 'rgba(255,255,255,0.62)' }} />}
               </button>
               <AnimatePresence initial={false}>
                 {showTemplate === 'surface' && (
@@ -857,13 +859,13 @@ export function PYQMasterSheet({ onBack }: Props) {
               {
                 title: 'Safest (all papers)',
                 desc: 'Data wrangling + cleaning: define wrangling → missing values → merge → string manipulation → transform → groupby. Always appears.',
-                color: '#ef4444',
+                color: '#ff8a8a',
                 icon: <Target size={16} strokeWidth={1.5} />,
               },
               {
                 title: 'If viz question appears',
                 desc: 'Choose it ONLY if you can write code for: 4 subplots + scatter + histogram + boxplot + plt.tight_layout() + customization.',
-                color: '#f59e0b',
+                color: '#fbbf24',
                 icon: <TrendingUp size={16} strokeWidth={1.5} />,
               },
               {
@@ -899,7 +901,7 @@ export function PYQMasterSheet({ onBack }: Props) {
             borderTop: '1px solid rgba(255,255,255,0.06)',
           }}
         >
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '-0.01em' }}>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', margin: 0, letterSpacing: '-0.01em' }}>
             Aswath AS · SRM Institute · "I got bored studying. So I analysed all 4 previous year papers."
           </p>
         </motion.div>

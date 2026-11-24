@@ -100,7 +100,7 @@ function MCQSection() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <Shield size={14} color="#7c3aed" />
         <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>UNIT WISE MCQ BANK</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>8 per unit = 40 total</span>
+        <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>8 per unit = 40 total</span>
       </div>
       <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
         {MCQ_TOPICS.map(mt => (
@@ -112,7 +112,7 @@ function MCQSection() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {MCQ_BANK[activeTopic]?.map((mcq, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }} style={{ background: 'rgba(255,255,255,0.02)', borderRadius: 8, padding: 14, border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="mono" style={{ fontSize: 9, color: '#555', marginBottom: 8 }}>{mcq.src}</div>
+            <div className="mono" style={{ fontSize: 9, color: '#8e8e93', marginBottom: 8 }}>{mcq.src}</div>
             <div style={{ fontSize: 13, color: '#e5e5e5', marginBottom: 12, lineHeight: 1.5 }}>{mcq.q}</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
               {mcq.opts.map((opt, oi) => (
@@ -122,7 +122,7 @@ function MCQSection() {
               ))}
             </div>
             <div style={{ marginTop: 10, padding: '8px 10px', background: 'rgba(255,255,255,0.02)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ fontSize: 11, color: '#666' }}>{mcq.ex}</span>
+              <span style={{ fontSize: 11, color: '#8e8e93' }}>{mcq.ex}</span>
             </div>
           </motion.div>
         ))}
@@ -151,7 +151,7 @@ function PartBSection() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <FileText size={14} color="#f59e0b" />
         <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>PART B — 8 MARK QUESTIONS</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>9 questions</span>
+        <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>9 questions</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {PART_B_8.map((q, i) => (
@@ -159,8 +159,8 @@ function PartBSection() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 12 }}>
               <div style={{ fontSize: 13, color: '#ddd', lineHeight: 1.6, marginBottom: 8 }}>{q.question}</div>
               <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ fontSize: 11, color: '#f59e0b', marginBottom: 8, fontWeight: 600 }}>KEY POINTS</div>
-                {q.keyPoints.map((kp, ki) => <div key={ki} style={{ display: 'flex', gap: 8, marginBottom: 6 }}><span style={{ color: '#555', fontSize: 10, fontFamily: "'JetBrains Mono', monospace", minWidth: 16 }}>{ki + 1}.</span><span style={{ fontSize: 12, color: '#bbb', lineHeight: 1.5 }}>{kp}</span></div>)}
+                <div style={{ fontSize: 11, color: '#fbbf24', marginBottom: 8, fontWeight: 600 }}>KEY POINTS</div>
+                {q.keyPoints.map((kp, ki) => <div key={ki} style={{ display: 'flex', gap: 8, marginBottom: 6 }}><span style={{ color: '#8e8e93', fontSize: 10, fontFamily: "'JetBrains Mono', monospace", minWidth: 16 }}>{ki + 1}.</span><span style={{ fontSize: 12, color: '#a1a1a6', lineHeight: 1.5 }}>{kp}</span></div>)}
               </div>
             </div>
           </AccordionItem>
@@ -173,8 +173,8 @@ function PartBSection() {
 // ─── PART C 15-MARK QUESTIONS ───────────────────────────────────────────────
 const PART_C = [
   { unit: 2, scenario: 'Fog Latency Numerical: A factory has 5000 IoT sensors, each generating 2KB data every second. Cloud processing adds 250ms round-trip latency. Fog node processes data locally adding 8ms. Calculate: (a) Total raw bandwidth to cloud (b) Bandwidth after fog at 100:1 compression (c) Latency saved per request.', probability: 85, color: '#06b6d4', solution: [{ step: 'Raw cloud bandwidth', value: '5000 × 2KB/s = 10,000 KB/s = 9.77 MB/s to cloud' }, { step: 'Fog compressed', value: '10,000 KB/s ÷ 100 = 100 KB/s after 100:1 aggregation' }, { step: 'Bandwidth saved', value: '9.77 MB/s - 0.1 MB/s = 9.67 MB/s ≈ 99% reduction' }, { step: 'Latency saved', value: '250ms - 8ms = 242ms saved (96.8% improvement)' }, { step: 'Cost impact', value: '99% bandwidth reduction = proportionally lower cloud egress costs' }] },
-  { unit: 3, scenario: 'Blockchain Hash Chain: Block 1 data="Vote:Alice", hash="0000a3...". Block 2 data="Vote:Bob", prev_hash="0000a3...", hash="0001b7...". Attacker changes Block 3 data from "Vote:Bob" to "Vote:Eve". Show how hash linking makes tampering detectable.', probability: 75, color: '#f59e0b', solution: [{ step: 'Block 3 tampered', value: 'Data changes "Vote:Bob" → "Vote:Eve" — hash becomes completely different' }, { step: 'Hash mismatch', value: 'Original Block 3 hash = "0001b7..." — New hash = "x9q2..." (avalanche effect)' }, { step: 'Chain broken', value: 'Block 4\'s "prev_hash" (0001b7...) no longer matches tampered Block 3 hash' }, { step: 'Detection', value: 'All downstream blocks invalid — re-mining entire chain required (infeasible)' }, { step: 'Immutability proven', value: 'Tiny data change → completely different hash → chain breakage easily detected' }] },
-  { unit: 5, scenario: 'DApp Design: Design a blockchain voting DApp. (a) User registers with verified identity — smart contract records eligibility. (b) User casts vote — smart contract enforces one-person-one-vote. (c) Vote stored immutably on blockchain. (d) Results auto-calculated. Analyze: Why blockchain more transparent than e-voting? Layer 2 recommendation for 1M voters?', probability: 70, color: '#10b981', solution: [{ step: 'One-person-one-vote', value: 'Smart contract maps verified ID hash → unique voter token. Vote checks: has token voted? Yes → rejected, No → vote recorded, token marked voted.' }, { step: 'Transparency', value: 'Every vote on public blockchain — anyone can verify count, cannot modify past votes, real-time tallying' }, { step: 'Layer 2 for scale', value: 'Polygon PoS or Arbitrum for 1M voters — batch off-chain, commit final counts to Ethereum mainnet' }, { step: 'IPFS storage', value: 'Voter documents on IPFS — only content hash on-chain — preserves privacy + integrity' }, { step: 'Governance token', value: 'Platform can issue governance token for future referendum participation' }] },
+  { unit: 3, scenario: 'Blockchain Hash Chain: Block 1 data="Vote:Alice", hash="0000a3...". Block 2 data="Vote:Bob", prev_hash="0000a3...", hash="0001b7...". Attacker changes Block 3 data from "Vote:Bob" to "Vote:Eve". Show how hash linking makes tampering detectable.', probability: 75, color: '#fbbf24', solution: [{ step: 'Block 3 tampered', value: 'Data changes "Vote:Bob" → "Vote:Eve" — hash becomes completely different' }, { step: 'Hash mismatch', value: 'Original Block 3 hash = "0001b7..." — New hash = "x9q2..." (avalanche effect)' }, { step: 'Chain broken', value: 'Block 4\'s "prev_hash" (0001b7...) no longer matches tampered Block 3 hash' }, { step: 'Detection', value: 'All downstream blocks invalid — re-mining entire chain required (infeasible)' }, { step: 'Immutability proven', value: 'Tiny data change → completely different hash → chain breakage easily detected' }] },
+  { unit: 5, scenario: 'DApp Design: Design a blockchain voting DApp. (a) User registers with verified identity — smart contract records eligibility. (b) User casts vote — smart contract enforces one-person-one-vote. (c) Vote stored immutably on blockchain. (d) Results auto-calculated. Analyze: Why blockchain more transparent than e-voting? Layer 2 recommendation for 1M voters?', probability: 70, color: '#34d399', solution: [{ step: 'One-person-one-vote', value: 'Smart contract maps verified ID hash → unique voter token. Vote checks: has token voted? Yes → rejected, No → vote recorded, token marked voted.' }, { step: 'Transparency', value: 'Every vote on public blockchain — anyone can verify count, cannot modify past votes, real-time tallying' }, { step: 'Layer 2 for scale', value: 'Polygon PoS or Arbitrum for 1M voters — batch off-chain, commit final counts to Ethereum mainnet' }, { step: 'IPFS storage', value: 'Voter documents on IPFS — only content hash on-chain — preserves privacy + integrity' }, { step: 'Governance token', value: 'Platform can issue governance token for future referendum participation' }] },
 ];
 
 // ─── PART C SECTION ─────────────────────────────────────────────────────────
@@ -184,22 +184,22 @@ function PartCSection() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
         <CheckCircle2 size={14} color="#10b981" />
         <h3 style={{ fontSize: 13, fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>PART C — 15 MARK PREDICTIONS</h3>
-        <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>3 probable long-answer questions</span>
+        <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>3 probable long-answer questions</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {PART_C.map((q, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} style={{ borderLeft: `3px solid ${q.color}`, background: 'rgba(255,255,255,0.02)', borderRadius: 8, padding: 16 }}>
+          <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} style={{ border: '1px solid rgba(255,255,255,0.1)', borderTop: `2px solid ${q.color}`, background: 'rgba(255,255,255,0.04)', borderRadius: 8, padding: 16 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
               <div>
                 <div style={{ fontSize: 11, color: q.color, fontWeight: 700, marginBottom: 4 }}>{q.probability}% probable — Unit {q.unit}</div>
-                <div className="mono" style={{ fontSize: 10, color: '#555' }}>Part C Long Answer — 15 Marks</div>
+                <div className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>Part C Long Answer — 15 Marks</div>
               </div>
               <div style={{ padding: '4px 10px', borderRadius: 6, fontSize: 10, fontWeight: 600, background: `${q.color}15`, color: q.color, border: `1px solid ${q.color}30`, fontFamily: "'JetBrains Mono', monospace" }}>U{q.unit}</div>
             </div>
-            <div style={{ fontSize: 13, color: '#ccc', marginBottom: 14, lineHeight: 1.5 }}>{q.scenario}</div>
+            <div style={{ fontSize: 13, color: '#b9b9bd', marginBottom: 14, lineHeight: 1.5 }}>{q.scenario}</div>
             <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-              <div style={{ fontSize: 11, color: '#10b981', marginBottom: 8, fontWeight: 600 }}>STEP-BY-STEP SOLUTION</div>
-              {q.solution.map((s, si) => <div key={si} style={{ display: 'flex', gap: 10, marginBottom: 6 }}><span className="mono" style={{ fontSize: 10, color: '#555', minWidth: 16 }}>{si + 1}.</span><div>{s.step && <span style={{ fontSize: 11, color: '#999' }}>{s.step}: </span>}<span className="mono" style={{ fontSize: 11, color: '#10b981' }}>{s.value}</span></div></div>)}
+              <div style={{ fontSize: 11, color: '#34d399', marginBottom: 8, fontWeight: 600 }}>STEP-BY-STEP SOLUTION</div>
+              {q.solution.map((s, si) => <div key={si} style={{ display: 'flex', gap: 10, marginBottom: 6 }}><span className="mono" style={{ fontSize: 10, color: '#8e8e93', minWidth: 16 }}>{si + 1}.</span><div>{s.step && <span style={{ fontSize: 11, color: '#a1a1a6' }}>{s.step}: </span>}<span className="mono" style={{ fontSize: 11, color: '#34d399' }}>{s.value}</span></div></div>)}
             </div>
           </motion.div>
         ))}
@@ -223,19 +223,19 @@ export function CCBFMasterSheet({ onBack }: Props) {
               <ArrowLeft size={16} />
             </button>
             <div style={{ flex: 1 }}>
-              <div className="mono" style={{ fontSize: 10, color: '#7c3aed', letterSpacing: '0.12em', textTransform: 'uppercase' }}>21CCT301T</div>
+              <div className="mono" style={{ fontSize: 10, color: '#a78bfa', letterSpacing: '0.12em', textTransform: 'uppercase' }}>21CCT301T</div>
               <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', letterSpacing: '-0.02em' }}>CCBF — Master Sheet</div>
             </div>
-            <button onClick={() => navigate('/ccbf-analysis')} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: 'transparent', color: '#888', transition: 'all 0.15s' }}>Analysis</button>
+            <button onClick={() => navigate('/ccbf-analysis')} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: 'transparent', color: '#8e8e93', transition: 'all 0.15s' }}>Analysis</button>
           </div>
         </div>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(16px,4vw,48px) clamp(16px,4vw,48px) 80px' }}>
           <div style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.08) 100%)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, padding: '24px 28px', marginBottom: 32 }}>
-            <div className="mono" style={{ fontSize: 10, color: '#7c3aed', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>21CCT301T — COMPLETE STUDY PACKAGE</div>
+            <div className="mono" style={{ fontSize: 10, color: '#a78bfa', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>21CCT301T — COMPLETE STUDY PACKAGE</div>
             <h2 style={{ fontSize: 22, fontWeight: 700, color: '#fff', margin: '0 0 8px', letterSpacing: '-0.02em' }}>CCBF Master Sheet</h2>
-            <p style={{ fontSize: 13, color: '#888', margin: 0 }}>40 MCQs · 9 Part B 8-marks · 3 Part C 15-marks · 5 Units</p>
+            <p style={{ fontSize: 13, color: '#8e8e93', margin: 0 }}>40 MCQs · 9 Part B 8-marks · 3 Part C 15-marks · 5 Units</p>
             <div style={{ display: 'flex', gap: 12, marginTop: 14, flexWrap: 'wrap' }}>
-              {[{ n: '40', l: 'MCQs' }, { n: '9', l: '8-Marks' }, { n: '3', l: '15-Marks' }, { n: '75', l: 'Total' }].map(s => <div key={s.l} style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: '8px 14px', textAlign: 'center' }}><div className="mono" style={{ fontSize: 20, fontWeight: 700, color: '#7c3aed' }}>{s.n}</div><div style={{ fontSize: 10, color: '#555', textTransform: 'uppercase' }}>{s.l}</div></div>)}
+              {[{ n: '40', l: 'MCQs' }, { n: '9', l: '8-Marks' }, { n: '3', l: '15-Marks' }, { n: '75', l: 'Total' }].map(s => <div key={s.l} style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: '8px 14px', textAlign: 'center' }}><div className="mono" style={{ fontSize: 20, fontWeight: 700, color: '#a78bfa' }}>{s.n}</div><div style={{ fontSize: 10, color: '#8e8e93', textTransform: 'uppercase' }}>{s.l}</div></div>)}
             </div>
           </div>
           <MCQSection />

@@ -22,24 +22,24 @@ const STATS = { papers: 1, mcqs: 40, marks: 75, safeScore: '60+', partB: 9, part
 
 // ─── UNITS ─────────────────────────────────────────────────────────────────
 const UNITS = [
-  { unit: 1, name: 'Cloud Computing Intro', marks: 12, color: '#7c3aed', priority: 'MED' },
+  { unit: 1, name: 'Cloud Computing Intro', marks: 12, color: '#a78bfa', priority: 'MED' },
   { unit: 2, name: 'Fog Computing', marks: 15, color: '#06b6d4', priority: 'HIGH' },
-  { unit: 3, name: 'Blockchain Fundamentals', marks: 18, color: '#f59e0b', priority: 'HIGH' },
-  { unit: 4, name: 'Hyperledger & Enterprise BC', marks: 15, color: '#10b981', priority: 'MED' },
-  { unit: 5, name: 'Decentralized Applications', marks: 15, color: '#ef4444', priority: 'HIGH' },
+  { unit: 3, name: 'Blockchain Fundamentals', marks: 18, color: '#fbbf24', priority: 'HIGH' },
+  { unit: 4, name: 'Hyperledger & Enterprise BC', marks: 15, color: '#34d399', priority: 'MED' },
+  { unit: 5, name: 'Decentralized Applications', marks: 15, color: '#ff8a8a', priority: 'HIGH' },
 ];
 
 // ─── TOPICS ────────────────────────────────────────────────────────────────
 const TOPICS = [
   { topic: 'Fog Architecture & IoT', score: 95, papers: 1, color: '#06b6d4', unit: 2 },
-  { topic: 'Blockchain Hash & Immutability', score: 95, papers: 1, color: '#f59e0b', unit: 3 },
-  { topic: 'Consensus Mechanisms (PoW/PoS/PBFT)', score: 90, papers: 1, color: '#f59e0b', unit: 3 },
-  { topic: 'Hyperledger Fabric Architecture', score: 85, papers: 1, color: '#10b981', unit: 4 },
-  { topic: 'Smart Contracts & DApps', score: 90, papers: 1, color: '#ef4444', unit: 5 },
-  { topic: 'IaaS / PaaS / SaaS', score: 80, papers: 1, color: '#7c3aed', unit: 1 },
-  { topic: 'Cloud Deployment Models', score: 75, papers: 1, color: '#7c3aed', unit: 1 },
-  { topic: 'Cloud Data Protection (CIA)', score: 85, papers: 1, color: '#10b981', unit: 4 },
-  { topic: 'Scalability Trilemma & Layer 2', score: 80, papers: 1, color: '#ef4444', unit: 5 },
+  { topic: 'Blockchain Hash & Immutability', score: 95, papers: 1, color: '#fbbf24', unit: 3 },
+  { topic: 'Consensus Mechanisms (PoW/PoS/PBFT)', score: 90, papers: 1, color: '#fbbf24', unit: 3 },
+  { topic: 'Hyperledger Fabric Architecture', score: 85, papers: 1, color: '#34d399', unit: 4 },
+  { topic: 'Smart Contracts & DApps', score: 90, papers: 1, color: '#ff8a8a', unit: 5 },
+  { topic: 'IaaS / PaaS / SaaS', score: 80, papers: 1, color: '#a78bfa', unit: 1 },
+  { topic: 'Cloud Deployment Models', score: 75, papers: 1, color: '#a78bfa', unit: 1 },
+  { topic: 'Cloud Data Protection (CIA)', score: 85, papers: 1, color: '#34d399', unit: 4 },
+  { topic: 'Scalability Trilemma & Layer 2', score: 80, papers: 1, color: '#ff8a8a', unit: 5 },
 ];
 
 // ─── RADAR ─────────────────────────────────────────────────────────────────
@@ -474,27 +474,27 @@ function HeroSection() {
     <div style={{ position: 'relative', background: 'linear-gradient(180deg, #0f0f12 0%, #0a0a0a 100%)', padding: 'clamp(40px,8vw,80px) clamp(16px,4vw,48px)', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 2 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-          <div className="mono" style={{ fontSize: 10, color: '#7c3aed', letterSpacing: '0.1em' }}>██ EXAM COMMAND CENTER ██</div>
+          <div className="mono" style={{ fontSize: 10, color: '#a78bfa', letterSpacing: '0.1em' }}>██ EXAM COMMAND CENTER ██</div>
           <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, rgba(255,255,255,0.1), transparent)' }} />
-          <div className="mono" style={{ fontSize: 10, color: '#666', letterSpacing: '0.1em' }}>21CCT301T — CCBF</div>
+          <div className="mono" style={{ fontSize: 10, color: '#8e8e93', letterSpacing: '0.1em' }}>21CCT301T — CCBF</div>
         </div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ fontSize: 'clamp(24px,5vw,42px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.03em', marginBottom: 8, lineHeight: 1.1 }}>
-          Cloud Computing using<br /><span style={{ color: '#7c3aed' }}>Blockchain</span>
+          Cloud Computing using<br /><span style={{ color: '#a78bfa' }}>Blockchain</span>
         </motion.h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }} style={{ fontSize: 14, color: '#888', marginBottom: 32, maxWidth: 500 }}>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }} style={{ fontSize: 14, color: '#8e8e93', marginBottom: 32, maxWidth: 500 }}>
           Comprehensive PYQ analysis. 5 Units × 8 MCQs + Part B 8-marks + Part C 15-marks. All topics covered.
         </motion.p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 12, marginBottom: 24, maxWidth: 700 }}>
           {[{ n: STATS.papers, l: 'Papers Analyzed', c: '#7c3aed' }, { n: STATS.mcqs, l: 'MCQs Covered', c: '#06b6d4' }, { n: STATS.marks, l: 'Total Marks', c: '#f59e0b' }, { n: STATS.safeScore, l: 'Safe Score', c: '#10b981' }].map(({ n, l, c }, i) => (
-            <motion.div key={l} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i, duration: 0.4 }} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${c}25`, borderLeft: `2px solid ${c}`, borderRadius: 8, padding: '14px 16px' }}>
+            <motion.div key={l} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i, duration: 0.4 }} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${c}25`, borderTop: `2px solid ${c}`, borderRadius: 8, padding: '14px 16px' }}>
               <div className="mono" style={{ fontSize: 24, fontWeight: 700, color: c, letterSpacing: '-0.04em' }}>{n}</div>
-              <div style={{ fontSize: 11, color: '#888', marginTop: 2, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l}</div>
+              <div style={{ fontSize: 11, color: '#8e8e93', marginTop: 2, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l}</div>
             </motion.div>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {[{ icon: <CheckCircle2 size={11} />, text: '40 MCQs across 5 units', color: '#7c3aed' }, { icon: <CheckCircle2 size={11} />, text: '9 Part B 8-mark questions', color: '#f59e0b' }, { icon: <AlertTriangle size={11} />, text: 'U3 + U5 = 33 marks (highest)', color: '#ef4444' }].map(({ icon, text, color }) => (
-            <motion.div key={text} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 6, background: `${color}12`, border: `1px solid ${color}25`, fontSize: 12, color: '#ccc' }}>
+          {[{ icon: <CheckCircle2 size={11} />, text: '40 MCQs across 5 units', color: '#a78bfa' }, { icon: <CheckCircle2 size={11} />, text: '9 Part B 8-mark questions', color: '#fbbf24' }, { icon: <AlertTriangle size={11} />, text: 'U3 + U5 = 33 marks (highest)', color: '#ff8a8a' }].map(({ icon, text, color }) => (
+            <motion.div key={text} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 6, background: `${color}12`, border: `1px solid ${color}25`, fontSize: 12, color: '#b9b9bd' }}>
               <span style={{ color }}>{icon}</span>{text}
             </motion.div>
           ))}
@@ -508,9 +508,9 @@ function HeroSection() {
 function RadarChart() {
   const cx = 160, cy = 145, r = 100, axes = 5;
   const datasets = [
-    { label: 'MCQ Density', color: '#7c3aed', values: RADAR_DATA.map(d => d.mcq) },
+    { label: 'MCQ Density', color: '#a78bfa', values: RADAR_DATA.map(d => d.mcq) },
     { label: 'Part B Frequency', color: '#06b6d4', values: RADAR_DATA.map(d => d.partB) },
-    { label: 'Part C Presence', color: '#f59e0b', values: RADAR_DATA.map(d => d.partC) },
+    { label: 'Part C Presence', color: '#fbbf24', values: RADAR_DATA.map(d => d.partC) },
   ];
   const toXY = (i: number, val: number) => { const angle = (Math.PI * 2 * i) / axes - Math.PI / 2; const dist = (val / 100) * r; return { x: cx + dist * Math.cos(angle), y: cy + dist * Math.sin(angle) }; };
   const gridLevels = [20, 40, 60, 80, 100];
@@ -529,8 +529,8 @@ function RadarChart() {
           {datasets.map((ds, di) => ds.values.map((v, i) => { const { x, y } = toXY(i, v); return <circle key={`${di}-${i}`} cx={x} cy={y} r={3} fill={ds.color} />; }))}
         </svg>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {datasets.map(ds => <div key={ds.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}><div style={{ width: 24, height: 2, background: ds.color, borderRadius: 1 }} /><span style={{ fontSize: 11, color: '#888', fontFamily: "'JetBrains Mono', monospace" }}>{ds.label}</span></div>)}
-          <div style={{ marginTop: 8, fontSize: 10, color: '#555', lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace" }}>
+          {datasets.map(ds => <div key={ds.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}><div style={{ width: 24, height: 2, background: ds.color, borderRadius: 1 }} /><span style={{ fontSize: 11, color: '#8e8e93', fontFamily: "'JetBrains Mono', monospace" }}>{ds.label}</span></div>)}
+          <div style={{ marginTop: 8, fontSize: 10, color: '#8e8e93', lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace" }}>
             5 axes = 5 units<br />Outer ring = 100<br />U3 (BC) highest overall<br />U5 (DApps) strong Part B
           </div>
         </div>
@@ -551,8 +551,8 @@ function TopicFreqBars() {
         {TOPICS.map((t, i) => (
           <div key={t.topic}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-              <span style={{ fontSize: 11, color: '#ccc' }}>{t.topic}</span>
-              <span className="mono" style={{ fontSize: 10, color: '#666' }}>{t.score}% · U{t.unit}</span>
+              <span style={{ fontSize: 11, color: '#b9b9bd' }}>{t.topic}</span>
+              <span className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>{t.score}% · U{t.unit}</span>
             </div>
             <div style={{ height: 4, background: 'rgba(255,255,255,0.05)', borderRadius: 2, overflow: 'hidden' }}>
               <motion.div initial={{ width: 0 }} whileInView={{ width: `${t.score}%` }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }} style={{ height: '100%', background: t.color, borderRadius: 2, boxShadow: `0 0 6px ${t.color}40` }} />
@@ -577,14 +577,14 @@ function Heatmap() {
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 300 }}>
           <thead>
             <tr>
-              <th style={{ textAlign: 'left', fontSize: 10, color: '#555', fontWeight: 500, padding: '0 10px 8px 0', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>Topic</th>
-              {paperLabels.map(p => <th key={p} style={{ textAlign: 'center', fontSize: 10, color: '#555', fontWeight: 500, padding: '0 0 8px 8px', fontFamily: "'JetBrains Mono', monospace" }}>{p}</th>)}
+              <th style={{ textAlign: 'left', fontSize: 10, color: '#8e8e93', fontWeight: 500, padding: '0 10px 8px 0', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>Topic</th>
+              {paperLabels.map(p => <th key={p} style={{ textAlign: 'center', fontSize: 10, color: '#8e8e93', fontWeight: 500, padding: '0 0 8px 8px', fontFamily: "'JetBrains Mono', monospace" }}>{p}</th>)}
             </tr>
           </thead>
           <tbody>
             {TOPICS.map((t, i) => (
               <tr key={t.topic} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
-                <td style={{ fontSize: 11, color: '#bbb', padding: '6px 10px 6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)', whiteSpace: 'nowrap' }}>{t.topic}</td>
+                <td style={{ fontSize: 11, color: '#a1a1a6', padding: '6px 10px 6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)', whiteSpace: 'nowrap' }}>{t.topic}</td>
                 {HEATMAP[i].map((val, j) => (
                   <td key={j} style={{ textAlign: 'center', padding: '6px 0 6px 8px', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                     <div style={{ width: 20, height: 20, borderRadius: 4, background: val === 'Y' ? 'rgba(48,209,88,0.12)' : 'rgba(255,255,255,0.03)', border: `1px solid ${val === 'Y' ? 'rgba(48,209,88,0.25)' : 'rgba(255,255,255,0.05)'}`, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -615,14 +615,14 @@ function PYQCards() {
             <div className="card card-glow" style={{ padding: '16px 18px', cursor: 'pointer', transition: 'all 0.2s' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                 <div>
-                  <div className="mono" style={{ fontSize: 11, color: '#7c3aed', marginBottom: 2 }}>{p.code}</div>
-                  <div className="mono" style={{ fontSize: 10, color: '#555' }}>{p.date}</div>
+                  <div className="mono" style={{ fontSize: 11, color: '#a78bfa', marginBottom: 2 }}>{p.code}</div>
+                  <div className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>{p.date}</div>
                 </div>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 8px rgba(245,158,11,0.5)' }} />
               </div>
-              <div style={{ fontSize: 11, color: '#888', marginBottom: 8, lineHeight: 1.5 }}><Shield size={9} style={{ display: 'inline', marginRight: 4 }} />{p.highlight}</div>
+              <div style={{ fontSize: 11, color: '#8e8e93', marginBottom: 8, lineHeight: 1.5 }}><Shield size={9} style={{ display: 'inline', marginRight: 4 }} />{p.highlight}</div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {p.keyTopics.slice(0, 3).map(t => <span key={t} style={{ fontSize: 9, color: '#666', background: 'rgba(255,255,255,0.04)', padding: '2px 6px', borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>{t}</span>)}
+                {p.keyTopics.slice(0, 3).map(t => <span key={t} style={{ fontSize: 9, color: '#8e8e93', background: 'rgba(255,255,255,0.04)', padding: '2px 6px', borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>{t}</span>)}
               </div>
             </div>
           </motion.a>
@@ -657,12 +657,12 @@ function UnitGrid() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
         {UNITS.map((u, i) => (
-          <motion.div key={u.unit} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${u.color}20`, borderLeft: `3px solid ${u.color}`, borderRadius: 8, padding: '12px 14px' }}>
-            <div className="mono" style={{ fontSize: 10, color: '#555', marginBottom: 4 }}>UNIT {u.unit}</div>
+          <motion.div key={u.unit} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }} style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${u.color}20`, borderTop: `2px solid ${u.color}`, borderRadius: 8, padding: '12px 14px' }}>
+            <div className="mono" style={{ fontSize: 10, color: '#8e8e93', marginBottom: 4 }}>UNIT {u.unit}</div>
             <div style={{ fontSize: 13, fontWeight: 600, color: '#fff', marginBottom: 6 }}>{u.name}</div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span className="mono" style={{ fontSize: 18, fontWeight: 700, color: u.color }}>{u.marks}</span>
-              <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, background: u.priority === 'HIGH' ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.06)', color: u.priority === 'HIGH' ? '#ef4444' : '#888', border: `1px solid ${u.priority === 'HIGH' ? 'rgba(239,68,68,0.25)' : 'rgba(255,255,255,0.08)'}` }}>{u.priority}</span>
+              <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, background: u.priority === 'HIGH' ? 'rgba(255,138,138,0.15)' : 'rgba(255,255,255,0.06)', color: u.priority === 'HIGH' ? '#ff8a8a' : '#a1a1a6', border: `1px solid ${u.priority === 'HIGH' ? 'rgba(255,138,138,0.25)' : 'rgba(255,255,255,0.12)'}` }}>{u.priority}</span>
             </div>
           </motion.div>
         ))}
@@ -692,10 +692,10 @@ export function CCBFAnalysisPage({ onBack }: Props) {
               <ArrowLeft size={16} />
             </button>
             <div style={{ flex: 1 }}>
-              <div className="mono" style={{ fontSize: 10, color: '#7c3aed', letterSpacing: '0.12em', textTransform: 'uppercase' }}>21CCT301T</div>
+              <div className="mono" style={{ fontSize: 10, color: '#a78bfa', letterSpacing: '0.12em', textTransform: 'uppercase' }}>21CCT301T</div>
               <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', letterSpacing: '-0.02em' }}>Cloud Computing using Blockchain</div>
             </div>
-            <button onClick={() => navigate('/ccbf-master')} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: 'transparent', color: '#888', transition: 'all 0.15s' }}>Master Sheet</button>
+            <button onClick={() => navigate('/ccbf-master')} style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit', background: 'transparent', color: '#8e8e93', transition: 'all 0.15s' }}>Master Sheet</button>
           </div>
         </div>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(16px,4vw,48px) clamp(16px,4vw,48px) 80px' }}>

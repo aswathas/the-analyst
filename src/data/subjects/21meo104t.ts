@@ -2984,9 +2984,10 @@ export const TQM_21MEO104T: SubjectSpec = {
       label: 'Charles Ebeling, "A Textbook of Reliability and Maintenance Engineering" (UBSPD, 2017)',
       note: 'Unit 5 - maintainability, MDT, condition monitoring and maintenance economics',
     },
-  ],pdf: {
-    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21MEO104T-TQM-Reliability-Master-PDF.pdf',
-    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21MEO104T-TQM-Reliability-Master-PDF.pdf',
+  ],
+pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21MEO104T-TQM-Reliability-Master-PDF.pdf?v=65e684df',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21MEO104T-TQM-Reliability-Master-PDF.pdf?v=65e684df',
     driveUrl: 'https://drive.google.com/file/d/11AmSxX1sREyJSPuR81hA1d6Bdcp0Pg1Q/view',
     pages: 44,
   },

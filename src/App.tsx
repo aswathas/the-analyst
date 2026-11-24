@@ -76,51 +76,6 @@ const CURSOR_THEMES = [
   { name: 'Rose Quartz', color: '#fb7185', densityDissipation: 1.6, velocityDissipation: 1.1, pressure: 0.16, curl: 34, splatForce: 5800, colorUpdateSpeed: 5, rainbow: false },
 ];
 
-const THEME_VARS = {
-  dark: `:root {
-    --bg-body: #000; --bg-hero: #000; --bg-hero-nav: rgba(0,0,0,0.82); --bg-hero-dropdown: rgba(18,18,18,0.96);
-    --text-hero: #E1E0CC; --text-hero-muted: rgba(225,224,204,0.7); --text-hero-subtle: rgba(225,224,204,0.38);
-    --text-hero-tagline: rgba(225,224,204,0.55); --text-hero-btn-outline: rgba(225,224,204,0.85);
-    --border-hero: rgba(255,255,255,0.07); --border-hero-light: rgba(255,255,255,0.1); --border-hero-btn: rgba(255,255,255,0.25);
-    --btn-primary: #0066cc; --btn-primary-hover: #2997ff;
-    --bg-stoic: #1d1d1f; --text-stoic: #d4c4a8; --accent-stoic: #c9a96e; --accent-stoic-secondary: #8fb4d4;
-    --border-stoic-line: #6b5a3a; --border-stoic: rgba(107,90,58,0.4); --border-stoic-note: rgba(107,90,58,0.3);
-    --glow-stoic: rgba(201,169,110,0.08); --note-bg-stoic: rgba(201,169,110,0.05);
-    --divider-stoic: rgba(255,255,255,0.08);
-    --bg-grid: #f5f5f7; --bg-card: #ffffff; --text-primary: #1d1d1f; --text-secondary: #6e6e73;
-    --border-card: rgba(0,0,0,0.08); --stat-divider: rgba(0,0,0,0.06);
-    --cursor-color: #0066cc; --cursor-ring: rgba(0,102,204,0.5);
-    --btn-master-bg: rgba(255,255,255,0.08); --btn-master-border: rgba(255,255,255,0.15); --btn-master-text: #ffffff;
-    --dropdown-hover: rgba(255,255,255,0.08); --dropdown-text: rgba(255,255,255,0.85);
-    --status-bg: rgba(52,199,89,0.10); --status-border: rgba(52,199,89,0.2);
-    --analysis-bg: #0a0a0a; --analysis-card: #1c1c1e; --analysis-border: rgba(255,255,255,0.08);
-    --analysis-text: rgba(255,255,255,0.85); --analysis-muted: rgba(255,255,255,0.55);
-    --analysis-subtle: rgba(255,255,255,0.35); --analysis-hover: rgba(255,255,255,0.05);
-    --analysis-nav: rgba(0,0,0,0.9); --analysis-input: rgba(255,255,255,0.06);
-  }`,
-  light: `:root {
-    --bg-body: #f7f8fc; --bg-hero: #eaeaf0; --bg-hero-nav: rgba(255,255,255,0.88); --bg-hero-dropdown: rgba(255,255,255,0.97);
-    --text-hero: #1d1d1f; --text-hero-muted: #555; --text-hero-subtle: #888;
-    --text-hero-tagline: #444; --text-hero-btn-outline: #333;
-    --border-hero: rgba(0,0,0,0.08); --border-hero-light: rgba(0,0,0,0.1); --border-hero-btn: rgba(0,0,0,0.2);
-    --btn-primary: #0066cc; --btn-primary-hover: #2997ff;
-    --bg-stoic: #faf8f5; --text-stoic: #5a4a32; --accent-stoic: #8b6914; --accent-stoic-secondary: #2a6496;
-    --border-stoic-line: #c9b896; --border-stoic: rgba(107,90,58,0.2); --border-stoic-note: rgba(107,90,58,0.15);
-    --glow-stoic: rgba(139,105,20,0.06); --note-bg-stoic: rgba(139,105,20,0.04);
-    --divider-stoic: rgba(0,0,0,0.06);
-    --bg-grid: #f7f8fc; --bg-card: #ffffff; --text-primary: #1d1d1f; --text-secondary: #6e6e73;
-    --border-card: rgba(0,0,0,0.08); --stat-divider: rgba(0,0,0,0.06);
-    --cursor-color: #0066cc; --cursor-ring: rgba(0,102,204,0.5);
-    --btn-master-bg: rgba(0,0,0,0.04); --btn-master-border: rgba(0,0,0,0.12); --btn-master-text: #1d1d1f;
-    --dropdown-hover: rgba(0,0,0,0.04); --dropdown-text: rgba(0,0,0,0.85);
-    --status-bg: rgba(52,199,89,0.10); --status-border: rgba(52,199,89,0.2);
-    --analysis-bg: #f5f5f7; --analysis-card: #ffffff; --analysis-border: rgba(0,0,0,0.08);
-    --analysis-text: #1d1d1f; --analysis-muted: #555;
-    --analysis-subtle: #888; --analysis-hover: rgba(0,0,0,0.03);
-    --analysis-nav: rgba(255,255,255,0.88); --analysis-input: rgba(0,0,0,0.04);
-  }`,
-};
-
 function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, paletteOpen, setPaletteOpen, cursorOff, setCursorOff }: {
   isDark: boolean; setIsDark: (v: boolean) => void;
   themeIndex: number; setThemeIndex: (v: number) => void;
@@ -137,11 +92,11 @@ function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, palett
         style={{
           position: 'fixed', bottom: 24, right: 78, zIndex: 100,
           width: 38, height: 38, borderRadius: '50%', cursor: 'pointer',
-          background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)',
+          background: 'var(--btn-master-bg)',
           backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-          border: isDark ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(0,0,0,0.08)',
+          border: '1px solid var(--btn-master-border)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'all 0.2s ease', color: isDark ? '#E1E0CC' : '#1d1d1f',
+          transition: 'all 0.2s ease', color: 'var(--btn-master-text)',
           padding: 0,
         }}
       >
@@ -171,7 +126,7 @@ function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, palett
                 title={t.name}
                 style={{
                   width: 34, height: 34, borderRadius: '50%', cursor: 'pointer',
-                  border: isActive ? '2.5px solid #fff' : '2px solid rgba(255,255,255,0.15)',
+                  border: isActive ? '2.5px solid var(--text-primary)' : '2px solid var(--border-strong)',
                   background: t.color,
                   boxShadow: isActive ? `0 0 16px ${t.color}` : '0 2px 6px rgba(0,0,0,0.3)',
                   transition: 'all 0.2s ease',
@@ -202,16 +157,16 @@ function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, palett
             title="Turn off cursor effect"
             style={{
               width: 34, height: 34, borderRadius: '50%', cursor: 'pointer',
-              border: cursorOff ? '2.5px solid #fff' : '2px solid rgba(255,255,255,0.15)',
-              background: cursorOff ? '#333' : 'rgba(255,255,255,0.08)',
-              boxShadow: cursorOff ? '0 0 10px rgba(255,255,255,0.1)' : '0 2px 6px rgba(0,0,0,0.3)',
+              border: cursorOff ? '2.5px solid var(--text-primary)' : '2px solid var(--border-strong)',
+              background: cursorOff ? 'var(--bg-elevated)' : 'var(--btn-master-bg)',
+              boxShadow: cursorOff ? '0 0 10px var(--btn-master-border)' : '0 2px 6px rgba(0,0,0,0.3)',
               transition: 'all 0.2s ease',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               backdropFilter: 'blur(8px)',
             }}
           >
             <span style={{
-              fontSize: 14, fontWeight: 700, color: cursorOff ? '#888' : '#555',
+              fontSize: 14, fontWeight: 700, color: cursorOff ? 'var(--text-muted)' : 'var(--text-secondary)',
               fontFamily: "'JetBrains Mono', monospace", lineHeight: 1,
             }}>/</span>
           </button>
@@ -219,16 +174,16 @@ function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, palett
         {/* Main palette button */}
         <div style={{
           width: 46, height: 46, borderRadius: '50%', cursor: 'pointer',
-          background: cursorOff ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)',
+          background: cursorOff ? 'var(--btn-master-bg)' : 'var(--btn-master-bg)',
           backdropFilter: 'blur(12px)',
-          border: `1px solid ${cursorOff ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.12)'}`,
+          border: `1px solid ${cursorOff ? 'var(--border-card)' : 'var(--btn-master-border)'}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: cursorOff ? 'none' : `0 0 18px ${theme.color}30`,
           transition: 'all 0.2s ease',
           position: 'relative',
         }}>
           {cursorOff ? (
-            <span style={{ fontSize: 18, color: '#555', opacity: 0.5 }}>·</span>
+            <span style={{ fontSize: 18, color: 'var(--text-muted)', opacity: 0.5 }}>·</span>
           ) : (
             <img
               src="/palette-icon.png"
@@ -284,7 +239,12 @@ function App() {
   const [cursorOff, setCursorOff] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const theme = isDark ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+    const meta = document.getElementById('theme-color-meta');
+    if (meta) meta.setAttribute('content', isDark ? '#0a0a0a' : '#f7f8fc');
   }, [isDark]);
 
   return (
@@ -331,7 +291,6 @@ function AppShell({
       <Analytics />
       <Cursor />
       <PWAPrompt />
-      <style>{THEME_VARS[isDark ? 'dark' : 'light']}</style>
       {!cursorOff && showHomeCursor && (
         <SplashCursor
           key={themeIndex}
@@ -354,7 +313,7 @@ function AppShell({
         paletteOpen={paletteOpen} setPaletteOpen={setPaletteOpen}
         cursorOff={cursorOff} setCursorOff={setCursorOff}
       />
-      <Suspense fallback={<div style={{ minHeight: '100vh', background: isDark ? '#000' : '#f7f8fc' }} />}>
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg-body)' }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ds-analysis" element={<DSAnalysisPageWrapper />} />
@@ -603,15 +562,15 @@ function SubjectAnalysisWrapper() {
   if (!spec) {
     return (
       <div data-testid="subject-not-found" style={{ padding: '64px 24px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 8px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 8px' }}>
           Subject not found
         </h2>
-        <p style={{ color: '#6e6e73', margin: '0 0 20px' }}>
+        <p style={{ color: 'var(--text-secondary)', margin: '0 0 20px' }}>
           No subject with code <strong>{code}</strong> is published yet.
         </p>
         <button
           onClick={() => navigate('/')}
-          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid rgba(0,0,0,0.12)', background: 'none', cursor: 'pointer' }}
+          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid var(--border-strong)', background: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
         >
           Back to subjects
         </button>
@@ -640,12 +599,12 @@ function SubjectMasterWrapper() {
   if (!spec) {
     return (
       <div data-testid="subject-not-found" style={{ padding: '64px 24px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 8px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 8px' }}>
           Subject not found
         </h2>
         <button
           onClick={() => navigate('/')}
-          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid rgba(0,0,0,0.12)', background: 'none', cursor: 'pointer' }}
+          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid var(--border-strong)', background: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
         >
           Back to subjects
         </button>

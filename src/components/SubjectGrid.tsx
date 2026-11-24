@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { SemesterSwitcher } from './subject/SemesterSwitcher';
 import { CountdownChip } from './subject/CountdownChip';
 import { SEM7_SUBJECTS } from './subject/registry';
+import { accentScope } from './subject/styles';
 
 interface Subject {
   code: string;
@@ -94,29 +95,30 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
     return (
       <motion.div
         data-testid={`subject-card-${subject.code}`}
+        data-accent=""
         initial={{ opacity: 0, y: 22 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px' }}
         transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          background: '#ffffff',
+        style={accentScope(subject.color, {
+          background: 'var(--bg-card)',
           borderRadius: '18px',
-          border: '1px solid rgba(0,0,0,0.08)',
+          border: '1px solid var(--border-card)',
           overflow: 'hidden',
-        }}
+        })}
       >
-        <div style={{ height: '3px', background: subject.color }} />
-        <div style={{ padding: '24px', borderRadius: '12px', background: '#f5f5f7', border: '1px dashed rgba(0,0,0,0.10)', textAlign: 'center' }}>
+        <div style={{ height: '3px', background: 'var(--accent-ink)' }} />
+        <div style={{ padding: '24px', borderRadius: '12px', background: 'var(--bg-elevated)', border: '1px dashed var(--border-strong)', textAlign: 'center' }}>
           <div style={{
             width: '36px', height: '36px', borderRadius: '50%',
-            background: `${subject.color}14`, border: `1.5px solid ${subject.color}30`,
+            background: 'var(--accent-soft)', border: '1.5px solid var(--accent-line)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 10px',
           }}>
-            <BarChart2 size={14} strokeWidth={1.5} style={{ color: subject.color }} />
+            <BarChart2 size={14} strokeWidth={1.5} style={{ color: 'var(--accent-ink)' }} />
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.224px' }}>Analysis in progress</div>
-          <div style={{ fontSize: '12px', color: '#6e6e73', marginTop: '4px' }}>PYQs → Pattern → Guide</div>
+          <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.224px' }}>Analysis in progress</div>
+          <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>PYQs → Pattern → Guide</div>
         </div>
       </motion.div>
     );
@@ -125,20 +127,21 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
   return (
     <motion.div
       data-testid={`subject-card-${subject.code}`}
+      data-accent=""
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        background: '#ffffff',
+      style={accentScope(subject.color, {
+        background: 'var(--bg-card)',
         borderRadius: '18px',
-        border: '1px solid rgba(0,0,0,0.08)',
+        border: '1px solid var(--border-card)',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-      }}
+      })}
     >
-      <div style={{ height: '3px', background: subject.color, flexShrink: 0 }} />
+      <div style={{ height: '3px', background: 'var(--accent-ink)', flexShrink: 0 }} />
       <div style={{
         padding: '24px',
         display: 'flex',
@@ -149,14 +152,14 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px' }}>
           <div style={{ minWidth: 0 }}>
             <div style={{
-              fontSize: '10px', fontWeight: 600, letterSpacing: '0.09em',
-              textTransform: 'uppercase', color: '#6e6e73', marginBottom: '5px',
+              fontSize: '11px', fontWeight: 600, letterSpacing: '0.09em',
+              textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '5px',
               fontFamily: "'JetBrains Mono', monospace",
             }}>
               {subject.code}
             </div>
             <h3 style={{
-              fontSize: '17px', fontWeight: 600, color: '#1d1d1f',
+              fontSize: '17px', fontWeight: 600, color: 'var(--text-primary)',
               margin: 0, letterSpacing: '-0.374px', lineHeight: 1.24,
             }}>
               {subject.name}
@@ -164,9 +167,9 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
           </div>
           <div style={{
             display: 'flex', alignItems: 'center', gap: '4px',
-            fontSize: '11px', fontWeight: 600, color: '#34c759',
-            background: 'rgba(52,199,89,0.10)', padding: '4px 10px', borderRadius: '100px',
-            flexShrink: 0, border: '1px solid rgba(52,199,89,0.2)',
+            fontSize: '11px', fontWeight: 600, color: 'var(--status-ink)',
+            background: 'var(--status-bg)', padding: '4px 10px', borderRadius: '100px',
+            flexShrink: 0, border: '1px solid var(--status-border)',
           }}>
             <CheckCircle size={10} strokeWidth={2.5} />
             Complete
@@ -187,7 +190,7 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
           <>
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '1px', background: 'rgba(0,0,0,0.06)', borderRadius: '12px',
+              gap: '1px', background: 'var(--border-subtle)', borderRadius: '12px',
               overflow: 'hidden',
             }}>
               {[
@@ -196,9 +199,9 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
                 { n: subject.stats.marks, l: 'Marks' },
                 { n: subject.stats.hitRate, l: 'Q27' },
               ].map(({ n, l }) => (
-                <div key={l} style={{ background: '#ffffff', padding: '12px 8px', textAlign: 'center' }}>
-                  <div style={{ fontSize: '17px', fontWeight: 600, color: subject.color, letterSpacing: '-0.374px' }}>{n}</div>
-                  <div style={{ fontSize: '10px', color: '#6e6e73', fontWeight: 400, marginTop: '2px' }}>{l}</div>
+                <div key={l} style={{ background: 'var(--bg-card)', padding: '12px 8px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '17px', fontWeight: 600, color: 'var(--accent-ink)', letterSpacing: '-0.374px' }}>{n}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 400, marginTop: '2px' }}>{l}</div>
                 </div>
               ))}
             </div>
@@ -209,9 +212,9 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
                   <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '6px' }}>
                     <div style={{
                       width: '4px', height: '4px', borderRadius: '50%',
-                      background: subject.color, marginTop: '8px', flexShrink: 0,
+                      background: 'var(--accent-ink)', marginTop: '8px', flexShrink: 0,
                     }} />
-                    <span style={{ fontSize: '14px', color: '#6e6e73', lineHeight: 1.47, letterSpacing: '-0.224px' }}>{f}</span>
+                    <span style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.47, letterSpacing: '-0.224px' }}>{f}</span>
                   </div>
                 ))}
               </div>
@@ -224,7 +227,7 @@ function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number
                   flex: 1, display: 'inline-flex', alignItems: 'center',
                   justifyContent: 'center', gap: '6px',
                   padding: '11px 16px', borderRadius: '9999px',
-                  background: subject.color, color: '#ffffff',
+                  background: 'var(--accent-fill)', color: 'var(--accent-label)',
                   border: 'none', fontSize: '14px', fontWeight: 500,
                   letterSpacing: '-0.224px', cursor: 'pointer',
                   transition: 'opacity 0.15s',
@@ -281,7 +284,7 @@ export function SubjectGrid() {
 
   return (
     <section id="subjects" style={{
-      background: '#f5f5f7',
+      background: 'var(--bg-grid)',
       padding: 'clamp(56px, 8vw, 96px) clamp(16px, 5vw, 80px)',
     }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -294,18 +297,18 @@ export function SubjectGrid() {
         >
           <div style={{
             fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em',
-            textTransform: 'uppercase', color: '#6e6e73', marginBottom: '10px',
+            textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '10px',
           }}>
             {sem === 7 ? '5 Subjects · Semester 7' : '6 Subjects · Semester 6'} · SRM Institute
           </div>
           <h2 style={{
-            fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 600, color: '#1d1d1f',
+            fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 600, color: 'var(--text-primary)',
             letterSpacing: '-0.03em', lineHeight: 1.07, margin: '0 0 14px',
           }}>
             Every subject. Every pattern.
           </h2>
           <p style={{
-            fontSize: '17px', fontWeight: 400, lineHeight: 1.47, color: '#6e6e73',
+            fontSize: '17px', fontWeight: 400, lineHeight: 1.47, color: 'var(--text-secondary)',
             margin: '0 0 24px', letterSpacing: '-0.374px', maxWidth: '600px',
           }}>
             {sem === 7
