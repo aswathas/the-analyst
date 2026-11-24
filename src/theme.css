@@ -1,0 +1,193 @@
+/*
+ * Theme tokens. One source of truth for every surface.
+ *
+ * Mechanism: `light-dark()` resolves against the element's used color-scheme,
+ * which is inherited from :root. The app sets `data-theme` on <html>; that
+ * flips `color-scheme` here, and every token below re-resolves.
+ *
+ * The hero and the stoic band are deliberate dark islands in BOTH themes
+ * (cinematic video footage, editorial interlude). Their tokens are therefore
+ * theme-invariant and must not use light-dark().
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ── Surfaces ───────────────────────────────────────────────── */
+  --bg-body: light-dark(#f7f8fc, #0a0a0a);
+  --bg-grid: light-dark(#f2f2f7, #0a0a0a);
+  --bg-card: light-dark(#ffffff, #161618);
+  --bg-elevated: light-dark(#f5f5f7, #1c1c1e);
+  --bg-inset: light-dark(#fbfbfd, #202024);
+
+  /* ── Ink ────────────────────────────────────────────────────── */
+  --text-primary: light-dark(#1d1d1f, #f5f5f7);
+  --text-secondary: light-dark(#55555c, #a1a1a6);
+  --text-muted: light-dark(#6e6e73, #8e8e93);
+
+  /* ── Lines ───────────────────────────────────────────────────── */
+  --border-card: light-dark(rgba(0, 0, 0, 0.09), rgba(255, 255, 255, 0.12));
+  --border-subtle: light-dark(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.10));
+  --border-strong: light-dark(rgba(0, 0, 0, 0.16), rgba(255, 255, 255, 0.20));
+
+  /* ── Controls ────────────────────────────────────────────────── */
+  --btn-primary: #0066cc;
+  --btn-primary-hover: #0052a8;
+  --btn-primary-text: #ffffff;
+  --btn-master-bg: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.08));
+  --btn-master-border: light-dark(rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.15));
+  --btn-master-text: light-dark(#1d1d1f, #ffffff);
+  --focus-ring: light-dark(#0066cc, #2997ff);
+  --selection-bg: light-dark(#c7ddfb, #204a7a);
+  --selection-fg: light-dark(#0b2a4a, #eef4ff);
+
+  /* ── Status ──────────────────────────────────────────────────── */
+  --status-bg: light-dark(rgba(52, 199, 89, 0.10), rgba(52, 199, 89, 0.14));
+  --status-border: light-dark(rgba(52, 199, 89, 0.28), rgba(52, 199, 89, 0.34));
+  --status-ink: light-dark(#1a7f37, #4ade80);
+
+  /* ── Dropdown / palette ──────────────────────────────────────── */
+  --dropdown-hover: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
+  --dropdown-text: light-dark(rgba(0, 0, 0, 0.85), rgba(255, 255, 255, 0.85));
+
+  /* ── Cursor ──────────────────────────────────────────────────── */
+  --cursor-color: light-dark(#0066cc, #2997ff);
+  --cursor-ring: light-dark(rgba(0, 102, 204, 0.55), rgba(41, 151, 255, 0.6));
+
+  /* ── Figure plate: always light, so a diagram matches its PDF ── */
+  --bg-figure: #ffffff;
+  --border-figure: light-dark(rgba(0, 0, 0, 0.09), rgba(255, 255, 255, 0.14));
+
+  /* ── Callout plates ──────────────────────────────────────────── */
+  --callout-warn-bg: light-dark(#fffbeb, #2f2610);
+  --callout-warn-ink: light-dark(#78350f, #f5cf94);
+  --callout-warn-label: light-dark(#b45309, #f0b429);
+  --callout-ok-bg: light-dark(#f0fdf4, #0f2a20);
+  --callout-ok-ink: light-dark(#14532d, #a7f3d0);
+  --callout-ok-label: light-dark(#15803d, #4ade80);
+
+  /*
+   * Analysis surfaces. The legacy sem-6 analysis pages are deliberate dark
+   * islands in BOTH themes: their body copy and fills are authored for a
+   * charcoal page, so these tokens must not flip with the theme. A flipped
+   * token would put dark chrome under light text.
+   */
+  --analysis-bg: #0a0a0a;
+  --analysis-card: #1c1c1e;
+  --analysis-border: rgba(255, 255, 255, 0.12);
+  --analysis-text: rgba(255, 255, 255, 0.85);
+  --analysis-muted: rgba(255, 255, 255, 0.62);
+  --analysis-subtle: rgba(255, 255, 255, 0.5);
+  --analysis-hover: rgba(255, 255, 255, 0.05);
+  --analysis-nav: rgba(0, 0, 0, 0.9);
+  --analysis-input: rgba(255, 255, 255, 0.06);
+
+  /* ── Hero: dark in both themes (video footage is dark) ─────────── */
+  --bg-hero: #000000;
+  --bg-hero-nav: rgba(0, 0, 0, 0.82);
+  --bg-hero-dropdown: rgba(18, 18, 18, 0.96);
+  --text-hero: #e1e0cc;
+  --text-hero-muted: rgba(225, 224, 204, 0.72);
+  --text-hero-subtle: rgba(225, 224, 204, 0.58);
+  --text-hero-tagline: rgba(225, 224, 204, 0.66);
+  --text-hero-btn-outline: rgba(225, 224, 204, 0.85);
+  --border-hero: rgba(255, 255, 255, 0.07);
+  --border-hero-light: rgba(255, 255, 255, 0.1);
+  --border-hero-btn: rgba(255, 255, 255, 0.25);
+
+  /* ── Stoic band: warm paper in light, charcoal in dark ────────── */
+  --bg-stoic: light-dark(#faf8f5, #1d1d1f);
+  --text-stoic: light-dark(#5a4a32, #d4c4a8);
+  --text-stoic-muted: light-dark(#6b5a3a, #a89a80);
+  --accent-stoic: light-dark(#7f5f12, #c9a96e);
+  --accent-stoic-secondary: light-dark(#2a6496, #8fb4d4);
+  --border-stoic: light-dark(rgba(107, 90, 58, 0.25), rgba(107, 90, 58, 0.4));
+  --border-stoic-line: light-dark(#c9b896, #6b5a3a);
+  --border-stoic-note: light-dark(rgba(107, 90, 58, 0.32), rgba(107, 90, 58, 0.42));
+  --glow-stoic: light-dark(rgba(139, 105, 20, 0.06), rgba(201, 169, 110, 0.08));
+  --note-bg-stoic: light-dark(rgba(139, 105, 20, 0.09), rgba(201, 169, 110, 0.07));
+  --divider-stoic: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.08));
+  --text-stoic-latin: light-dark(#6b5a3a, #b9a173);
+  --text-stoic-note: light-dark(#5a4a32, #b9ab90);
+  --text-stoic-caption: light-dark(#7a6a52, #a89a80);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/*
+ * Subject accent. The accent arrives per-subject as `--accent`, set on the
+ * element that also carries `data-accent`. These derivatives are what
+ * components actually paint with.
+ *
+ *   --accent-ink    accent as TEXT on a card surface   (>= 4.5:1)
+ *   --accent-fill   accent as a solid fill
+ *   --accent-label  the label colour that sits on --accent-fill (>= 4.5:1)
+ *   --accent-soft   a 10% wash of the accent, for chip plates
+ *   --accent-line   a 30% hairline of the accent, for chip borders
+ *
+ * One recipe for the whole site: a hue is darkened for light surfaces and
+ * lightened for dark ones. 58% toward black clears 4.5:1 on white for every
+ * accent in the palette; 74% toward white clears it on #161618.
+ */
+[data-accent] {
+  --accent-ink: light-dark(
+    color-mix(in srgb, var(--accent) 58%, #000000),
+    color-mix(in srgb, var(--accent) 74%, #ffffff)
+  );
+  --accent-fill: light-dark(
+    color-mix(in srgb, var(--accent) 58%, #000000),
+    color-mix(in srgb, var(--accent) 74%, #ffffff)
+  );
+  --accent-label: light-dark(#ffffff, #1d1d1d);
+  --accent-soft: light-dark(
+    color-mix(in srgb, var(--accent) 7%, transparent),
+    color-mix(in srgb, var(--accent) 10%, transparent)
+  );
+  --accent-line: light-dark(
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    color-mix(in srgb, var(--accent) 36%, transparent)
+  );
+}
+
+/*
+ * Unit hues. Same recipe as the subject accent: darkened on light surfaces,
+ * lightened on dark ones. Unit 1 takes the subject accent instead, so the
+ * first unit always reads as the subject's own colour.
+ */
+:root {
+  --unit-1: light-dark(
+    color-mix(in srgb, #7c3aed 58%, #000000),
+    color-mix(in srgb, #7c3aed 74%, #ffffff)
+  );
+  --unit-2: light-dark(
+    color-mix(in srgb, #f59e0b 58%, #000000),
+    color-mix(in srgb, #f59e0b 74%, #ffffff)
+  );
+  --unit-3: light-dark(
+    color-mix(in srgb, #10b981 58%, #000000),
+    color-mix(in srgb, #10b981 74%, #ffffff)
+  );
+  --unit-4: light-dark(
+    color-mix(in srgb, #dc2626 58%, #000000),
+    color-mix(in srgb, #dc2626 74%, #ffffff)
+  );
+  --unit-5: light-dark(
+    color-mix(in srgb, #0066cc 58%, #000000),
+    color-mix(in srgb, #0066cc 74%, #ffffff)
+  );
+}
+
+/* Priority chips: must / should / skip. */
+:root {
+  --prio-must: light-dark(#801616, #e55e5e);
+  --prio-should: light-dark(#8e5c06, #f8b74a);
+  --prio-skip: light-dark(#404043, #949497);
+  --prio-must-soft: light-dark(rgba(220, 38, 38, 0.07), rgba(229, 94, 94, 0.1));
+  --prio-must-line: light-dark(rgba(220, 38, 38, 0.3), rgba(229, 94, 94, 0.36));
+  --prio-should-soft: light-dark(rgba(245, 158, 11, 0.08), rgba(248, 183, 74, 0.1));
+  --prio-should-line: light-dark(rgba(245, 158, 11, 0.3), rgba(248, 183, 74, 0.36));
+  --prio-skip-soft: light-dark(rgba(110, 110, 115, 0.08), rgba(148, 148, 151, 0.1));
+  --prio-skip-line: light-dark(rgba(110, 110, 115, 0.3), rgba(148, 148, 151, 0.36));
+}

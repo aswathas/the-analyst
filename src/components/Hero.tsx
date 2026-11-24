@@ -23,10 +23,10 @@ const dropdownStyle: React.CSSProperties = {
   top: 'calc(100% + 8px)',
   left: '50%',
   transform: 'translateX(-50%)',
-  background: 'rgba(18,18,18,0.96)',
+  background: 'var(--bg-hero-dropdown)',
   backdropFilter: 'saturate(180%) blur(24px)',
   WebkitBackdropFilter: 'saturate(180%) blur(24px)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  border: '1px solid var(--border-hero-light)',
   borderRadius: '14px',
   padding: '6px',
   minWidth: '180px',
@@ -44,7 +44,7 @@ const dropdownItemStyle: React.CSSProperties = {
   fontSize: '13px',
   fontWeight: 400,
   letterSpacing: '-0.01em',
-  color: 'rgba(255,255,255,0.85)',
+  color: 'var(--text-hero-btn-outline)',
   cursor: 'none',
   textDecoration: 'none',
   transition: 'background 0.15s',
@@ -82,7 +82,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
         height: '100svh',
         minHeight: '640px',
         overflow: 'hidden',
-        background: '#000',
+        background: 'var(--bg-hero)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
@@ -130,7 +130,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
           top: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          background: 'rgba(0,0,0,0.82)',
+          background: 'var(--bg-hero-nav)',
           backdropFilter: 'saturate(180%) blur(20px)',
           WebkitBackdropFilter: 'saturate(180%) blur(20px)',
           borderRadius: '0 0 20px 20px',
@@ -139,16 +139,16 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
           gap: 'clamp(12px, 3vw, 24px)',
           alignItems: 'center',
           zIndex: 20,
-          border: '1px solid rgba(255,255,255,0.07)',
+          border: '1px solid var(--border-hero)',
           borderTop: 'none',
           whiteSpace: 'nowrap',
         }}
       >
         <a
           href="#subjects"
-          style={{ color: 'rgba(225,224,204,0.7)', textDecoration: 'none', fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em', transition: 'color 0.2s', cursor: 'none' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#E1E0CC')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(225,224,204,0.7)')}
+          style={{ color: 'var(--text-hero-muted)', textDecoration: 'none', fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em', transition: 'color 0.2s', cursor: 'none' }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-hero)')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-hero-muted)')}
         >
           Subjects
         </a>
@@ -159,13 +159,13 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
             onClick={() => setOpenDropdown(openDropdown === 'analysis' ? null : 'analysis')}
             style={{
               display: 'flex', alignItems: 'center', gap: '4px',
-              color: openDropdown === 'analysis' ? '#E1E0CC' : 'rgba(225,224,204,0.7)',
+              color: openDropdown === 'analysis' ? 'var(--text-hero)' : 'var(--text-hero-muted)',
               background: 'none', border: 'none', padding: 0,
               fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em',
               cursor: 'none', transition: 'color 0.2s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#E1E0CC')}
-            onMouseLeave={e => { if (openDropdown !== 'analysis') e.currentTarget.style.color = 'rgba(225,224,204,0.7)'; }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-hero)')}
+            onMouseLeave={e => { if (openDropdown !== 'analysis') e.currentTarget.style.color = 'var(--text-hero-muted)'; }}
           >
             Analysis
             <motion.span animate={{ rotate: openDropdown === 'analysis' ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ display: 'flex' }}>
@@ -184,7 +184,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                 <button
                   onClick={() => { onViewAnalysis(); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--dropdown-hover)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                 >
                   <BarChart2 size={13} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
@@ -195,7 +195,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                     key={code}
                     onClick={() => { onOpenSubject?.(code); setOpenDropdown(null); }}
                     style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--dropdown-hover)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                   >
                     <BarChart2 size={13} strokeWidth={1.5} style={{ color, flexShrink: 0 }} />
@@ -213,13 +213,13 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
             onClick={() => setOpenDropdown(openDropdown === 'pdf' ? null : 'pdf')}
             style={{
               display: 'flex', alignItems: 'center', gap: '4px',
-              color: openDropdown === 'pdf' ? '#E1E0CC' : 'rgba(225,224,204,0.7)',
+              color: openDropdown === 'pdf' ? 'var(--text-hero)' : 'var(--text-hero-muted)',
               background: 'none', border: 'none', padding: 0,
               fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em',
               cursor: 'none', transition: 'color 0.2s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#E1E0CC')}
-            onMouseLeave={e => { if (openDropdown !== 'pdf') e.currentTarget.style.color = 'rgba(225,224,204,0.7)'; }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-hero)')}
+            onMouseLeave={e => { if (openDropdown !== 'pdf') e.currentTarget.style.color = 'var(--text-hero-muted)'; }}
           >
             PDF Guide
             <motion.span animate={{ rotate: openDropdown === 'pdf' ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ display: 'flex' }}>
@@ -238,7 +238,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                 <button
                   onClick={() => { window.open('/prepguide.pdf', '_blank'); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--dropdown-hover)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                 >
                   <BookOpen size={13} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
@@ -247,7 +247,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                 <button
                   onClick={() => { window.open('/mastersheet.pdf', '_blank'); setOpenDropdown(null); }}
                   style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--dropdown-hover)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                 >
                   <FileSpreadsheet size={13} strokeWidth={1.5} style={{ color: '#34c759', flexShrink: 0 }} />
@@ -260,9 +260,9 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
 
         <a
           href="#about"
-          style={{ color: 'rgba(225,224,204,0.7)', textDecoration: 'none', fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em', transition: 'color 0.2s', cursor: 'none' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#E1E0CC')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(225,224,204,0.7)')}
+          style={{ color: 'var(--text-hero-muted)', textDecoration: 'none', fontSize: '12px', fontWeight: 400, letterSpacing: '-0.01em', transition: 'color 0.2s', cursor: 'none' }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-hero)')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-hero-muted)')}
         >
           About
         </a>
@@ -289,12 +289,13 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               style={{
-                color: 'rgba(225,224,204,0.4)',
-                fontSize: '11px',
+                color: 'var(--text-hero-subtle)',
+                fontSize: '15px',
                 fontWeight: 400,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                marginBottom: '8px',
+                letterSpacing: '0.01em',
+                fontStyle: 'italic',
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                marginBottom: '10px',
               }}
             >
               Let our scars fall in love.
@@ -306,7 +307,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontSize: 'clamp(52px, 11vw, 148px)',
-                color: '#E1E0CC',
+                color: 'var(--text-hero)',
                 fontWeight: 600,
                 letterSpacing: '-0.07em',
                 lineHeight: 0.87,
@@ -322,7 +323,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
               style={{
-                color: 'rgba(225,224,204,0.38)',
+                color: 'var(--text-hero-muted)',
                 fontSize: '13px',
                 fontWeight: 400,
                 letterSpacing: '0.06em',
@@ -348,7 +349,7 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                color: 'rgba(225,224,204,0.55)',
+                color: 'var(--text-hero-tagline)',
                 fontSize: 'clamp(14px, 4vw, 17px)',
                 fontWeight: 400,
                 lineHeight: 1.47,
@@ -370,8 +371,8 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
               <button
                 onClick={onViewAnalysis}
                 style={{
-                  background: '#0066cc',
-                  color: '#ffffff',
+                  background: 'var(--btn-primary)',
+                  color: 'var(--btn-primary-text)',
                   border: 'none',
                   borderRadius: '9999px',
                   padding: '10px 22px',
@@ -382,16 +383,16 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                   transition: 'background 0.2s',
                   whiteSpace: 'nowrap',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#2997ff')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#0066cc')}
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--btn-primary-hover)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'var(--btn-primary)')}
               >
                 View Analysis
               </button>
               <a
                 href="#subjects"
                 style={{
-                  color: 'rgba(225,224,204,0.85)',
-                  border: '1px solid rgba(255,255,255,0.25)',
+                  color: 'var(--text-hero-btn-outline)',
+                  border: '1px solid var(--border-hero-btn)',
                   borderRadius: '9999px',
                   padding: '10px 22px',
                   fontSize: '14px',
@@ -402,8 +403,8 @@ export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
                   transition: 'border-color 0.2s, color 0.2s',
                   whiteSpace: 'nowrap',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.color = '#E1E0CC'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.color = 'rgba(225,224,204,0.85)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(225,224,204,0.5)'; e.currentTarget.style.color = 'var(--text-hero)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-hero-btn)'; e.currentTarget.style.color = 'var(--text-hero-btn-outline)'; }}
               >
                 Explore Subjects
               </a>

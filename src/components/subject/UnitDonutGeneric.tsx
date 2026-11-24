@@ -32,7 +32,7 @@ export function UnitDonutGeneric({ units, total = 75 }: { units: DonutUnit[]; to
     <div ref={ref} style={{ display: 'flex', alignItems: 'center', gap: '28px', flexWrap: 'wrap' }}>
       <div style={{ position: 'relative', flexShrink: 0 }}>
         <svg width="140" height="140" style={{ transform: 'rotate(-90deg)' }}>
-          <circle cx={CX} cy={CY} r={R} fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="14" />
+          <circle cx={CX} cy={CY} r={R} fill="none" style={{ stroke: 'var(--border-subtle)' }} strokeWidth="14" />
           {segments.map((seg, i) => (
             <motion.circle
               key={seg.unit}
@@ -40,7 +40,7 @@ export function UnitDonutGeneric({ units, total = 75 }: { units: DonutUnit[]; to
               cy={CY}
               r={R}
               fill="none"
-              stroke={seg.color}
+              style={{ stroke: seg.color }}
               strokeWidth="14"
               strokeDasharray={`${seg.dash} ${seg.gap}`}
               strokeDashoffset={-seg.offset}
@@ -53,7 +53,7 @@ export function UnitDonutGeneric({ units, total = 75 }: { units: DonutUnit[]; to
         </svg>
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <span style={{ fontSize: '22px', fontWeight: 600, color: 'var(--text-primary, #1d1d1f)', letterSpacing: '-0.03em' }}>{total}</span>
-          <span style={{ fontSize: '10px', color: 'var(--text-secondary, #6e6e73)', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
+          <span style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ export function UnitDonutGeneric({ units, total = 75 }: { units: DonutUnit[]; to
             style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
           >
             <div style={{ width: '10px', height: '10px', borderRadius: '3px', background: u.color, flexShrink: 0 }} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary, #1d1d1f)' }}>{u.label}</span>
+            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>{u.label}</span>
             <span style={{ fontSize: '13px', fontWeight: 600, color: u.color }}>{u.pct}%</span>
           </motion.div>
         ))}

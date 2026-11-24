@@ -2250,9 +2250,10 @@ export const BITCOIN_21CSE436T: SubjectSpec = {
       label: 'Bitcoin Essentials (2016)',
       note: 'Albert Szmigielski — the course text that maps directly onto Units 1 to 3: wallets, the network, mining hardware and economics.',
     },
-  ],pdf: {
-    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf',
-    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf',
+  ],
+pdf: {
+    siteUrl: 'https://sem6-prep-for-me.vercel.app/master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf?v=ecc0032a',
+    releaseUrl: 'https://github.com/aswathas/the-analyst/releases/download/sem7-master-pdfs/21CSE436T-Bitcoin-Master-PDF.pdf?v=ecc0032a',
     driveUrl: 'https://drive.google.com/file/d/14LH1RbvHQ5NPIT7r689sEatzF41mxpnz/view',
     pages: 32,
   },

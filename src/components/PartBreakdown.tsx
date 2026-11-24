@@ -8,7 +8,7 @@ const PARTS = [
     part: 'Part A',
     marks: '20 × 1 = 20',
     desc: 'Multiple Choice Questions — all compulsory',
-    bg: '#0066cc',
+    bg: '#60a5fa',
     items: [
       { icon: 'check', text: 'Data types: ndarray vs DataFrame (appears every paper)' },
       { icon: 'check', text: 'dropna() axis parameter (axis=0 is rows, axis=1 is columns)' },
@@ -27,7 +27,7 @@ const PARTS = [
     part: 'Part B',
     marks: '4 × 10 = 40',
     desc: 'Answer 4 out of 6 questions — strategic choice',
-    bg: '#7c3aed',
+    bg: '#a78bfa',
     items: [
       { icon: 'target', text: 'Q17/18: DataFrame creation + indexing (safe pick — always appears)' },
       { icon: 'target', text: 'Q19/20: Data cleaning pipeline (dropna + fillna + rename)' },
@@ -43,7 +43,7 @@ const PARTS = [
     part: 'Part C',
     marks: '1 × 15 = 15',
     desc: 'Compulsory OR question — one choice',
-    bg: '#dc2626',
+    bg: '#f87171',
     items: [
       { icon: 'target', text: 'Q27: Data Wrangling pipeline — 3/3 current papers (100% hit rate)' },
       { icon: 'target', text: 'Pattern: read CSV → clean → transform → groupby → visualize' },

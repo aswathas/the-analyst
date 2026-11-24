@@ -7,7 +7,7 @@ const QUOTES = [
     latin: null,
     author: 'Seneca',
     work: 'Naturales Quaestiones, VII',
-    accent: '#c9a96e',
+    accent: 'var(--accent-stoic)',
     small: true,
   },
   {
@@ -15,7 +15,7 @@ const QUOTES = [
     latin: 'Dum differtur vita transcurrit.',
     author: 'Seneca',
     work: 'Epistulae Morales, I',
-    accent: '#c9a96e',
+    accent: 'var(--accent-stoic)',
     small: false,
   },
   {
@@ -23,7 +23,7 @@ const QUOTES = [
     latin: 'Primum dic tibi ipse quis sis.',
     author: 'Epictetus',
     work: 'Discourses, III.23',
-    accent: '#8fb4d4',
+    accent: 'var(--accent-stoic-secondary)',
     small: false,
   },
 ];
@@ -34,19 +34,19 @@ function StoicMedallion() {
       <div style={{
         position: 'absolute', inset: '-12px',
         borderRadius: '50%',
-        border: '1px solid rgba(107,90,58,0.4)',
+        border: '1px solid var(--border-stoic)',
         pointerEvents: 'none',
       }} />
       <div style={{
         position: 'absolute', inset: '-6px',
         borderRadius: '50%',
-        border: '1px solid rgba(107,90,58,0.2)',
+        border: '1px solid var(--border-stoic-note)',
         pointerEvents: 'none',
       }} />
       <div style={{
         position: 'absolute', inset: 0,
         borderRadius: '50%',
-        boxShadow: '0 0 60px 10px rgba(201,169,110,0.08)',
+        boxShadow: '0 0 60px 10px var(--glow-stoic)',
         pointerEvents: 'none',
       }} />
       <img
@@ -58,16 +58,16 @@ function StoicMedallion() {
           borderRadius: '50%',
           display: 'block',
           filter: 'sepia(35%) brightness(0.82) contrast(1.1)',
-          border: '2px solid rgba(107,90,58,0.5)',
+          border: '2px solid var(--border-stoic)',
         }}
       />
       <div style={{
         position: 'absolute', bottom: '-32px', left: '50%',
         transform: 'translateX(-50%)',
         whiteSpace: 'nowrap',
-        fontSize: '9px', fontWeight: 400,
-        letterSpacing: '0.25em', textTransform: 'uppercase',
-        color: '#8a7450', fontFamily: 'Georgia, serif',
+        fontSize: '11px', fontWeight: 400,
+        letterSpacing: '0.14em', textTransform: 'uppercase',
+        color: 'var(--text-stoic-caption)', fontFamily: 'Georgia, serif',
       }}>
         SENECA · c. 4 BC–65 AD
       </div>
@@ -85,7 +85,7 @@ function DrawLine({ delay = 0 }: { delay?: number }) {
       transition={{ duration: prefersReducedMotion ? 0 : 1.0, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{
         height: '1px',
-        background: 'linear-gradient(to right, transparent, #6b5a3a, transparent)',
+        background: 'linear-gradient(to right, transparent, var(--border-stoic-line), transparent)',
         transformOrigin: 'left center',
         margin: '18px 0',
       }}
@@ -104,13 +104,13 @@ export function StoicSection() {
     <section
       ref={ref}
       style={{
-        background: '#1d1d1f',
+        background: 'var(--bg-stoic)',
         padding: 'clamp(64px, 10vw, 120px) clamp(16px, 6vw, 96px)',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'var(--divider-stoic)' }} />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div
@@ -134,7 +134,7 @@ export function StoicSection() {
               top: '50%', left: '50%',
               transform: 'translate(-50%, -50%)',
               width: '60%', height: '60%',
-              background: 'radial-gradient(ellipse, rgba(201,169,110,0.08) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse, var(--glow-stoic) 0%, transparent 70%)',
               pointerEvents: 'none',
             }} />
             <StoicMedallion />
@@ -153,8 +153,8 @@ export function StoicSection() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                   <div style={{ width: '20px', height: '1px', background: q.accent, opacity: 0.7 }} />
                   <span style={{
-                    fontSize: '10px', fontWeight: 400, letterSpacing: '0.2em',
-                    textTransform: 'uppercase', color: q.accent, opacity: 0.8,
+                    fontSize: '12px', fontWeight: 400, letterSpacing: '0.14em',
+                    textTransform: 'uppercase', color: q.accent,
                     fontFamily: 'Georgia, serif',
                   }}>
                     {q.author}
@@ -165,7 +165,7 @@ export function StoicSection() {
                   <p style={{
                     fontSize: q.small ? 'clamp(14px, 1.9vw, 18px)' : 'clamp(18px, 2.8vw, 28px)',
                     fontWeight: 300,
-                    color: '#d4c4a8',
+                    color: 'var(--text-stoic)',
                     lineHeight: q.small ? 1.7 : 1.35,
                     letterSpacing: q.small ? '0.005em' : '-0.01em',
                     margin: '0 0 10px',
@@ -179,8 +179,8 @@ export function StoicSection() {
                     <p style={{
                       fontSize: '12px',
                       fontWeight: 400,
-                      color: 'rgba(201,169,110,0.45)',
-                      letterSpacing: '0.06em',
+                      color: 'var(--text-stoic-latin)',
+                      letterSpacing: '0.02em',
                       margin: '0 0 8px',
                       fontFamily: 'Georgia, serif',
                       fontStyle: 'normal',
@@ -190,10 +190,10 @@ export function StoicSection() {
                   )}
 
                   <cite style={{
-                    fontSize: '10px',
+                    fontSize: '11px',
                     fontWeight: 400,
-                    color: 'rgba(138,116,80,0.6)',
-                    letterSpacing: '0.14em',
+                    color: 'var(--text-stoic-muted)',
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     fontStyle: 'normal',
                     fontFamily: 'Georgia, serif',
@@ -214,17 +214,17 @@ export function StoicSection() {
               style={{
                 marginTop: '36px',
                 padding: '16px 20px',
-                background: 'rgba(201,169,110,0.05)',
-                border: '1px solid rgba(107,90,58,0.3)',
+                background: 'var(--note-bg-stoic)',
+                border: '1px solid var(--border-stoic-note)',
                 borderRadius: '4px',
                 position: 'relative',
                 overflow: 'hidden',
               }}
             >
-              <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '2px', background: 'linear-gradient(to bottom, transparent, #c9a96e, transparent)' }} />
+              <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '2px', background: 'linear-gradient(to bottom, transparent, var(--accent-stoic), transparent)' }} />
               <p style={{
-                fontSize: '12px',
-                color: 'rgba(212,196,168,0.55)',
+                fontSize: '13px',
+                color: 'var(--text-stoic-note)',
                 lineHeight: 1.65,
                 margin: 0,
                 fontFamily: 'Georgia, serif',
@@ -232,7 +232,7 @@ export function StoicSection() {
                 letterSpacing: '0.01em',
               }}>
                 Time is the only resource that cannot be reclaimed.
-                You have <span style={{ color: '#c9a96e', fontStyle: 'normal' }}>one exam</span> — what you do with the hours before it
+                You have <span style={{ color: 'var(--accent-stoic)', fontStyle: 'normal' }}>one exam</span> — what you do with the hours before it
                 is the only variable still in your control.
               </p>
             </motion.div>
@@ -240,7 +240,7 @@ export function StoicSection() {
         </div>
       </div>
 
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'var(--divider-stoic)' }} />
     </section>
   );
 }

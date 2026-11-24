@@ -19,20 +19,20 @@ interface Props {
 /* ─── SYLLABUS UNITS ─────────────────────────────────────── */
 
 const UNITS = [
-  { unit: 1, name: 'Introduction to Cryptography', marks: 14, color: '#ef4444', icon: Lock, topics: ['Classic ciphers', 'Substitution & Transposition', 'Stream Cipher model', 'Block Cipher model', 'Confusion & Diffusion'] },
-  { unit: 2, name: 'Symmetric Key Ciphers', marks: 18, color: '#f59e0b', icon: Key, topics: ['DES & Feistel Network', '3DES & Double DES pitfalls', 'AES & SPN Architecture', 'RC4, RC5, Blowfish'] },
-  { unit: 3, name: 'Asymmetric Key Ciphers', marks: 20, color: '#30d158', icon: Shield, topics: ['RSA & Integer Factorization', 'Diffie-Hellman Key Exchange', 'ECC & ECDLP', 'ElGamal & DSA', 'Fiat-Shamir'] },
-  { unit: 4, name: 'Message Integrity & Hash', marks: 16, color: '#3b82f6', icon: Hash, topics: ['MAC & CBC-MAC', 'HMAC structure', 'SHA-1, SHA-2, SHA-3', 'MD4, MD5', 'Sponge Construction'] },
-  { unit: 5, name: 'Applications & Future', marks: 12, color: '#8b5cf6', icon: Atom, topics: ['TLS/SSL & Internet security', 'WPA3 & Wireless', '5G Mobile security', 'EMV & Payments', 'Quantum Computing', 'Post-Quantum Crypto'] },
+  { unit: 1, name: 'Introduction to Cryptography', marks: 14, color: '#ff8a8a', icon: Lock, topics: ['Classic ciphers', 'Substitution & Transposition', 'Stream Cipher model', 'Block Cipher model', 'Confusion & Diffusion'] },
+  { unit: 2, name: 'Symmetric Key Ciphers', marks: 18, color: '#fbbf24', icon: Key, topics: ['DES & Feistel Network', '3DES & Double DES pitfalls', 'AES & SPN Architecture', 'RC4, RC5, Blowfish'] },
+  { unit: 3, name: 'Asymmetric Key Ciphers', marks: 20, color: '#4ade80', icon: Shield, topics: ['RSA & Integer Factorization', 'Diffie-Hellman Key Exchange', 'ECC & ECDLP', 'ElGamal & DSA', 'Fiat-Shamir'] },
+  { unit: 4, name: 'Message Integrity & Hash', marks: 16, color: '#60a5fa', icon: Hash, topics: ['MAC & CBC-MAC', 'HMAC structure', 'SHA-1, SHA-2, SHA-3', 'MD4, MD5', 'Sponge Construction'] },
+  { unit: 5, name: 'Applications & Future', marks: 12, color: '#a78bfa', icon: Atom, topics: ['TLS/SSL & Internet security', 'WPA3 & Wireless', '5G Mobile security', 'EMV & Payments', 'Quantum Computing', 'Post-Quantum Crypto'] },
 ];
 
 /* ─── 15-MARK PREDICTIONS ────────────────────────────────── */
 
 const PREDICTIONS_15 = [
-  { rank: 1, label: 'Highly Probable', color: '#ef4444', scenario: 'RSA: Complete Trapdoor Analysis + Hybrid Crypto', evidence: 'Core asymmetric topic. Appears in every pattern.' },
-  { rank: 2, label: 'Very Likely', color: '#f59e0b', scenario: 'AES vs DES: Feistel vs SPN Structural Comparison', evidence: 'Major symmetric topic. High marks density.' },
-  { rank: 3, label: 'Very Likely', color: '#f59e0b', scenario: 'Quantum Threat: Shor\'s vs Grover\'s + PQC Categories', evidence: 'Future-tech. High examiner interest.' },
-  { rank: 4, label: 'Possible', color: '#3b82f6', scenario: 'DES Feistel Network + 3DES EDE Justification', evidence: 'Classic symmetric structure.' },
+  { rank: 1, label: 'Highly Probable', color: '#ff8a8a', scenario: 'RSA: Complete Trapdoor Analysis + Hybrid Crypto', evidence: 'Core asymmetric topic. Appears in every pattern.' },
+  { rank: 2, label: 'Very Likely', color: '#fbbf24', scenario: 'AES vs DES: Feistel vs SPN Structural Comparison', evidence: 'Major symmetric topic. High marks density.' },
+  { rank: 3, label: 'Very Likely', color: '#fbbf24', scenario: 'Quantum Threat: Shor\'s vs Grover\'s + PQC Categories', evidence: 'Future-tech. High examiner interest.' },
+  { rank: 4, label: 'Possible', color: '#60a5fa', scenario: 'DES Feistel Network + 3DES EDE Justification', evidence: 'Classic symmetric structure.' },
 ];
 
 /* ─── 8-MARK PRIORITIES ──────────────────────────────────── */
@@ -51,10 +51,10 @@ const PRIORITIES_8 = [
 /* ─── KEY INSIGHTS ───────────────────────────────────────── */
 
 const KEY_INSIGHTS = [
-  { icon: Target, text: 'RSA + AES/DES + Quantum = 45+ marks safe strategy', color: '#ef4444' },
-  { icon: TrendingUp, text: 'Unit 3 (Asymmetric) = highest weight at 20 marks', color: '#30d158' },
-  { icon: AlertTriangle, text: 'Questions are TWISTED — don\'t just define, ANALYZE use-cases', color: '#f59e0b' },
-  { icon: Award, text: 'Draw diagrams: Feistel, SPN, DH exchange, Sponge = +2 marks each', color: '#3b82f6' },
+  { icon: Target, text: 'RSA + AES/DES + Quantum = 45+ marks safe strategy', color: '#ff8a8a' },
+  { icon: TrendingUp, text: 'Unit 3 (Asymmetric) = highest weight at 20 marks', color: '#4ade80' },
+  { icon: AlertTriangle, text: 'Questions are TWISTED — don\'t just define, ANALYZE use-cases', color: '#fbbf24' },
+  { icon: Award, text: 'Draw diagrams: Feistel, SPN, DH exchange, Sponge = +2 marks each', color: '#60a5fa' },
 ];
 
 /* ─── MCQ FLASH FACTS ────────────────────────────────────── */
@@ -90,13 +90,13 @@ const UNIT_INTROS: Record<number, string> = {
 /* ─── HELPERS ─────────────────────────────────────────────── */
 
 const TYPE_BADGE: Record<string, { bg: string; color: string; label: string }> = {
-  must: { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', label: 'MUST DO' },
-  safe: { bg: 'rgba(48,209,88,0.10)', color: '#30d158', label: 'SAFE PICK' },
+  must: { bg: 'rgba(239,68,68,0.12)', color: '#ff8a8a', label: 'MUST DO' },
+  safe: { bg: 'rgba(48,209,88,0.10)', color: '#4ade80', label: 'SAFE PICK' },
 };
 
 const PROB_COLOR = (p: number) => p >= 90 ? '#ef4444' : p >= 80 ? '#f59e0b' : p >= 70 ? '#3b82f6' : '#6b7280';
 
-function SectionTitle({ label, title, desc, color = '#dc2626' }: { label: string; title: string; desc?: string; color?: string }) {
+function SectionTitle({ label, title, desc, color = '#f87171' }: { label: string; title: string; desc?: string; color?: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   return (
@@ -122,7 +122,7 @@ function ExamAnswerCard({ topic, index }: { topic: ExhaustiveTopic; index: numbe
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.04 }}
-      style={{ background: 'var(--analysis-hover)', borderRadius: '14px', border: '1px solid var(--analysis-border)', overflow: 'hidden', borderLeft: `3px solid ${unitColor}` }}
+      style={{ background: 'var(--analysis-hover)', borderRadius: '14px', border: '1px solid var(--analysis-border)', borderTop: `2px solid ${unitColor}`, overflow: 'hidden' }}
     >
       {/* Header — always visible */}
       <button onClick={() => setOpen(!open)} style={{ width: '100%', background: 'none', border: 'none', padding: '18px 22px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '14px', textAlign: 'left', color: 'inherit' }}>
@@ -144,13 +144,13 @@ function ExamAnswerCard({ topic, index }: { topic: ExhaustiveTopic; index: numbe
 
               {/* First Principles — green box */}
               <div style={{ background: 'rgba(48,209,88,0.06)', borderRadius: '10px', padding: '14px 16px', border: '1px solid rgba(48,209,88,0.15)', margin: '14px 0' }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, color: '#30d158', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>First Principles</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#4ade80', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>First Principles</div>
                 <div style={{ fontSize: '13px', color: 'var(--analysis-text)', lineHeight: 1.6, fontStyle: 'italic' }}>"{topic.firstPrinciples}"</div>
               </div>
 
               {/* Twisted Question — amber box */}
               <div style={{ background: 'rgba(245,158,11,0.06)', borderRadius: '10px', padding: '14px 16px', border: '1px solid rgba(245,158,11,0.15)', margin: '14px 0' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: 700, color: '#f59e0b', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: 700, color: '#fbbf24', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
                   <AlertTriangle size={11} />
                   Twisted Exam Scenario
                 </div>
@@ -159,13 +159,13 @@ function ExamAnswerCard({ topic, index }: { topic: ExhaustiveTopic; index: numbe
 
               {/* Exam-Ready Answer */}
               <div style={{ background: 'var(--analysis-hover)', borderRadius: '10px', padding: '16px 18px', border: '1px solid var(--analysis-border)', margin: '14px 0' }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, color: '#30d158', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>Exam-Ready Answer</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#4ade80', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>Exam-Ready Answer</div>
                 <div style={{ fontSize: '13px', color: 'var(--analysis-text)', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{topic.examReadyAnswer}</div>
               </div>
 
               {/* Real World */}
               <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', marginTop: '12px' }}>
-                <Globe size={13} style={{ color: '#3b82f6', flexShrink: 0, marginTop: '2px' }} />
+                <Globe size={13} style={{ color: '#60a5fa', flexShrink: 0, marginTop: '2px' }} />
                 <div style={{ fontSize: '12px', color: 'var(--analysis-muted)', lineHeight: 1.55 }}>{topic.realWorldImplications}</div>
               </div>
 
@@ -183,11 +183,11 @@ function ExamAnswerCard({ topic, index }: { topic: ExhaustiveTopic; index: numbe
 
 function CryptoPipeline() {
   const steps = [
-    { label: 'Plaintext', icon: BookOpen, color: '#ef4444' },
-    { label: 'Key Gen', icon: Key, color: '#f59e0b' },
-    { label: 'Encrypt', icon: Lock, color: '#30d158' },
-    { label: 'Ciphertext', icon: Binary, color: '#3b82f6' },
-    { label: 'Decrypt', icon: Shield, color: '#8b5cf6' },
+    { label: 'Plaintext', icon: BookOpen, color: '#ff8a8a' },
+    { label: 'Key Gen', icon: Key, color: '#fbbf24' },
+    { label: 'Encrypt', icon: Lock, color: '#4ade80' },
+    { label: 'Ciphertext', icon: Binary, color: '#60a5fa' },
+    { label: 'Decrypt', icon: Shield, color: '#a78bfa' },
     { label: 'Verify', icon: Fingerprint, color: '#0891b2' },
   ];
   return (
@@ -214,11 +214,11 @@ function CryptoPipeline() {
 /* ─── APPLICATION ICONS GRID ─────────────────────────────── */
 
 const APP_ICONS = [
-  { icon: Globe, label: 'TLS/SSL', color: '#3b82f6' },
-  { icon: Wifi, label: 'WPA3', color: '#30d158' },
-  { icon: CreditCard, label: 'EMV', color: '#f59e0b' },
-  { icon: Radio, label: '5G', color: '#ef4444' },
-  { icon: Eye, label: 'TOR', color: '#8b5cf6' },
+  { icon: Globe, label: 'TLS/SSL', color: '#60a5fa' },
+  { icon: Wifi, label: 'WPA3', color: '#4ade80' },
+  { icon: CreditCard, label: 'EMV', color: '#fbbf24' },
+  { icon: Radio, label: '5G', color: '#ff8a8a' },
+  { icon: Eye, label: 'TOR', color: '#a78bfa' },
   { icon: Coins, label: 'Blockchain', color: '#FFC000' },
 ];
 
@@ -256,7 +256,7 @@ export function CryptoExamAnalysis({ onBack }: Props) {
           <button onClick={() => navigate('/crypto-flash')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '8px', background: '#FFC000', border: 'none', color: '#000', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}>
             <Zap size={12} strokeWidth={2} /> Flash Cards
           </button>
-          <button onClick={() => navigate('/crypto-analysis')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '8px', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', color: '#dc2626', fontSize: '12px', fontWeight: 500, cursor: 'pointer' }}>
+          <button onClick={() => navigate('/crypto-analysis')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '8px', background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.25)', color: '#f87171', fontSize: '12px', fontWeight: 500, cursor: 'pointer' }}>
             <BookOpen size={12} strokeWidth={1.5} /> Learning Hub
           </button>
           <button onClick={() => navigate('/crypto-learn')} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 14px', borderRadius: '8px', background: 'rgba(255,192,0,0.12)', border: '1px solid rgba(255,192,0,0.25)', color: '#FFC000', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}>
@@ -272,14 +272,14 @@ export function CryptoExamAnalysis({ onBack }: Props) {
         ══════════════════════════════════════════════════════ */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} style={{ marginBottom: '80px' }}>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#dc2626', background: 'rgba(220,38,38,0.08)', padding: '5px 12px', borderRadius: '100px', border: '1px solid rgba(220,38,38,0.2)', marginBottom: '18px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#f87171', background: 'rgba(220,38,38,0.08)', padding: '5px 12px', borderRadius: '100px', border: '1px solid rgba(220,38,38,0.2)', marginBottom: '18px' }}>
             <Cpu size={9} strokeWidth={2} />
             5 Units · 75 Marks · Twisted Questions Decoded
           </div>
 
           <h1 style={{ fontSize: 'clamp(34px, 5.5vw, 60px)', fontWeight: 700, color: 'var(--analysis-text)', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 14px' }}>
             Advanced Cryptography<br />
-            <span style={{ color: '#dc2626' }}>Exam Analysis</span>
+            <span style={{ color: '#f87171' }}>Exam Analysis</span>
           </h1>
           <p style={{ fontSize: '16px', color: 'var(--analysis-subtle)', lineHeight: 1.6, margin: '0 0 28px', maxWidth: '550px' }}>
             Every twisted question answered. First principles → exam scenario → full answer. Your complete preparation weapon.
@@ -310,7 +310,7 @@ export function CryptoExamAnalysis({ onBack }: Props) {
             UNIT MAP — unique visual with marks distribution
         ══════════════════════════════════════════════════════ */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} style={{ marginBottom: '80px' }}>
-          <SectionTitle label="Syllabus Map" title="Unit-wise Marks Distribution" desc="Unit 3 (Asymmetric) carries the highest weight. Prioritize RSA, AES, and Quantum." color="#dc2626" />
+          <SectionTitle label="Syllabus Map" title="Unit-wise Marks Distribution" desc="Unit 3 (Asymmetric) carries the highest weight. Prioritize RSA, AES, and Quantum." color="#f87171" />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {UNITS.map((u, i) => {
@@ -373,7 +373,7 @@ export function CryptoExamAnalysis({ onBack }: Props) {
             15-MARK PREDICTIONS
         ══════════════════════════════════════════════════════ */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: '80px' }}>
-          <SectionTitle label="Part C · 2 × 15 = 30 marks" title="15-Mark Predictions" desc="RSA, AES/DES structure, and Quantum/PQC are the high-value targets." color="#dc2626" />
+          <SectionTitle label="Part C · 2 × 15 = 30 marks" title="15-Mark Predictions" desc="RSA, AES/DES structure, and Quantum/PQC are the high-value targets." color="#f87171" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {PREDICTIONS_15.map((pred, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.06 }}
@@ -422,12 +422,12 @@ export function CryptoExamAnalysis({ onBack }: Props) {
             ALL EXAM ANSWERS (expandable)
         ══════════════════════════════════════════════════════ */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: '80px' }}>
-          <SectionTitle label="Complete Q&A Bank" title="Every Twisted Question — Answered" desc="Click any card to reveal: first principles → twisted scenario → full exam answer → real-world connection." color="#dc2626" />
+          <SectionTitle label="Complete Q&A Bank" title="Every Twisted Question — Answered" desc="Click any card to reveal: first principles → twisted scenario → full exam answer → real-world connection." color="#f87171" />
 
           {/* Unit filter */}
           <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
             <motion.button onClick={() => setActiveUnit(null)} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-              style={{ padding: '8px 20px', borderRadius: '100px', fontSize: '12px', fontWeight: 600, background: activeUnit === null ? 'rgba(220,38,38,0.15)' : 'var(--analysis-hover)', border: activeUnit === null ? '1.5px solid rgba(220,38,38,0.4)' : '1.5px solid var(--analysis-border)', color: activeUnit === null ? '#dc2626' : 'var(--analysis-subtle)', cursor: 'pointer', transition: 'all 0.2s' }}>
+              style={{ padding: '8px 20px', borderRadius: '100px', fontSize: '12px', fontWeight: 600, background: activeUnit === null ? 'rgba(248,113,113,0.15)' : 'var(--analysis-hover)', border: activeUnit === null ? '1.5px solid rgba(248,113,113,0.4)' : '1.5px solid var(--analysis-border)', color: activeUnit === null ? '#f87171' : 'var(--analysis-subtle)', cursor: 'pointer', transition: 'all 0.2s' }}>
               All Units — {allAnswers.length}
             </motion.button>
             {UNITS.map(u => (
@@ -474,7 +474,7 @@ export function CryptoExamAnalysis({ onBack }: Props) {
               <motion.div key={i} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: (i % 5) * 0.04 }}
                 style={{ background: 'var(--analysis-hover)', borderRadius: '10px', padding: '14px 16px', border: '1px solid var(--analysis-border)' }}>
                 <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--analysis-text)', marginBottom: '6px', lineHeight: 1.4 }}>{mcq.q}</div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#30d158', fontFamily: "'JetBrains Mono', monospace" }}>{mcq.a}</div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: '#4ade80', fontFamily: "'JetBrains Mono', monospace" }}>{mcq.a}</div>
               </motion.div>
             ))}
           </div>
@@ -507,13 +507,13 @@ export function CryptoExamAnalysis({ onBack }: Props) {
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
           style={{ background: 'rgba(220,38,38,0.05)', borderRadius: '16px', padding: '28px 32px', border: '1px solid rgba(220,38,38,0.12)', marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-            <Zap size={20} style={{ color: '#dc2626' }} />
+            <Zap size={20} style={{ color: '#f87171' }} />
             <span style={{ fontSize: '18px', fontWeight: 700, color: 'var(--analysis-text)' }}>Safe Path to 60+/75</span>
           </div>
           {[
             { part: 'Part A (20M)', action: 'Memorize the 15 MCQ flash facts above. Revise Confusion/Diffusion, Avalanche Effect, algorithm security bases.', color: '#FFC000' },
-            { part: 'Part B (40M)', action: 'Answer: HMAC vs Hash(Key||Msg), SHA evolution, Stream vs Block, ECC vs RSA, DH + MITM. All 5 are safe picks.', color: '#30d158' },
-            { part: 'Part C (15M)', action: 'RSA trapdoor analysis OR AES vs DES structure comparison. Both are high-probability 15-markers.', color: '#dc2626' },
+            { part: 'Part B (40M)', action: 'Answer: HMAC vs Hash(Key||Msg), SHA evolution, Stream vs Block, ECC vs RSA, DH + MITM. All 5 are safe picks.', color: '#4ade80' },
+            { part: 'Part C (15M)', action: 'RSA trapdoor analysis OR AES vs DES structure comparison. Both are high-probability 15-markers.', color: '#f87171' },
           ].map(({ part, action, color }) => (
             <div key={part} style={{ display: 'flex', gap: '14px', marginBottom: '14px', paddingBottom: '14px', borderBottom: '1px solid var(--analysis-border)' }}>
               <div style={{ flexShrink: 0 }}>

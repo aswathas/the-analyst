@@ -74,7 +74,7 @@ export function PYQCards({ dark = false }: { dark?: boolean }) {
             <FileText size={18} strokeWidth={1.5} style={{ color: paper.color, marginTop: '1px', flexShrink: 0 }} />
             <div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: dark ? '#ffffff' : '#1d1d1f' }}>{paper.year}</div>
-              <div style={{ fontSize: '11px', color: dark ? 'rgba(255,255,255,0.4)' : '#9ca3af', fontFamily: "'JetBrains Mono', monospace" }}>
+              <div style={{ fontSize: '11px', color: dark ? 'rgba(255,255,255,0.55)' : '#6b7280', fontFamily: "'JetBrains Mono', monospace" }}>
                 {paper.file}
               </div>
             </div>

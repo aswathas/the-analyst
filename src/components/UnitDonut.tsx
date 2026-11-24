@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 
 const UNITS = [
-  { label: 'Unit 1', sublabel: 'Foundations', pct: 35, color: '#0066cc', topics: 'NumPy, Pandas basics, data types' },
+  { label: 'Unit 1', sublabel: 'Foundations', pct: 35, color: '#60a5fa', topics: 'NumPy, Pandas basics, data types' },
   { label: 'Unit 2', sublabel: 'Data Ops', pct: 35, color: '#f59e0b', topics: 'Wrangling, viz, GroupBy, merge' },
   { label: 'Unit 3', sublabel: 'ML', pct: 30, color: '#10b981', topics: 'Sklearn, models, clustering, metrics' },
 ];
@@ -79,7 +79,7 @@ export function UnitDonut() {
           }}
         >
           <span style={{ fontSize: '22px', fontWeight: 600, color: '#ffffff', letterSpacing: '-0.03em' }}>75</span>
-          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
+          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.55)', fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase' }}>marks</span>
         </div>
       </div>
 
@@ -106,10 +106,10 @@ export function UnitDonut() {
             <div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
                 <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>{u.label}</span>
-                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)' }}>{u.sublabel}</span>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)' }}>{u.sublabel}</span>
                 <span style={{ fontSize: '13px', fontWeight: 600, color: u.color }}>{u.pct}%</span>
               </div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '2px' }}>{u.topics}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{u.topics}</div>
             </div>
           </motion.div>
         ))}

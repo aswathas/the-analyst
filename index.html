@@ -9,9 +9,22 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Analyst" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0a0a0a" id="theme-color-meta" />
     <title>Analyst</title>
     <meta name="description" content="21CSS303T SRM Institute — Data Science exam pattern analysis, PYQ breakdown, and study guide by Aswath AS." />
+    <script>
+      // Set the theme before first paint so the canvas never flashes the wrong colour.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved === 'light' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme;
+          var meta = document.getElementById('theme-color-meta');
+          if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f8fc' : '#0a0a0a');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

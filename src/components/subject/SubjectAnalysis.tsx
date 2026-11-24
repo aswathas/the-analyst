@@ -9,7 +9,7 @@ import { StudyPlanTable } from './StudyPlanTable';
 import { AnswerPlaybook } from './AnswerPlaybook';
 import { PdfDownload } from './PdfDownload';
 import { UnitDonutGeneric } from './UnitDonutGeneric';
-import { card, sectionTitle, mono, muted, body, unitColor } from './styles';
+import { card, sectionTitle, mono, muted, body, unitColor, accentScope } from './styles';
 
 const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf3j8ie04bEhqdU-iluDsBiXAE5VPMG5BNLXbFsTp5HTauETw/viewform';
 
@@ -26,13 +26,16 @@ function unitWeights(spec: SubjectSpec) {
     unit: u.unit,
     label: `Unit ${u.unit}`,
     pct: Math.round((minutes[i] / total) * 100),
-    color: unitColor(i, spec.accent),
+    color: unitColor(i),
   }));
 }
 
 export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: () => void }) {
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px) 64px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div
+      data-accent=""
+      style={accentScope(spec.accent, { maxWidth: '1100px', margin: '0 auto', padding: 'clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px) 64px', display: 'flex', flexDirection: 'column', gap: '16px' })}
+    >
       <button
         onClick={onBack}
         style={{
@@ -62,7 +65,7 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
             <p style={{ ...body, color: muted, margin: 0, maxWidth: '620px' }}>{spec.oneLiner}</p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
-            <span style={{ ...mono, color: spec.accent, border: `1px solid ${spec.accent}33`, background: `${spec.accent}12`, borderRadius: '999px', padding: '4px 10px', fontWeight: 600 }}>
+            <span style={{ ...mono, color: 'var(--accent-ink)', border: '1px solid var(--accent-line)', background: 'var(--accent-soft)', borderRadius: '999px', padding: '4px 10px', fontWeight: 600 }}>
               {CATEGORY_LABEL[spec.category]}
             </span>
             <CountdownChip examDate={spec.examDate} examSession={spec.examSession} />
@@ -124,7 +127,7 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
               <span style={{ ...mono, color: muted, flexShrink: 0 }}>→</span>
               <span style={{ flex: 1, fontSize: '14px', color: 'var(--text-primary, #1d1d1f)', lineHeight: 1.45 }}>
                 {r.url ? (
-                  <a href={r.url} target="_blank" rel="noreferrer" style={{ color: spec.accent, textDecoration: 'none' }}>{r.label}</a>
+                  <a href={r.url} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-ink)', textDecoration: 'none' }}>{r.label}</a>
                 ) : (
                   r.label
                 )}
@@ -136,7 +139,7 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
       </div>
 
       <div style={{ ...body, color: muted, textAlign: 'center' }}>
-        <a href={FORM_URL} target="_blank" rel="noreferrer" style={{ color: spec.accent, textDecoration: 'none', fontWeight: 600 }}>
+        <a href={FORM_URL} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-ink)', textDecoration: 'none', fontWeight: 600 }}>
           What was asked in the paper?
         </a>
         <span style={{ display: 'block', ...mono, marginTop: '4px' }}>Tell us what the paper actually asked — crowdsourced, and it makes the next cohort better.</span>

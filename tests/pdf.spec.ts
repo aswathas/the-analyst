@@ -32,7 +32,7 @@ test('every subject has a site-hosted PDF link and a release mirror', () => {
 test('every subject PDF is committed to public/master-pdfs', () => {
   for (const spec of SUBJECTS) {
     expect(spec.pdf, `${spec.code} pdf links`).toBeDefined();
-    const name = spec.pdf!.siteUrl.split('/').pop()!;
+    const name = spec.pdf!.siteUrl.split('/').pop()!.split('?')[0];
     expect(existsSync(join(process.cwd(), 'public', 'master-pdfs', name)), name).toBe(true);
   }
 });

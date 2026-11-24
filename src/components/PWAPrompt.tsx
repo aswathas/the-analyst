@@ -69,37 +69,37 @@ export function PWAPrompt() {
           }}
         >
           <div style={{
-            background: 'rgba(18,18,20,0.97)',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            border: '1px solid rgba(255,255,255,0.12)',
+            border: '1px solid var(--border-card)',
             borderRadius: '20px',
             padding: '16px 18px',
             display: 'flex',
             alignItems: 'center',
             gap: '14px',
-            boxShadow: '0 -4px 40px rgba(0,0,0,0.6)',
+            boxShadow: '0 -4px 40px rgba(0,0,0,0.25)',
           }}>
 
             {/* App icon */}
             <img
               src="/favicon.svg"
               alt="Analyst"
-              style={{ width: 46, height: 46, borderRadius: '12px', flexShrink: 0, background: '#1a0a0a', padding: '4px' }}
+              style={{ width: 46, height: 46, borderRadius: '12px', flexShrink: 0, background: 'var(--bg-inset)', padding: '4px' }}
             />
 
             {/* Text */}
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff', letterSpacing: '-0.02em' }}>
+              <div style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                 Install Analyst
               </div>
               {isIOS ? (
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.45, marginTop: '2px' }}>
+                <div style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.45, marginTop: '2px' }}>
                   Tap <Share2 size={11} style={{ display: 'inline', verticalAlign: 'middle', marginInline: '2px' }} />
                   {' '}then "Add to Home Screen"
                 </div>
               ) : (
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.45, marginTop: '2px' }}>
+                <div style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.45, marginTop: '2px' }}>
                   Works offline · No app store needed
                 </div>
               )}
@@ -111,9 +111,9 @@ export function PWAPrompt() {
                 <button
                   onClick={handleInstall}
                   style={{
-                    background: 'rgba(41,151,255,0.9)',
-                    border: '1px solid rgba(41,151,255,0.5)',
-                    color: '#fff', borderRadius: '100px',
+                    background: 'var(--btn-primary)',
+                    border: '1px solid var(--btn-primary)',
+                    color: 'var(--btn-primary-text)', borderRadius: '100px',
                     padding: '8px 16px',
                     fontSize: '13px', fontWeight: 500,
                     cursor: 'pointer',
@@ -127,8 +127,8 @@ export function PWAPrompt() {
               <button
                 onClick={dismiss}
                 style={{
-                  background: 'rgba(255,255,255,0.08)',
-                  border: 'none', color: 'rgba(255,255,255,0.5)',
+                  background: 'var(--btn-master-bg)',
+                  border: 'none', color: 'var(--text-secondary)',
                   borderRadius: '100px', padding: '8px 10px',
                   cursor: 'pointer', display: 'flex', alignItems: 'center',
                 }}

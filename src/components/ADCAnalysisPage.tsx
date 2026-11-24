@@ -43,25 +43,25 @@ const STATS = {
 };
 
 const UNITS = [
-  { unit: 1, name: 'AM, DSB-SC, SSB', marks: 20, color: '#ef4444', priority: 'HIGH' },
-  { unit: 2, name: 'FM, PM', marks: 15, color: '#ff9f0a', priority: 'HIGH' },
-  { unit: 3, name: 'PAM, PWM, PPM, TDM', marks: 15, color: '#2997ff', priority: 'MED' },
-  { unit: 4, name: 'ASK, FSK, PSK, QAM', marks: 15, color: '#30d158', priority: 'MED' },
-  { unit: 5, name: 'Noise, SNR, Friis', marks: 10, color: '#a855f7', priority: 'HIGH' },
+  { unit: 1, name: 'AM, DSB-SC, SSB', marks: 20, color: '#ff8a8a', priority: 'HIGH' },
+  { unit: 2, name: 'FM, PM', marks: 15, color: '#fbbf24', priority: 'HIGH' },
+  { unit: 3, name: 'PAM, PWM, PPM, TDM', marks: 15, color: '#60a5fa', priority: 'MED' },
+  { unit: 4, name: 'ASK, FSK, PSK, QAM', marks: 15, color: '#4ade80', priority: 'MED' },
+  { unit: 5, name: 'Noise, SNR, Friis', marks: 10, color: '#c4a2fb', priority: 'HIGH' },
 ];
 
 // Topic frequency from PYQ analysis — 20 MCQs mapped to 5 units
 const TOPICS = [
-  { topic: 'AM Modulation Index / Power', score: 100, papers: 3, color: '#ef4444', unit: 1 },
-  { topic: "Carson's Rule / FM Bandwidth", score: 100, papers: 3, color: '#ff9f0a', unit: 2 },
-  { topic: 'Sampling Theorem / Nyquist', score: 100, papers: 3, color: '#2997ff', unit: 3 },
-  { topic: 'BPSK / QPSK / QAM', score: 100, papers: 3, color: '#30d158', unit: 4 },
-  { topic: 'Noise / SNR / Friis', score: 100, papers: 3, color: '#a855f7', unit: 5 },
-  { topic: 'DSB-SC vs SSB', score: 67, papers: 2, color: '#ef4444', unit: 1 },
-  { topic: 'FSK Bandwidth', score: 67, papers: 2, color: '#30d158', unit: 4 },
-  { topic: 'PAM / PWM / PPM', score: 67, papers: 2, color: '#2997ff', unit: 3 },
-  { topic: 'Deviation Ratio β', score: 67, papers: 2, color: '#ff9f0a', unit: 2 },
-  { topic: 'Pre-emphasis / FM-PM', score: 33, papers: 1, color: '#ff9f0a', unit: 2 },
+  { topic: 'AM Modulation Index / Power', score: 100, papers: 3, color: '#ff8a8a', unit: 1 },
+  { topic: "Carson's Rule / FM Bandwidth", score: 100, papers: 3, color: '#fbbf24', unit: 2 },
+  { topic: 'Sampling Theorem / Nyquist', score: 100, papers: 3, color: '#60a5fa', unit: 3 },
+  { topic: 'BPSK / QPSK / QAM', score: 100, papers: 3, color: '#4ade80', unit: 4 },
+  { topic: 'Noise / SNR / Friis', score: 100, papers: 3, color: '#c4a2fb', unit: 5 },
+  { topic: 'DSB-SC vs SSB', score: 67, papers: 2, color: '#ff8a8a', unit: 1 },
+  { topic: 'FSK Bandwidth', score: 67, papers: 2, color: '#4ade80', unit: 4 },
+  { topic: 'PAM / PWM / PPM', score: 67, papers: 2, color: '#60a5fa', unit: 3 },
+  { topic: 'Deviation Ratio β', score: 67, papers: 2, color: '#fbbf24', unit: 2 },
+  { topic: 'Pre-emphasis / FM-PM', score: 33, papers: 1, color: '#fbbf24', unit: 2 },
 ];
 
 // Radar data per unit: [MCQ density, Part B freq, Part C presence] (0-100)
@@ -417,11 +417,11 @@ const GLOBAL_STYLES = `
     box-shadow: 0 0 30px rgba(41,151,255,0.1);
   }
 
-  .tag-danger { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; }
-  .tag-warning { background: rgba(255,159,10,0.15); border: 1px solid rgba(255,159,10,0.3); color: #ff9f0a; }
-  .tag-success { background: rgba(48,209,88,0.15); border: 1px solid rgba(48,209,88,0.3); color: #30d158; }
-  .tag-info { background: rgba(41,151,255,0.15); border: 1px solid rgba(41,151,255,0.3); color: #2997ff; }
-  .tag-purple { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); color: #a855f7; }
+  .tag-danger { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #ff8a8a; }
+  .tag-warning { background: rgba(255,159,10,0.15); border: 1px solid rgba(255,159,10,0.3); color: #fbbf24; }
+  .tag-success { background: rgba(48,209,88,0.15); border: 1px solid rgba(48,209,88,0.3); color: #4ade80; }
+  .tag-info { background: rgba(41,151,255,0.15); border: 1px solid rgba(41,151,255,0.3); color: #60a5fa; }
+  .tag-purple { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); color: #c4a2fb; }
 `;
 
 // ─────────────────────────────────────────
@@ -454,7 +454,7 @@ function StickyHeader({ onBack, activeTab, onTabChange }: {
           <ArrowLeft size={16} />
         </button>
         <div style={{ flex: 1 }}>
-          <div className="mono" style={{ fontSize: 10, color: '#ff9f0a', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+          <div className="mono" style={{ fontSize: 10, color: '#fbbf24', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
             21ECC302T
           </div>
           <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', letterSpacing: '-0.02em' }}>
@@ -472,7 +472,7 @@ function StickyHeader({ onBack, activeTab, onTabChange }: {
               style={{
                 padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer',
                 fontSize: 12, fontWeight: 600, fontFamily: 'inherit',
-                background: activeTab === tab.key ? '#2997ff' : 'transparent',
+                background: activeTab === tab.key ? '#0066cc' : 'transparent',
                 color: activeTab === tab.key ? '#fff' : '#888',
                 transition: 'all 0.15s',
               }}
@@ -485,7 +485,7 @@ function StickyHeader({ onBack, activeTab, onTabChange }: {
           <a href="/ADC_Syllabus.pdf" target="_blank" rel="noopener noreferrer" style={{
             display: 'flex', alignItems: 'center', gap: 6,
             padding: '6px 14px', borderRadius: 8,
-            background: 'rgba(255,255,255,0.06)', color: '#888',
+            background: 'rgba(255,255,255,0.06)', color: '#8e8e93',
             textDecoration: 'none', fontSize: 12, border: '1px solid rgba(255,255,255,0.08)',
           }}>
             <BookOpen size={12} /> Syllabus
@@ -530,7 +530,7 @@ function HeroSection() {
             ██ EXAM COMMAND CENTER ██
           </div>
           <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, rgba(255,255,255,0.1), transparent)' }} />
-          <div className="mono" style={{ fontSize: 10, color: '#666', letterSpacing: '0.1em' }}>
+          <div className="mono" style={{ fontSize: 10, color: '#8e8e93', letterSpacing: '0.1em' }}>
             21ECC302T — ADC
           </div>
         </div>
@@ -550,14 +550,14 @@ function HeroSection() {
           }}
         >
           Analog & Digital<br />
-          <span style={{ color: '#2997ff' }}>Communication</span>
+          <span style={{ color: '#60a5fa' }}>Communication</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          style={{ fontSize: 14, color: '#888', marginBottom: 32, maxWidth: 500 }}
+          style={{ fontSize: 14, color: '#8e8e93', marginBottom: 32, maxWidth: 500 }}
         >
           PYQ analysis across 3 semester papers. Unit-wise coverage, probability rankings, and predicted questions for upcoming exam.
         </motion.p>
@@ -584,12 +584,12 @@ function HeroSection() {
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: `1px solid ${c}25`,
-                borderLeft: `2px solid ${c}`,
+                borderTop: `2px solid ${c}`,
                 borderRadius: 8, padding: '14px 16px',
               }}
             >
               <div className="mono" style={{ fontSize: 24, fontWeight: 700, color: c, letterSpacing: '-0.04em' }}>{n}</div>
-              <div style={{ fontSize: 11, color: '#888', marginTop: 2, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l}</div>
+              <div style={{ fontSize: 11, color: '#8e8e93', marginTop: 2, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l}</div>
             </motion.div>
           ))}
         </div>
@@ -597,10 +597,10 @@ function HeroSection() {
         {/* Alert badges */}
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           {[
-            { icon: <CheckCircle2 size={11} />, text: 'FM Carson\'s rule — 3/3 papers', color: '#ff9f0a' },
-            { icon: <CheckCircle2 size={11} />, text: 'Noise/Friis — 3/3 papers', color: '#a855f7' },
-            { icon: <CheckCircle2 size={11} />, text: 'AM mod index — 3/3 papers', color: '#ef4444' },
-            { icon: <AlertTriangle size={11} />, text: 'U2 + U5 highest priority — 25 marks guaranteed', color: '#ef4444' },
+            { icon: <CheckCircle2 size={11} />, text: 'FM Carson\'s rule — 3/3 papers', color: '#fbbf24' },
+            { icon: <CheckCircle2 size={11} />, text: 'Noise/Friis — 3/3 papers', color: '#c4a2fb' },
+            { icon: <CheckCircle2 size={11} />, text: 'AM mod index — 3/3 papers', color: '#ff8a8a' },
+            { icon: <AlertTriangle size={11} />, text: 'U2 + U5 highest priority — 25 marks guaranteed', color: '#ff8a8a' },
           ].map(({ icon, text, color }) => (
             <motion.div
               key={text}
@@ -611,7 +611,7 @@ function HeroSection() {
                 display: 'flex', alignItems: 'center', gap: 6,
                 padding: '6px 12px', borderRadius: 6,
                 background: `${color}12`, border: `1px solid ${color}25`,
-                fontSize: 12, color: '#ccc',
+                fontSize: 12, color: '#b9b9bd',
               }}
             >
               <span style={{ color }}>{icon}</span>
@@ -632,9 +632,9 @@ function RadarChart() {
   const cx = 160, cy = 145, r = 100;
   const axes = 5;
   const datasets = [
-    { label: 'MCQ Density', color: '#2997ff', values: RADAR_DATA.map(d => d.mcq) },
-    { label: 'Part B Frequency', color: '#ff9f0a', values: RADAR_DATA.map(d => d.partB) },
-    { label: 'Part C Presence', color: '#ef4444', values: RADAR_DATA.map(d => d.partC) },
+    { label: 'MCQ Density', color: '#60a5fa', values: RADAR_DATA.map(d => d.mcq) },
+    { label: 'Part B Frequency', color: '#fbbf24', values: RADAR_DATA.map(d => d.partB) },
+    { label: 'Part C Presence', color: '#ff8a8a', values: RADAR_DATA.map(d => d.partC) },
   ];
 
   const toXY = (i: number, val: number) => {
@@ -707,10 +707,10 @@ function RadarChart() {
           {datasets.map((ds) => (
             <div key={ds.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div style={{ width: 24, height: 2, background: ds.color, borderRadius: 1 }} />
-              <span style={{ fontSize: 11, color: '#888', fontFamily: "'JetBrains Mono', monospace" }}>{ds.label}</span>
+              <span style={{ fontSize: 11, color: '#8e8e93', fontFamily: "'JetBrains Mono', monospace" }}>{ds.label}</span>
             </div>
           ))}
-          <div style={{ marginTop: 8, fontSize: 10, color: '#555', lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace" }}>
+          <div style={{ marginTop: 8, fontSize: 10, color: '#8e8e93', lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace" }}>
             5 axes = 5 units<br />
             Outer ring = 100<br />
             U2 (FM) highest Part B<br />
@@ -739,8 +739,8 @@ function TopicFreqBars() {
         {TOPICS.map((t, i) => (
           <div key={t.topic}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-              <span style={{ fontSize: 11, color: '#ccc' }}>{t.topic}</span>
-              <span className="mono" style={{ fontSize: 10, color: '#666' }}>{t.score}% · {t.papers}/3</span>
+              <span style={{ fontSize: 11, color: '#b9b9bd' }}>{t.topic}</span>
+              <span className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>{t.score}% · {t.papers}/3</span>
             </div>
             <div style={{ height: 4, background: 'rgba(255,255,255,0.05)', borderRadius: 2, overflow: 'hidden' }}>
               <motion.div
@@ -781,16 +781,16 @@ function Heatmap() {
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 450 }}>
           <thead>
             <tr>
-              <th style={{ textAlign: 'left', fontSize: 10, color: '#555', fontWeight: 500, padding: '0 10px 8px 0', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>Topic</th>
+              <th style={{ textAlign: 'left', fontSize: 10, color: '#8e8e93', fontWeight: 500, padding: '0 10px 8px 0', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>Topic</th>
               {paperLabels.map(p => (
-                <th key={p} style={{ textAlign: 'center', fontSize: 10, color: '#555', fontWeight: 500, padding: '0 0 8px 8px', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.04em' }}>{p}</th>
+                <th key={p} style={{ textAlign: 'center', fontSize: 10, color: '#8e8e93', fontWeight: 500, padding: '0 0 8px 8px', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.04em' }}>{p}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {TOPICS.map((t, i) => (
               <tr key={t.topic} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
-                <td style={{ fontSize: 11, color: '#bbb', padding: '6px 10px 6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)', whiteSpace: 'nowrap' }}>{t.topic}</td>
+                <td style={{ fontSize: 11, color: '#a1a1a6', padding: '6px 10px 6px 0', borderBottom: '1px solid rgba(255,255,255,0.03)', whiteSpace: 'nowrap' }}>{t.topic}</td>
                 {HEATMAP[i].map((val, j) => (
                   <td key={j} style={{ textAlign: 'center', padding: '6px 0 6px 8px', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                     {val === 'Y' ? (
@@ -850,23 +850,23 @@ function PYQCards() {
             <div className="card card-glow" style={{ padding: '16px 18px', cursor: 'pointer', transition: 'all 0.2s' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                 <div>
-                  <div className="mono" style={{ fontSize: 11, color: '#ff9f0a', marginBottom: 2 }}>{p.code}</div>
-                  <div className="mono" style={{ fontSize: 10, color: '#555' }}>{p.date}</div>
+                  <div className="mono" style={{ fontSize: 11, color: '#fbbf24', marginBottom: 2 }}>{p.code}</div>
+                  <div className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>{p.date}</div>
                 </div>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#30d158', boxShadow: '0 0 8px rgba(48,209,88,0.5)' }} />
               </div>
-              <div style={{ fontSize: 11, color: '#888', marginBottom: 8, lineHeight: 1.5 }}>
+              <div style={{ fontSize: 11, color: '#8e8e93', marginBottom: 8, lineHeight: 1.5 }}>
                 <Shield size={9} style={{ display: 'inline', marginRight: 4 }} />
                 {p.highlight}
               </div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {p.keyTopics.slice(0, 3).map(t => (
-                  <span key={t} style={{ fontSize: 9, color: '#666', background: 'rgba(255,255,255,0.04)', padding: '2px 6px', borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>
+                  <span key={t} style={{ fontSize: 9, color: '#8e8e93', background: 'rgba(255,255,255,0.04)', padding: '2px 6px', borderRadius: 4, fontFamily: "'JetBrains Mono', monospace" }}>
                     {t}
                   </span>
                 ))}
                 {p.keyTopics.length > 3 && (
-                  <span style={{ fontSize: 9, color: '#555', padding: '2px 6px' }}>+{p.keyTopics.length - 3}</span>
+                  <span style={{ fontSize: 9, color: '#8e8e93', padding: '2px 6px' }}>+{p.keyTopics.length - 3}</span>
                 )}
               </div>
             </div>
@@ -958,8 +958,8 @@ function MasterSheet() {
             style={{
               padding: '6px 16px', borderRadius: 9999, cursor: 'pointer',
               fontSize: 12, fontWeight: 600, fontFamily: 'inherit',
-              background: activeUnit === u.v ? '#2997ff' : 'rgba(255,255,255,0.06)',
-              color: activeUnit === u.v ? '#fff' : '#888',
+              background: activeUnit === u.v ? '#0066cc' : 'rgba(255,255,255,0.06)',
+              color: activeUnit === u.v ? '#fff' : '#a1a1a6',
               border: activeUnit === u.v ? '1px solid rgba(41,151,255,0.3)' : '1px solid rgba(255,255,255,0.08)',
             }}
           >
@@ -973,7 +973,7 @@ function MasterSheet() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
           <div style={{ width: 3, height: 16, background: '#ef4444', borderRadius: 2 }} />
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#fff', margin: 0 }}>PART A — MCQ Analysis</h3>
-          <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>18 × 1 = 18 marks</span>
+          <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>18 × 1 = 18 marks</span>
         </div>
 
         {/* Topic selector for Part A */}
@@ -1007,7 +1007,7 @@ function MasterSheet() {
               className="card"
               style={{ padding: 16 }}
             >
-              <div className="mono" style={{ fontSize: 9, color: '#555', marginBottom: 8 }}>{mcq.source}</div>
+              <div className="mono" style={{ fontSize: 9, color: '#8e8e93', marginBottom: 8 }}>{mcq.source}</div>
               <div style={{ fontSize: 13, color: '#e5e5e5', marginBottom: 12, lineHeight: 1.5 }}>{mcq.question}</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                 {mcq.options.map((opt, oi) => (
@@ -1029,7 +1029,7 @@ function MasterSheet() {
                 ))}
               </div>
               <div style={{ marginTop: 10, padding: '8px 10px', background: 'rgba(255,255,255,0.02)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
-                <span style={{ fontSize: 11, color: '#666' }}>{mcq.explanation}</span>
+                <span style={{ fontSize: 11, color: '#8e8e93' }}>{mcq.explanation}</span>
               </div>
             </motion.div>
           ))}
@@ -1041,7 +1041,7 @@ function MasterSheet() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
           <div style={{ width: 3, height: 16, background: '#ff9f0a', borderRadius: 2 }} />
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#fff', margin: 0 }}>PART B — Long Answer</h3>
-          <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>5 × 8 = 40 marks</span>
+          <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>5 × 8 = 40 marks</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {filteredPartB.map((q, i) => (
@@ -1059,7 +1059,7 @@ function MasterSheet() {
                 
               >
                 <div style={{ marginBottom: 12 }}>
-                  <div className="mono" style={{ fontSize: 10, color: '#666', marginBottom: 8 }}>
+                  <div className="mono" style={{ fontSize: 10, color: '#8e8e93', marginBottom: 8 }}>
                     Sources: {q.sources.join(' | ')}
                   </div>
                   <div style={{ fontSize: 13, color: '#ddd', lineHeight: 1.6, marginBottom: 12 }}>
@@ -1067,11 +1067,11 @@ function MasterSheet() {
                   </div>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ fontSize: 11, color: '#ff9f0a', marginBottom: 8, fontWeight: 600 }}>KEY POINTS</div>
+                  <div style={{ fontSize: 11, color: '#fbbf24', marginBottom: 8, fontWeight: 600 }}>KEY POINTS</div>
                   {q.keyPoints.map((kp, ki) => (
                     <div key={ki} style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
-                      <span style={{ color: '#555', fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }}>{ki + 1}.</span>
-                      <span style={{ fontSize: 12, color: '#bbb', lineHeight: 1.5 }}>{kp}</span>
+                      <span style={{ color: '#8e8e93', fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }}>{ki + 1}.</span>
+                      <span style={{ fontSize: 12, color: '#a1a1a6', lineHeight: 1.5 }}>{kp}</span>
                     </div>
                   ))}
                 </div>
@@ -1086,7 +1086,7 @@ function MasterSheet() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
           <div style={{ width: 3, height: 16, background: '#30d158', borderRadius: 2 }} />
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#fff', margin: 0 }}>PART C — Numerical Predictions</h3>
-          <span className="mono" style={{ fontSize: 11, color: '#555', marginLeft: 4 }}>1 × 15 = 15 marks</span>
+          <span className="mono" style={{ fontSize: 11, color: '#8e8e93', marginLeft: 4 }}>1 × 15 = 15 marks</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {filteredPartC.map((q, i) => (
@@ -1097,14 +1097,14 @@ function MasterSheet() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               className="card"
-              style={{ padding: 16, borderLeft: `3px solid ${q.rankColor}` }}
+              style={{ padding: 16, borderTop: `2px solid ${q.rankColor}` }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                 <div>
                   <div style={{ fontSize: 11, color: q.rankColor, fontWeight: 700, marginBottom: 4 }}>
                     {q.rank} — {q.probability}% probability
                   </div>
-                  <div className="mono" style={{ fontSize: 10, color: '#555' }}>
+                  <div className="mono" style={{ fontSize: 10, color: '#8e8e93' }}>
                     Sources: {q.sources.join(' | ')} | Unit {q.unit}
                   </div>
                 </div>
@@ -1117,17 +1117,17 @@ function MasterSheet() {
                   U{q.unit}
                 </div>
               </div>
-              <div style={{ fontSize: 13, color: '#ccc', marginBottom: 14, lineHeight: 1.5 }}>
+              <div style={{ fontSize: 13, color: '#b9b9bd', marginBottom: 14, lineHeight: 1.5 }}>
                 {q.scenario}
               </div>
               <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ fontSize: 11, color: '#30d158', marginBottom: 8, fontWeight: 600 }}>STEP-BY-STEP SOLUTION</div>
+                <div style={{ fontSize: 11, color: '#4ade80', marginBottom: 8, fontWeight: 600 }}>STEP-BY-STEP SOLUTION</div>
                 {q.solution.map((s, si) => (
                   <div key={si} style={{ display: 'flex', gap: 10, marginBottom: 6 }}>
-                    <span className="mono" style={{ fontSize: 10, color: '#555', minWidth: 16 }}>{si + 1}.</span>
+                    <span className="mono" style={{ fontSize: 10, color: '#8e8e93', minWidth: 16 }}>{si + 1}.</span>
                     <div>
-                      {s.step && <span style={{ fontSize: 11, color: '#999' }}>{s.step}: </span>}
-                      <span className="mono" style={{ fontSize: 11, color: '#30d158' }}>{s.value}</span>
+                      {s.step && <span style={{ fontSize: 11, color: '#a1a1a6' }}>{s.step}: </span>}
+                      <span className="mono" style={{ fontSize: 11, color: '#4ade80' }}>{s.value}</span>
                     </div>
                   </div>
                 ))}
@@ -1146,18 +1146,18 @@ function MasterSheet() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
           {/* Score breakdown */}
           <div className="card" style={{ padding: 16 }}>
-            <div style={{ fontSize: 12, color: '#ff9f0a', fontWeight: 600, marginBottom: 12 }}>SCORE BREAKDOWN TARGET</div>
+            <div style={{ fontSize: 12, color: '#fbbf24', fontWeight: 600, marginBottom: 12 }}>SCORE BREAKDOWN TARGET</div>
             {[
-              { part: 'Part A (MCQs)', target: '16/18', color: '#30d158', note: 'Skip 2 max — be decisive' },
-              { part: 'Part B (Long)', target: '32/40', color: '#2997ff', note: '5 questions × 8 marks' },
-              { part: 'Part C (Numerical)', target: '13/15', color: '#a855f7', note: '1 numerical, full marks' },
-              { part: 'TOTAL', target: '64+/75', color: '#ff9f0a', note: 'Safe passing zone' },
+              { part: 'Part A (MCQs)', target: '16/18', color: '#4ade80', note: 'Skip 2 max — be decisive' },
+              { part: 'Part B (Long)', target: '32/40', color: '#60a5fa', note: '5 questions × 8 marks' },
+              { part: 'Part C (Numerical)', target: '13/15', color: '#c4a2fb', note: '1 numerical, full marks' },
+              { part: 'TOTAL', target: '64+/75', color: '#fbbf24', note: 'Safe passing zone' },
             ].map(s => (
               <div key={s.part} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                <span style={{ fontSize: 12, color: '#ccc' }}>{s.part}</span>
+                <span style={{ fontSize: 12, color: '#b9b9bd' }}>{s.part}</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span className="mono" style={{ fontSize: 13, color: s.color, fontWeight: 600 }}>{s.target}</span>
-                  <span style={{ fontSize: 10, color: '#555' }}>{s.note}</span>
+                  <span style={{ fontSize: 10, color: '#8e8e93' }}>{s.note}</span>
                 </div>
               </div>
             ))}
@@ -1165,7 +1165,7 @@ function MasterSheet() {
 
           {/* Part-wise tips */}
           <div className="card" style={{ padding: 16 }}>
-            <div style={{ fontSize: 12, color: '#ef4444', fontWeight: 600, marginBottom: 12 }}>PART-WISE TIPS</div>
+            <div style={{ fontSize: 12, color: '#ff8a8a', fontWeight: 600, marginBottom: 12 }}>PART-WISE TIPS</div>
             {[
               { part: 'Part A', tip: 'Carson rule, AM index, Nyquist, BPSK, Pn=kTB — all appeared 3/3. Memorize formulas first.' },
               { part: 'Part B', tip: 'Pick: AM derivation, FM+Carson, Sampling, Noise/Friis. Write key formulas, derive where asked.' },
@@ -1173,8 +1173,8 @@ function MasterSheet() {
               { part: 'Time', tip: 'Part A: 15 min. Part B: 50 min. Part C: 20 min. Buffer: 5 min. Total: 90 min.' },
             ].map(t => (
               <div key={t.part} style={{ marginBottom: 10 }}>
-                <span style={{ fontSize: 11, color: '#ff9f0a', fontWeight: 600 }}>{t.part}:</span>
-                <span style={{ fontSize: 11, color: '#999', marginLeft: 6 }}>{t.tip}</span>
+                <span style={{ fontSize: 11, color: '#fbbf24', fontWeight: 600 }}>{t.part}:</span>
+                <span style={{ fontSize: 11, color: '#a1a1a6', marginLeft: 6 }}>{t.tip}</span>
               </div>
             ))}
           </div>
@@ -1192,7 +1192,7 @@ function MasterSheet() {
             <thead>
               <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
                 {['Unit', 'Topic', 'Marks', 'MCQ', 'Part B', 'Part C', 'Priority'].map(h => (
-                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 10, color: '#555', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: "'JetBrains Mono', monospace" }}>{h}</th>
+                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: 10, color: '#8e8e93', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: "'JetBrains Mono', monospace" }}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -1202,11 +1202,11 @@ function MasterSheet() {
                 return (
                   <tr key={u.unit} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
                     <td style={{ padding: '10px 14px', fontSize: 12, color: u.color, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>U{u.unit}</td>
-                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#ccc' }}>{u.name}</td>
-                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#888', fontFamily: "'JetBrains Mono', monospace" }}>{u.marks}</td>
-                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#30d158', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.mcq ?? 0) / 100 > 0.8 ? 'HIGH' : 'MED'}</td>
-                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#ff9f0a', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.partB ?? 0) / 100 > 0.85 ? 'HIGH' : 'MED'}</td>
-                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#a855f7', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.partC ?? 0) / 100 > 0.6 ? 'HIGH' : (RADAR_DATA[i]?.partC ?? 0) / 100 > 0.3 ? 'MED' : 'LOW'}</td>
+                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#b9b9bd' }}>{u.name}</td>
+                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#8e8e93', fontFamily: "'JetBrains Mono', monospace" }}>{u.marks}</td>
+                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#4ade80', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.mcq ?? 0) / 100 > 0.8 ? 'HIGH' : 'MED'}</td>
+                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#fbbf24', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.partB ?? 0) / 100 > 0.85 ? 'HIGH' : 'MED'}</td>
+                    <td style={{ padding: '10px 14px', fontSize: 12, color: '#c4a2fb', fontFamily: "'JetBrains Mono', monospace" }}>{(RADAR_DATA[i]?.partC ?? 0) / 100 > 0.6 ? 'HIGH' : (RADAR_DATA[i]?.partC ?? 0) / 100 > 0.3 ? 'MED' : 'LOW'}</td>
                     <td style={{ padding: '10px 14px' }}>
                       <span style={{
                         padding: '3px 10px', borderRadius: 4, fontSize: 10, fontWeight: 600,

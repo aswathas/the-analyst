@@ -15,7 +15,7 @@ const buttonBase: React.CSSProperties = {
 export function PdfDownload({ pdf, code, shortTitle }: { pdf?: PdfLinks; code: string; shortTitle: string }) {
   if (!pdf || (!pdf.siteUrl && !pdf.releaseUrl)) {
     return (
-      <div data-testid="pdf-coming" style={{ padding: 16, borderRadius: 12, border: '1px dashed rgba(0,0,0,0.15)', color: '#6e6e73' }}>
+      <div data-testid="pdf-coming" style={{ padding: 16, borderRadius: 12, border: '1px dashed var(--border-strong)', color: 'var(--text-secondary)' }}>
         Master PDF for {code} is being generated. Check back before the exam.
       </div>
     );
@@ -31,7 +31,7 @@ export function PdfDownload({ pdf, code, shortTitle }: { pdf?: PdfLinks; code: s
             href={pdf.siteUrl}
             target="_blank"
             rel="noreferrer"
-            style={{ ...buttonBase, background: '#0066cc', color: '#ffffff' }}
+            style={{ ...buttonBase, background: 'var(--btn-primary)', color: 'var(--btn-primary-text)' }}
           >
             Download master PDF
           </a>
@@ -42,7 +42,7 @@ export function PdfDownload({ pdf, code, shortTitle }: { pdf?: PdfLinks; code: s
             href={pdf.releaseUrl}
             target="_blank"
             rel="noreferrer"
-            style={{ ...buttonBase, border: '1px solid rgba(0,0,0,0.12)', color: 'var(--text-primary, #1d1d1f)' }}
+            style={{ ...buttonBase, border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}
           >
             Mirror (GitHub)
           </a>

@@ -10,8 +10,8 @@ export function SafeComboPanel({ spec }: { spec: SubjectSpec }) {
           const body = (
             <>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={dot(unitColor(i, spec.accent))} />
-                <span style={{ fontSize: '16px', fontWeight: 600, color: i === 0 ? spec.accent : 'var(--text-primary, #1d1d1f)', letterSpacing: '-0.3px' }}>
+                <span style={dot(unitColor(i))} />
+                <span style={{ fontSize: '16px', fontWeight: 600, color: i === 0 ? 'var(--accent-ink)' : 'var(--text-primary)', letterSpacing: '-0.3px' }}>
                   {combo.claim}
                 </span>
               </div>
@@ -23,8 +23,8 @@ export function SafeComboPanel({ spec }: { spec: SubjectSpec }) {
                     style={{
                       ...mono,
                       color: 'var(--text-primary, #1d1d1f)',
-                      background: 'rgba(0,0,0,0.04)',
-                      border: '1px solid rgba(0,0,0,0.06)',
+                      background: 'var(--bg-inset)',
+                      border: '1px solid var(--border-subtle)',
                       borderRadius: '999px',
                       padding: '4px 10px',
                     }}
@@ -41,7 +41,7 @@ export function SafeComboPanel({ spec }: { spec: SubjectSpec }) {
               key={i}
               {...(i === 0 ? { 'data-testid': 'safe-combo-claim' } : {})}
               style={{
-                border: '1px solid rgba(0,0,0,0.08)',
+                border: '1px solid var(--border-card)',
                 borderRadius: '14px',
                 padding: '16px',
                 display: 'flex',
