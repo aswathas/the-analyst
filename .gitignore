@@ -24,3 +24,7 @@ dist-pdf
 *.sln
 *.sw?
 .vercel
+
+# playwright
+test-results/
+playwright-report/
