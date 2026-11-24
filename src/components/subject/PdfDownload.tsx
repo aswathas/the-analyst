@@ -47,20 +47,9 @@ export function PdfDownload({ pdf, code, shortTitle }: { pdf?: PdfLinks; code: s
             Mirror (GitHub)
           </a>
         )}
-        {pdf.driveUrl && (
-          <a
-            data-testid="pdf-drive"
-            href={pdf.driveUrl}
-            target="_blank"
-            rel="noreferrer"
-            style={{ ...buttonBase, border: '1px solid rgba(0,0,0,0.12)', color: 'var(--text-primary, #1d1d1f)' }}
-          >
-            Drive copy
-          </a>
-        )}
         {pdf.pages > 0 && <span style={{ ...mono, color: muted }}>{pdf.pages} pages</span>}
       </div>
-      <div style={{ ...mono, color: muted, marginTop: '10px' }}>{shortTitle} master sheet · {code}</div>
+      <div style={{ ...mono, color: muted, marginTop: '10px' }}>{shortTitle} master notes · {code}</div>
     </div>
   );
 }

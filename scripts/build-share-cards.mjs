@@ -83,7 +83,7 @@ function cardHtml(spec) {
   .label { font-size: 17px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: ${muted}; margin-bottom: 7px; }
   .value { font-size: 27px; font-weight: 700; }
   .url { font-family: "JetBrains Mono", "Cascadia Mono", Consolas, monospace; font-size: 23px; }
-  .footnote { margin-top: 30px; font-size: 18px; color: ${muted}; }
+  .footnote { margin-top: 26px; font-size: 21px; line-height: 1.45; color: ${muted}; }
 </style></head>
 <body>
   <div class="top">
@@ -105,7 +105,7 @@ function cardHtml(spec) {
       <div class="value url">${esc(SITE_URL)}</div>
     </div>
   </div>
-  <div class="footnote">Student-made analysis. Not an official SRMIST document. Questions are reference archetypes, not past papers.</div>
+  <div class="footnote">Student-made analysis. Not an official SRMIST document. Every topic taught from first principles, with diagrams and worked examples.</div>
 </body></html>`;
 }
 

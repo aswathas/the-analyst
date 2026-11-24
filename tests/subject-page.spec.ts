@@ -19,9 +19,12 @@ test('the page states that no previous-year paper exists', async ({ page }) => {
   await expect(page.getByTestId('pyq-note')).toContainText('First-time-offered');
 });
 
-test('the question bank shows the real count of MCQs', async ({ page }) => {
+test('the analysis page ranks every topic into must, should and skip', async ({ page }) => {
   await page.goto('/subject/21CSE432T');
-  await expect(page.getByTestId('mcq-count')).toHaveText('20');
+  const notes = page.getByTestId('topic-notes');
+  await expect(notes.first()).toBeVisible();
+  const count = await notes.count();
+  expect(count).toBeGreaterThanOrEqual(43);
 });
 
 test('an unknown subject code shows a not-found message, not a blank page', async ({ page }) => {
@@ -34,10 +37,18 @@ test('the countdown chip renders', async ({ page }) => {
   await expect(page.getByTestId('countdown')).toBeVisible();
 });
 
-test('the master sheet renders the paper header and the MCQ bank', async ({ page }) => {
+test('the master sheet renders the paper header and the taught topics', async ({ page }) => {
   await page.goto('/subject/21CSE435T/master');
   await expect(page.getByTestId('master-title')).toContainText('Smart Contracts');
-  await expect(page.getByTestId('master-mcq-count')).toHaveText('20');
+  await expect(page.getByTestId('topic-notes').first()).toBeVisible();
+});
+
+test('a taught topic shows its analogy and its diagram', async ({ page }) => {
+  await page.goto('/subject/21CSE435T');
+  const notes = page.getByTestId('topic-notes').first();
+  await expect(notes).toContainText('First principles');
+  await expect(notes).toContainText('Remember it this way');
+  await expect(notes.locator('svg')).toBeVisible();
 });
 
 test('the master sheet links to the PDF when one is published', async ({ page }) => {

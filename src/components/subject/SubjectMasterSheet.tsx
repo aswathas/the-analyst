@@ -1,5 +1,6 @@
 import type { SubjectSpec } from '../../data/subjects/types';
 import { PdfDownload } from './PdfDownload';
+import { TopicNotes } from './TopicNotes';
 import { card, sectionTitle, mono, muted, body } from './styles';
 
 function PaperHead({ children }: { children: React.ReactNode }) {
@@ -93,83 +94,17 @@ export function SubjectMasterSheet({ spec, onBack }: { spec: SubjectSpec; onBack
         </table>
       </div>
 
-      {/* Part A question sheet */}
-      <div style={card}>
-        <h3 style={sectionTitle}>
-          Part A — <span data-testid="master-mcq-count">{spec.mcqs.length}</span> MCQs · 1 mark each
-        </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          {spec.mcqs.map((mcq, i) => (
-            <div key={mcq.id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-              <span style={{ ...mono, color: muted, flexShrink: 0, minWidth: '30px' }}>{i + 1}.</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-primary, #1d1d1f)', lineHeight: 1.5 }}>
-                {mcq.question}
-                <span style={{ display: 'block', ...mono, color: muted, marginTop: '3px' }}>
-                  ({String.fromCharCode(65 + mcq.correct)}) {mcq.options[mcq.correct]}
-                </span>
-              </span>
-            </div>
-          ))}
+      {/* Every topic, taught */}
+      {spec.units.map((unit) => (
+        <div key={unit.unit} style={card}>
+          <h3 style={sectionTitle}>Unit {unit.unit} · {unit.name}</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {unit.topics.map((topic) => (
+              <TopicNotes key={topic.name} topic={topic} accent={spec.accent} />
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Answer key */}
-      <div style={card}>
-        <h3 style={sectionTitle}>Part A — answer key</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '6px', ...mono }}>
-          {spec.mcqs.map((mcq, i) => (
-            <div key={mcq.id} style={{ color: 'var(--text-primary, #1d1d1f)' }}>
-              {i + 1}. {String.fromCharCode(65 + mcq.correct)}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Part B and C question sheet */}
-      <div style={card}>
-        <h3 style={sectionTitle}>Part B — {spec.partB.length} questions · answer any {b.partB.answerAny}</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {spec.partB.map((q, i) => (
-            <div key={q.id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-              <span style={{ ...mono, color: muted, flexShrink: 0, minWidth: '30px' }}>{i + 1}.</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-primary, #1d1d1f)', lineHeight: 1.5 }}>
-                {q.question} <span style={{ ...mono, color: muted }}>({q.marks} marks)</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div style={card}>
-        <h3 style={sectionTitle}>Part C — {spec.partC.length} questions · answer any {b.partC.answerAny}</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {spec.partC.map((q, i) => (
-            <div key={q.id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-              <span style={{ ...mono, color: muted, flexShrink: 0, minWidth: '30px' }}>{i + 1}.</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-primary, #1d1d1f)', lineHeight: 1.5 }}>
-                {q.question} <span style={{ ...mono, color: muted }}>({q.marks} marks)</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Solutions */}
-      <div style={card}>
-        <h3 style={sectionTitle}>Solutions</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          {[...spec.partB, ...spec.partC].map((q, i) => (
-            <div key={q.id}>
-              <div style={{ ...mono, color: muted, marginBottom: '6px' }}>
-                {i < spec.partB.length ? `B${i + 1}` : `C${i + 1 - spec.partB.length}`} · {q.marks} marks · Unit {q.unit}
-              </div>
-              <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '13px', color: 'var(--text-primary, #1d1d1f)', lineHeight: 1.6 }}>
-                {q.modelAnswer.map((p, pi) => <li key={pi}>{p}</li>)}
-              </ol>
-            </div>
-          ))}
-        </div>
-      </div>
+      ))}
 
       {/* Quick reference */}
       <div style={card}>

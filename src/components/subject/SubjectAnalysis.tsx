@@ -3,7 +3,10 @@ import { CountdownChip } from './CountdownChip';
 import { BlueprintPanel } from './BlueprintPanel';
 import { SafeComboPanel } from './SafeComboPanel';
 import { UnitBreakdown } from './UnitBreakdown';
-import { QuestionBank } from './QuestionBank';
+import { TopicNotes } from './TopicNotes';
+import { AnalysisVerdict } from './AnalysisVerdict';
+import { StudyPlanTable } from './StudyPlanTable';
+import { AnswerPlaybook } from './AnswerPlaybook';
 import { PdfDownload } from './PdfDownload';
 import { UnitDonutGeneric } from './UnitDonutGeneric';
 import { card, sectionTitle, mono, muted, body, unitColor } from './styles';
@@ -72,6 +75,10 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
         {spec.pyqNote}
       </div>
 
+      <PdfDownload pdf={spec.pdf} code={spec.code} shortTitle={spec.shortTitle} />
+
+      <AnalysisVerdict spec={spec} />
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px', alignItems: 'start' }}>
         <BlueprintPanel spec={spec} />
         <div style={card}>
@@ -81,11 +88,31 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
       </div>
 
       <SafeComboPanel spec={spec} />
+      <StudyPlanTable spec={spec} />
       <UnitBreakdown spec={spec} />
 
+      <AnswerPlaybook spec={spec} />
+
       <div>
-        <h3 style={{ ...sectionTitle, fontSize: '13px', marginBottom: '10px' }}>Practice</h3>
-        <QuestionBank spec={spec} />
+        <h3 style={{ ...sectionTitle, fontSize: '13px', marginBottom: '4px' }}>Every topic, taught</h3>
+        <p style={{ ...body, color: muted, margin: '0 0 12px' }}>
+          First principles, a plain-language analogy, a diagram and — where the maths allows — a worked example.
+          The same content is in the master PDF, so this page and the PDF cannot disagree.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {spec.units.map((unit) => (
+            <div key={unit.unit}>
+              <div style={{ ...mono, color: muted, fontWeight: 600, marginBottom: '8px' }}>
+                Unit {unit.unit} · {unit.name}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {unit.topics.map((topic) => (
+                  <TopicNotes key={topic.name} topic={topic} accent={spec.accent} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Resources */}
@@ -107,8 +134,6 @@ export function SubjectAnalysis({ spec, onBack }: { spec: SubjectSpec; onBack: (
           ))}
         </div>
       </div>
-
-      <PdfDownload pdf={spec.pdf} code={spec.code} shortTitle={spec.shortTitle} />
 
       <div style={{ ...body, color: muted, textAlign: 'center' }}>
         <a href={FORM_URL} target="_blank" rel="noreferrer" style={{ color: spec.accent, textDecoration: 'none', fontWeight: 600 }}>

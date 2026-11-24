@@ -38,8 +38,8 @@ Replace `{CLAIM}` with the subject's safe-combo claim and `{DATE}` with the exam
 ```
 {CLAIM}
 
-The full 75-mark breakdown for {SUBJECT} — unit-wise syllabus, what to skip, 20 MCQs with
-answers, and the model Part B and Part C questions.
+The full 75-mark breakdown for {SUBJECT} — every topic explained from first principles, with
+diagrams, analogies and worked examples, plus what to skip.
 
 {URL}
 
@@ -59,8 +59,8 @@ Hi — we put together a free analysis for {SUBJECT} ({CODE}), exam {DATE}.
 
 {CLAIM}
 
-Everything in one PDF: unit-wise syllabus, what to skip, the 20 MCQs with answers, and the
-model Part B and Part C questions.
+Everything in one PDF: every topic taught from first principles, with diagrams, analogies and
+worked examples, and a priority list of what to skip.
 
 {URL}
 
@@ -110,16 +110,17 @@ BEAT (30-40s): "The skip list is the most valuable page on the site."
 CLOSE: the page scrolled to the skip items.
 ```
 
-### Reel 4 — "the question they actually asked"
+### Reel 4 — "the page that made it click"
 
 ```
-HOOK (0-3s): a real MCQ from the bank, on screen.
-BEAT (3-25s): answer it. Then show the explanation — the formula, the rule, why the other
-  three options fail.
-BEAT (25-40s): "20 of these per subject, with the working shown."
-CLOSE: "Free PDF. Link in bio."
+HOOK (0-3s): a diagram from the PDF, full screen — e.g. the block header, the transaction
+  journey, the reliability block diagram.
+BEAT (3-20s): narrate it in one breath: what flows where, and the one line that makes it
+  make sense. Then show the analogy underneath it.
+BEAT (20-40s): "Every topic in the syllabus, drawn like this. One PDF. Free."
+CLOSE: "Link in bio."
 ```
-Caption: `One of the 20 MCQs from {SUBJECT}. Full bank + working: {URL}`
+Caption: `The {TOPIC} diagram from {SUBJECT}. Every topic, drawn and explained: {URL}`
 
 ### Reel 5 — "how we know"
 

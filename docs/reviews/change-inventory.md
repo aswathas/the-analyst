@@ -105,3 +105,32 @@ first claim contains "of 75", and the prescribed textbook list.
 | `public/share/*.png` | 5 share cards at 1080×1350 | The forwarded artifact | `tests/share.spec.ts`; card read back and confirmed readable |
 | `vercel.json` | SPA fallback rewrite: every path except `assets/`, `master-pdfs/`, `share/` serves `index.html` | Deep links (`/subject/21CSE435T`) are the whole distribution plan; without the rewrite every client route 404s on a hard navigation, and sem-6 routes (`/ds-analysis`) were already broken | `curl` on the live domain → 200 for `/`, `/subject/21CSE435T`, `/subject/21CSE435T/master`; Playwright against production renders the title, code, blueprint and countdown |
 | `.gitignore` | `test-results/` and `playwright-report/` ignored; `test-results/.last-run.json` untracked | The Playwright run artifact was committed and re-dirtied the tree on every test run | `git status --short` clean after a test run |
+
+## Master PDF v2 — teaching document (2026-11-24)
+
+| File | What | Why | Verified by |
+| --- | --- | --- | --- |
+| `src/data/subjects/types.ts` | `Topic` gained `principles`, `analogy`, `example`, `diagram`; new `Diagram` and `DiagramNode` types | The PDF has to teach the subject, not list it | `npx tsc -p tsconfig.app.json --noEmit` |
+| `src/data/subjects/helpers.ts` | New `n()` helper: name, priority, minutes, why, principles, analogy, example?, diagram? | One line per topic keeps the subject files readable | `npx eslint src/data/subjects` |
+| `src/data/subjects/21cse435t.ts` | 54 topics converted to `n()`; 48 diagrams, 18 worked examples | Smart Contracts master notes | `npx tsc`; all 48 diagrams rendered through `src/lib/diagram.ts` with no errors |
+| `src/data/subjects/21cse432t.ts` | 43 topics converted; 40 diagrams | Hyperledger master notes | same |
+| `src/data/subjects/21cse433t.ts` | 45 topics converted; 40 diagrams, 14 worked examples | Business Models master notes | same; SHA-256 vectors and the p=23/g=5 Diffie-Hellman example recomputed |
+| `src/data/subjects/21cse436t.ts` | 52 topics converted; 52 diagrams | Bitcoin master notes | same; difficulty, halving and block-weight constants verified |
+| `src/data/subjects/21meo104t.ts` | 84 topics converted; 80 diagrams, 81 worked examples | TQM master notes | same; 130 computed figures recomputed independently |
+| `src/lib/diagram.ts` | New. Renders a `Diagram` spec to inline SVG: flow, stack, cycle, compare, tree, matrix | Diagrams as data, so site and PDF share one renderer and can never disagree | 6 sample diagrams rendered and screenshotted; all six kinds checked for overlap, clipping and arrow direction |
+| `src/lib/master-pdf-template.ts` | New. Notes-forward template: how-to-use, blueprint, marks-per-minute plan, per-unit taught notes, 15-mark rubric, fact sheet. No questions | The PDF teaches | 5 PDFs built and rasterised; pages inspected at 100 dpi |
+| `scripts/master-pdf-template.mjs`, `scripts/diagram.mjs` | Deleted; replaced by the two `src/lib/` modules | One copy of the renderer, inside the type-checked tree | `npx tsc -p tsconfig.app.json --noEmit` |
+| `scripts/registry-entry.ts` | Also exports `renderMasterHtml` | The SSR build now carries the template so the PDF script has one import | `npm run pdf:build` |
+| `scripts/build-master-pdfs.mjs` | Imports the template from the SSR bundle instead of a local `.mjs` | Same reason | `npm run pdf:build` → 5 PDFs |
+| `src/components/subject/TopicNotes.tsx` | New. Renders one taught topic on the site | The site shows the same content as the PDF | `tests/subject-page.spec.ts` |
+| `src/components/subject/AnalysisVerdict.tsx` | New. The verdict: hours, must/should/skip counts, the marks claim, and three study plans | "Think like a real analyst" — the page answers "what do I study" first | manual check on the live page |
+| `src/components/subject/StudyPlanTable.tsx` | New. Topics ranked by marks per minute, not syllabus order | The single most useful artefact on the page | manual check |
+| `src/components/subject/AnswerPlaybook.tsx` | New. The 15-mark rubric and the four-part answer | Marks are won by answer shape, not by knowledge alone | manual check |
+| `src/components/subject/SubjectAnalysis.tsx` | Page rebuilt around the new blocks: PDF download moved above the fold, verdict first, study order, playbook, taught notes per unit. Practice section removed | The page is an analysis of what to study | `tests/subject-page.spec.ts` — 25 tests pass |
+| `src/components/subject/SubjectMasterSheet.tsx` | Question lists and solutions replaced with the taught notes | The master sheet must match the master PDF | `tests/subject-page.spec.ts` |
+| `src/components/subject/QuestionBank.tsx` | Deleted | No questions reach a student | `npx tsc`; no import remains |
+| `src/components/subject/PdfDownload.tsx` | Drive button removed; label now "master notes" | The Drive link returns HTTP 401 for an anonymous request — a student clicking it hits a Google sign-in wall | `curl` on all five Drive IDs → 401 "Sign in" |
+| `scripts/publish-pdfs.mjs` | Reused Drive files now get their content replaced via `drive files update --upload` | Reuse was silently keeping the previous build's bytes | `npm run publish` → "updated Drive file … with the new build" for all five |
+| `scripts/build-share-cards.mjs` | Footnote updated and enlarged to 21px | The old footnote described a question bank and was too small to read on a phone | card rasterised and inspected |
+| `docs/growth/kit.md` | Post copy, reel 4 and the footer line rewritten: no more "20 MCQs with answers", reel 4 is now a diagram reel | The copy advertised the old product | manual read |
+| `public/master-pdfs/*.pdf` | Rebuilt: 27 / 27 / 25 / 32 / 44 pages | The new teaching PDFs | `npm run pdf:build`; page counts read from `dist-pdf/manifest.json` |

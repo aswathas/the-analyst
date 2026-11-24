@@ -210,3 +210,64 @@ Hosting on the site is better on every axis that mattered:
 **Still true from the original plan:** Drive throttling under viral load was the reason for having
 a mirror at all. That reasoning holds — it is just GitHub Releases, not Drive, that carries the
 load, and the site carries the primary.
+
+---
+
+## D18 — The master PDF teaches; it does not test
+
+**Decision.** The master PDF for each sem-7 subject contains no questions of any kind — no MCQs, no
+model answers, no practice set. It contains teaching material: every topic explained from first
+principles, a plain-language analogy, a diagram, and a worked example where the topic is numeric.
+
+**Driver.** The user asked for "something like a master PDF — if they study this they get max marks",
+then rejected a question bank explicitly: "i dont want pyqs or questions you have answered". A
+question bank cannot deliver that. It tells a student what to memorise; a teaching document tells
+them why, so they can answer a question they have never seen. Since no end-sem paper exists for any
+of these five subjects (all first-time-offered), the syllabus is the ground truth and the paper
+will be written from it — so the notes have to stand on their own.
+
+**What was removed.** The MCQ bank, the answer key, the Part B and Part C question lists, the model
+answers, and the on-site "Practice" section. The `mcqs` / `partB` / `partC` data stays in the type
+layer and the subject files — it is the CT-bank source and removing it would break the validator and
+throw away work — but nothing renders it to a student.
+
+**What replaced it.** A `Topic` grew four fields: `principles` (first principles), `analogy`,
+`example` (worked, with real numbers) and `diagram` (a structured spec, not an image). The PDF
+template renders them per topic. The site renders the same data through the same renderer, so the
+page and the PDF cannot disagree.
+
+## D19 — Diagrams are data, not images
+
+**Decision.** A topic's diagram is a structured spec — `kind` (flow / stack / cycle / compare /
+tree / matrix), a node list and edges — rendered to inline SVG by one renderer shared by the site
+and the PDF.
+
+**Driver.** The user asked for "good diagrams mostly" in the PDF. Hand-drawn or generated images
+would be per-topic image assets: hundreds of files, no way to keep them consistent with the text, no
+way to re-style them, and no way to guarantee they render at A4 print resolution. A spec is
+versionable, diffable, restyleable and searchable, and the same spec draws on screen and on paper.
+
+## D20 — The site page is an analysis, not a PYQ page
+
+**Decision.** The subject page leads with the verdict (hours, must/should/skip counts, the marks
+claim), then the paper blueprint, the marks-per-minute study order, the safe combo, the
+answer-writing playbook, and the taught notes per topic. The `pyqNote` copy was reworded from "no
+previous paper exists, so this analysis is built from…" to "there is no previous paper to copy, so
+this is built from… every topic is ranked must / should / skip".
+
+**Driver.** The user said: "think like a real analyst and let's create analysis page not this pyq
+page", and "we need an analysis of which to study that's all". A student opening the page should
+leave knowing what to study and in what order, not that a question bank exists. The blueprint
+(which is the published SRMIST pattern, not a PYQ) stays — it is the only legitimate reason the
+paper shape is known.
+
+## D21 — The Drive button comes off the student page
+
+**Decision.** The Drive link is kept in the data layer and on the Drive folder, but the "Drive copy"
+button is removed from the subject page. The two student-facing links are the site's own PDF and the
+GitHub Release mirror.
+
+**Driver.** Verified with `curl`: all five Drive file IDs return HTTP 401 with "Sign in" for an
+anonymous request. The Workspace admin policy blocks "anyone with the link". A student clicking
+"Drive copy" lands on a Google sign-in wall and concludes the site is broken. A button that cannot
+work for its audience is worse than no button.

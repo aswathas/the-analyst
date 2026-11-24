@@ -3,7 +3,7 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, readd
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, basename } from 'node:path';
 import { chromium } from 'playwright';
-import { renderMasterHtml } from './master-pdf-template.mjs';
+
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const outDir = join(root, 'dist-pdf');
@@ -38,7 +38,7 @@ if (!existsSync(registryPath)) {
   throw new Error(`Registry build did not produce ${registryPath}`);
 }
 
-const { SUBJECTS } = await import(pathToFileURL(registryPath).href + '?t=' + Date.now());
+const { SUBJECTS, renderMasterHtml } = await import(pathToFileURL(registryPath).href + '?t=' + Date.now());
 console.log(`\nLoaded ${SUBJECTS.length} subjects from the registry.`);
 if (SUBJECTS.length === 0) {
   throw new Error('The subject registry is empty — refusing to write an empty manifest.');

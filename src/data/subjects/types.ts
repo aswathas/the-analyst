@@ -1,5 +1,27 @@
 export type Priority = 'must' | 'should' | 'skip';
 
+/** A node in a topic diagram. */
+export interface DiagramNode {
+  /** Short label, 1-3 words. */
+  label: string;
+  /** Optional second line under the label. */
+  sub?: string;
+  /** Visual weight. 'core' is the main idea, 'muted' is context, 'warn' is a failure mode. */
+  kind?: 'core' | 'muted' | 'warn';
+}
+
+export interface Diagram {
+  /** What the diagram shows. Rendered as the caption. */
+  title: string;
+  /** flow = left-to-right arrows, stack = layered boxes, cycle = ring, compare = two columns, tree = hierarchy, matrix = grid. */
+  kind: 'flow' | 'stack' | 'cycle' | 'compare' | 'tree' | 'matrix';
+  nodes: DiagramNode[];
+  /** Edges as [fromIndex, toIndex, label?]. Only used by 'flow', 'cycle' and 'tree'. */
+  edges?: Array<[number, number, string?]>;
+  /** One line explaining what to look at in the diagram. */
+  caption?: string;
+}
+
 export interface Topic {
   /** Topic name copied verbatim from the official SRMIST syllabus. */
   name: string;
@@ -8,6 +30,14 @@ export interface Topic {
   minutes: number;
   /** Why this topic matters for the paper, and what an exam question on it looks like. */
   why?: string;
+  /** First principles: the idea derived from scratch, 2-4 lines. This is the part that makes the rest stick. */
+  principles?: string[];
+  /** A simple analogy or short scene that makes the idea memorable. */
+  analogy?: string;
+  /** A worked example with real numbers, where the topic is numeric. */
+  example?: string;
+  /** A diagram of the topic. */
+  diagram?: Diagram;
 }
 
 export interface Unit {
@@ -68,7 +98,7 @@ export interface PdfLinks {
   siteUrl: string;
   /** Mirror: the GitHub release asset URL. */
   releaseUrl: string;
-  /** Owner's working copy on Drive. May be empty if the Drive upload failed. */
+  /** Owner's working copy on Drive. Not shown to students: the link requires a Google sign-in. */
   driveUrl: string;
   pages: number;
 }

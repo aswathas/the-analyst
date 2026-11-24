@@ -121,7 +121,19 @@ for (const [code, entry] of Object.entries(manifest)) {
 
   let fileId = existing.get(entry.file);
   if (fileId) {
-    console.log(`\n${code}: reusing Drive file ${fileId} (${entry.file})`);
+    // The file exists but holds the previous build's bytes. Replace the content.
+    gws([
+      'drive',
+      'files',
+      'update',
+      '--params',
+      JSON.stringify({ fileId, supportsAllDrives: true }),
+      '--upload',
+      filePath,
+      '--upload-content-type',
+      'application/pdf',
+    ]);
+    console.log(`\n${code}: updated Drive file ${fileId} with the new build (${entry.file})`);
   } else {
     const uploaded = gws([
       'drive',
