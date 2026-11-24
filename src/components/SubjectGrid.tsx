@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { BarChart2, CheckCircle, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { SemesterSwitcher } from './subject/SemesterSwitcher';
+import { CountdownChip } from './subject/CountdownChip';
+import { SEM7_SUBJECTS } from './subject/registry';
 
 interface Subject {
   code: string;
@@ -11,7 +15,7 @@ interface Subject {
   findings?: string[];
 }
 
-const SUBJECTS: Subject[] = [
+const SEM6_SUBJECTS: Subject[] = [
   {
     code: '21CSS303T',
     name: 'Data Science',
@@ -65,7 +69,7 @@ const SUBJECTS: Subject[] = [
   { code: 'TBC', name: 'Hybrid Vehicles', status: 'coming', color: '#d97706' },
 ];
 
-function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
+function SubjectCard({ subject, index, sem7 }: { subject: Subject; index: number; sem7: boolean }) {
   const navigate = useNavigate();
   const routeMap: Record<string, string> = {
     '21CSS303T': '/ds-analysis',
@@ -80,15 +84,16 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
     '21CSC303J': '/sepm-analysis',
   };
   const handleViewAnalysis = () => {
-    navigate(routeMap[subject.code] || '/ds-analysis');
+    navigate(sem7 ? `/subject/${subject.code}` : (routeMap[subject.code] || '/ds-analysis'));
   };
   const handleViewMasterSheet = () => {
-    navigate(masterRouteMap[subject.code] || '/pyq-master');
+    navigate(sem7 ? `/subject/${subject.code}/master` : (masterRouteMap[subject.code] || '/pyq-master'));
   };
 
   if (subject.status === 'coming') {
     return (
       <motion.div
+        data-testid={`subject-card-${subject.code}`}
         initial={{ opacity: 0, y: 22 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px' }}
@@ -119,6 +124,7 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
 
   return (
     <motion.div
+      data-testid={`subject-card-${subject.code}`}
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}
@@ -166,6 +172,16 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
             Complete
           </div>
         </div>
+
+        {sem7 && (() => {
+          const spec = SEM7_SUBJECTS.find(s => s.code === subject.code);
+          if (!spec) return null;
+          return (
+            <div style={{ marginTop: '-6px' }}>
+              <CountdownChip examDate={spec.examDate} examSession={spec.examSession} />
+            </div>
+          );
+        })()}
 
         {subject.stats && (
           <>
@@ -245,6 +261,24 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
 }
 
 export function SubjectGrid() {
+  const [sem, setSem] = useState(7);
+  const sem7 = SEM7_SUBJECTS;
+  const subjects: Subject[] = sem === 7
+    ? sem7.map(s => ({
+        code: s.code,
+        name: s.title,
+        status: 'complete' as const,
+        color: s.accent,
+        stats: {
+          papers: 0,
+          topics: s.units.reduce((n, u) => n + u.topics.length, 0),
+          marks: s.blueprint.total,
+          hitRate: 'NEW',
+        },
+        findings: [s.safeCombo[0]?.claim ?? ''],
+      }))
+    : SEM6_SUBJECTS;
+
   return (
     <section id="subjects" style={{
       background: '#f5f5f7',
@@ -262,7 +296,7 @@ export function SubjectGrid() {
             fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em',
             textTransform: 'uppercase', color: '#6e6e73', marginBottom: '10px',
           }}>
-            6 Subjects · SRM Institute
+            {sem === 7 ? '5 Subjects · Semester 7' : '6 Subjects · Semester 6'} · SRM Institute
           </div>
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 600, color: '#1d1d1f',
@@ -272,10 +306,13 @@ export function SubjectGrid() {
           </h2>
           <p style={{
             fontSize: '17px', fontWeight: 400, lineHeight: 1.47, color: '#6e6e73',
-            margin: 0, letterSpacing: '-0.374px', maxWidth: '600px',
+            margin: '0 0 24px', letterSpacing: '-0.374px', maxWidth: '600px',
           }}>
-            4 PYQs analyzed per subject. Topic heatmaps, exam strategy, and first-principles PDF guides.
+            {sem === 7
+              ? 'First-time electives. No previous-year paper exists, so every analysis is built from the official unit-wise syllabus and the published 75-mark pattern.'
+              : '4 PYQs analyzed per subject. Topic heatmaps, exam strategy, and first-principles PDF guides.'}
           </p>
+          <SemesterSwitcher semesters={[7, 6]} active={sem} onChange={setSem} />
         </motion.div>
 
         <div style={{
@@ -283,8 +320,8 @@ export function SubjectGrid() {
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: '16px',
         }}>
-          {SUBJECTS.map((subject, i) => (
-            <SubjectCard key={i} subject={subject} index={i} />
+          {subjects.map((subject, i) => (
+            <SubjectCard key={`${subject.code}-${i}`} subject={subject} index={i} sem7={sem === 7} />
           ))}
         </div>
       </div>

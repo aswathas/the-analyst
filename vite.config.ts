@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'seneca.jpg'],
       manifest: {
-        name: 'Analyst — Sem 6 Prep',
+        name: 'Analyst — Exam Prep',
         short_name: 'Analyst',
-        description: 'SRM Institute semester exam intelligence. 4 PYQs analyzed per subject.',
+        description: 'SRM Institute semester exam intelligence. Unit-wise paper analysis, safe combos and master PDFs.',
         theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',

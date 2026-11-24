@@ -7,8 +7,11 @@ import { StoicSection } from './components/StoicSection';
 import { SubjectGrid } from './components/SubjectGrid';
 import { PWAPrompt } from './components/PWAPrompt';
 import SplashCursor from './components/SplashCursor';
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate, useParams } from 'react-router';
 import { Sun, Moon } from 'lucide-react';
+import { SubjectAnalysis } from './components/subject/SubjectAnalysis';
+import { SubjectMasterSheet } from './components/subject/SubjectMasterSheet';
+import { getSubject } from './components/subject/registry';
 
 // Lazy-load heavy components — deferred until needed
 const DSAnalysisPage = lazy(() => import('./components/DSAnalysisPage').then(m => ({ default: m.DSAnalysisPage })));
@@ -260,7 +263,10 @@ function FloatingControls({ isDark, setIsDark, themeIndex, setThemeIndex, palett
 function Home() {
   return (
     <div style={{ position: 'relative', zIndex: 1 }}>
-      <Hero onViewAnalysis={() => window.location.href = '/ds-analysis'} />
+      <Hero
+        onViewAnalysis={() => window.location.href = '/subject/21CSE435T'}
+        onOpenSubject={(code) => { window.location.href = `/subject/${code}`; }}
+      />
       <SubjectGrid />
       <StoicSection />
       <Footer />
@@ -364,6 +370,8 @@ function AppShell({
           <Route path="/crypto-exam" element={<CryptoExamAnalysisWrapper />} />
           <Route path="/crypto-flash" element={<CryptoFlashCardsWrapper />} />
           <Route path="/crypto-learn" element={<CryptoLearnModeWrapper />} />
+          <Route path="/subject/:code" element={<SubjectAnalysisWrapper />} />
+          <Route path="/subject/:code/master" element={<SubjectMasterWrapper />} />
         </Routes>
       </Suspense>
     </>
@@ -583,6 +591,77 @@ function CryptoLearnModeWrapper() {
       style={{ position: 'relative', zIndex: 2 }}
     >
       <CryptoLearnMode onBack={() => navigate('/')} />
+    </motion.div>
+  );
+}
+
+function SubjectAnalysisWrapper() {
+  const { code } = useParams();
+  const navigate = useNavigate();
+  const spec = code ? getSubject(code) : undefined;
+
+  if (!spec) {
+    return (
+      <div data-testid="subject-not-found" style={{ padding: '64px 24px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 8px' }}>
+          Subject not found
+        </h2>
+        <p style={{ color: '#6e6e73', margin: '0 0 20px' }}>
+          No subject with code <strong>{code}</strong> is published yet.
+        </p>
+        <button
+          onClick={() => navigate('/')}
+          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid rgba(0,0,0,0.12)', background: 'none', cursor: 'pointer' }}
+        >
+          Back to subjects
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      key={`subject-${spec.code}`}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      <SubjectAnalysis spec={spec} onBack={() => navigate('/')} />
+    </motion.div>
+  );
+}
+
+function SubjectMasterWrapper() {
+  const { code } = useParams();
+  const navigate = useNavigate();
+  const spec = code ? getSubject(code) : undefined;
+
+  if (!spec) {
+    return (
+      <div data-testid="subject-not-found" style={{ padding: '64px 24px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#1d1d1f', margin: '0 0 8px' }}>
+          Subject not found
+        </h2>
+        <button
+          onClick={() => navigate('/')}
+          style={{ padding: '10px 18px', borderRadius: '9999px', border: '1px solid rgba(0,0,0,0.12)', background: 'none', cursor: 'pointer' }}
+        >
+          Back to subjects
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      key={`subject-master-${spec.code}`}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: 'relative', zIndex: 2 }}
+    >
+      <SubjectMasterSheet spec={spec} onBack={() => navigate('/')} />
     </motion.div>
   );
 }

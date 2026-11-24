@@ -5,8 +5,17 @@ import { ChevronDown, BarChart2, BookOpen, FileSpreadsheet } from 'lucide-react'
 
 const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
+const SEM7_LINKS = [
+  { code: '21CSE435T', label: 'Smart Contracts', color: '#7c3aed' },
+  { code: '21CSE432T', label: 'Hyperledger', color: '#0891b2' },
+  { code: '21CSE433T', label: 'Business Models', color: '#dc2626' },
+  { code: '21CSE436T', label: 'Bitcoin', color: '#f59e0b' },
+  { code: '21MEO104T', label: 'TQM & Reliability', color: '#10b981' },
+];
+
 interface HeroProps {
   onViewAnalysis: () => void;
+  onOpenSubject?: (code: string) => void;
 }
 
 const dropdownStyle: React.CSSProperties = {
@@ -42,7 +51,7 @@ const dropdownItemStyle: React.CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
-export function Hero({ onViewAnalysis }: HeroProps) {
+export function Hero({ onViewAnalysis, onOpenSubject }: HeroProps) {
   const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
   const videoYRaw = useTransform(scrollY, [0, 700], ['0%', '20%']);
@@ -181,6 +190,18 @@ export function Hero({ onViewAnalysis }: HeroProps) {
                   <BarChart2 size={13} strokeWidth={1.5} style={{ color: '#2997ff', flexShrink: 0 }} />
                   Data Science
                 </button>
+                {SEM7_LINKS.map(({ code, label, color }) => (
+                  <button
+                    key={code}
+                    onClick={() => { onOpenSubject?.(code); setOpenDropdown(null); }}
+                    style={{ ...dropdownItemStyle, width: '100%', background: 'none', border: 'none', textAlign: 'left' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'none')}
+                  >
+                    <BarChart2 size={13} strokeWidth={1.5} style={{ color, flexShrink: 0 }} />
+                    {label}
+                  </button>
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
@@ -337,7 +358,7 @@ export function Hero({ onViewAnalysis }: HeroProps) {
             >
               I got bored studying.<br />
               So I decoded every exam pattern<br />
-              across 6 subjects. You're welcome.
+              across 11 subjects. You're welcome.
             </motion.p>
 
             <motion.div
